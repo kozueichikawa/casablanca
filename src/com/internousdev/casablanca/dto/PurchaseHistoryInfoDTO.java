@@ -20,6 +20,7 @@ public class PurchaseHistoryInfoDTO {
 	private String imageFileName;
 	private String imageFilePath;
 	private String releaseCompany;
+	private Date releaseDate;
 	/* 宛先情報*/
 	private String familyName;
 	private String firstName;
