@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class PurchaseHistoryInfoDTO {
 	private int id;
-	/* 購入履歴情報 */
+	/* 購入履歴情報purchase_history_info */
 	private String userId;
 	private int productId;
 	private int productCount;
@@ -12,7 +12,7 @@ public class PurchaseHistoryInfoDTO {
 	private int destinationId;
 	private Date registDate;
 	private Date updateDate;
-	/*商品情報*/
+	/*商品情報 product_info*/
 	private String productName;
 	private String productNameKana;
 	private String productDescription;
@@ -20,7 +20,8 @@ public class PurchaseHistoryInfoDTO {
 	private String imageFileName;
 	private String imageFilePath;
 	private String releaseCompany;
-	/* 宛先情報*/
+	private Date releaseDate;
+	/* 宛先情報destination_info*/
 	private String familyName;
 	private String firstName;
 	private String familyNameKana;
@@ -58,6 +59,10 @@ public class PurchaseHistoryInfoDTO {
 
 	public int getPrice() {
 		return price;
+
+	}
+	public void setPrice(int price) {
+		this.price=price;
 	}
 	public int getDestinationId() {
 		return destinationId;
