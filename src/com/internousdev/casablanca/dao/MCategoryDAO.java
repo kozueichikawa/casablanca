@@ -16,7 +16,7 @@ public class MCategoryDAO {
 	ResultSet rs = null;
 
 	public List<MCategoryDTO> getMCategoryList() {
-		List<MCategoryDTO> mCategoryDtoList = new ArrayList<MCategoryDTO>();
+		List<MCategoryDTO> mCategoryDTOList = new ArrayList<MCategoryDTO>();
 		DBConnector db = new DBConnector();
 		con = db.getConnection();
 		String sql = "select * from m_category";
@@ -24,14 +24,14 @@ public class MCategoryDAO {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				MCategoryDTO mCategoryDto = new MCategoryDTO();
-				mCategoryDto.setId(rs.getInt("id"));
-				mCategoryDto.setCategoryId(rs.getInt("category_id"));
-				mCategoryDto.setCategoryName(rs.getString("category_name"));
-				mCategoryDto.setCategoryDescription(rs.getString("category_description"));
-				mCategoryDto.setInsertDate(rs.getDate("insert_date"));
-				mCategoryDto.setUpdateDate(rs.getDate("update_date"));
-				mCategoryDtoList.add(mCategoryDto);
+				MCategoryDTO mCategoryDTO = new MCategoryDTO();
+				mCategoryDTO.setId(rs.getInt("id"));
+				mCategoryDTO.setCategoryId(rs.getInt("category_id"));
+				mCategoryDTO.setCategoryName(rs.getString("category_name"));
+				mCategoryDTO.setCategoryDescription(rs.getString("category_description"));
+				mCategoryDTO.setInsertDate(rs.getDate("insert_date"));
+				mCategoryDTO.setUpdateDate(rs.getDate("update_date"));
+				mCategoryDTOList.add(mCategoryDTO);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -50,6 +50,6 @@ public class MCategoryDAO {
 				e.printStackTrace();
 			}
 		}
-		return mCategoryDtoList;
+		return mCategoryDTOList;
 	}
 }
