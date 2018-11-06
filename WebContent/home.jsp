@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<jsp:include page="header.jsp" />
+<s:include value="header.jsp" />
 
 <h1>ホーム画面</h1>
 

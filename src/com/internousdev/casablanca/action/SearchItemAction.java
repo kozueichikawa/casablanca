@@ -49,7 +49,6 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 	if(!(iterator.hasNext())){
 		productInfoDtoList = null;
 	}
-	session.put("keywordsErrorMessageList",keywordsErrorMessageList);
 
 	if(!session.containsKey("mCategoryList")){
 		MCategoryDAO mCategoryDAO = new MCategoryDAO();
@@ -80,9 +79,6 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 	}
 	public List<String> getKeywordsErrorMessageList(){
 		return keywordsErrorMessageList;
-	}
-	public void setKeywordsErrorMessageList(List<String> keywordsErrorMessageList){
-		this.keywordsErrorMessageList = keywordsErrorMessageList;
 	}
 	public List<ProductInfoDTO> getProductInfoDTOList(){
 		return productInfoDtoList;
