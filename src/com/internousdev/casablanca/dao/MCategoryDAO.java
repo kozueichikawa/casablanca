@@ -15,7 +15,7 @@ public class MCategoryDAO {
 	PreparedStatement ps = null;
 	ResultSet rs = null;
 
-	public List<MCategoryDTO> getCategoryList() {
+	public List<MCategoryDTO> getMCategoryList() {
 		List<MCategoryDTO> mCategoryDtoList = new ArrayList<MCategoryDTO>();
 		DBConnector db = new DBConnector();
 		con = db.getConnection();
