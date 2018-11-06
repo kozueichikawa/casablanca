@@ -9,7 +9,7 @@
 <title>商品購入履歴</title>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<s:include value="header.jsp"/>
 <div id="contents">
 <h1>商品購入履歴</h1>
 <s:if test="#session.purchaseHistoryInfoDTOList.size()>0">

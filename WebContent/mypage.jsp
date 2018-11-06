@@ -9,7 +9,7 @@
 <title>マイページ</title>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<s:include value="header.jsp"/>
 <div id="contents">
 <h1>マイページ画面</h1>
 	<s:form action="PurchaseHistoryAction">
