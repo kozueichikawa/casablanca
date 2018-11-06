@@ -13,13 +13,17 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	Map<String, Object> session;
 
 	public String execute() {
+		String result = ERROR;
 		session.put("savedLoginId", savedLoginId);
 		UserInfoDAO userInfoDAO = new UserInfoDAO();
-
-		/* ユーザ名・パスワードがヒットするか確認 (select)
-		 * ヒットしたら、そのユーザのloginedカラムに１を立てる (update where ユーザ名(確かuniqueだったよね)
-		 * DAOのメソッドを作らないといけない*/
-
+		boolean loginFlg = userInfoDAO.getUserInfo(loginId, password);
+		if (loginFlg) {
+			if (カートの決済ボタン経由でログイン画面にきたかどうか判定) {
+				result = "gotocart";
+			}
+			result = SUCCESS;
+		}
+		return result;
 	}
 	public void setLoginId(String loginId) {
 		this.loginId = loginId;

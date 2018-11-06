@@ -20,7 +20,7 @@
 		</s:form>
 	</s:if>
 	<s:else>
-	<li><s:form action="LoginAction">
+	<li><s:form action="GoLoginAction">
 		<s:submit value="ログイン"/>
 	</s:form></li>
 	</s:else>
