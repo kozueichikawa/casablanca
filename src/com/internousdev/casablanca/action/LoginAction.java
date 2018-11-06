@@ -15,7 +15,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	public String execute() {
 		session.put("savedLoginId", savedLoginId);
 		UserInfoDAO userInfoDAO = new UserInfoDAO();
-
+		
 		/* ユーザ名・パスワードがヒットするか確認 (select)
 		 * ヒットしたら、そのユーザのloginedカラムに１を立てる (update where ユーザ名(確かuniqueだったよね)
 		 * DAOのメソッドを作らないといけない*/
