@@ -23,6 +23,6 @@
 <h1>ホーム画面</h1>
 
 
-<jsp:include page="footer.jsp" />
+<s:include value="footer.jsp" />
 </body>
 </html>

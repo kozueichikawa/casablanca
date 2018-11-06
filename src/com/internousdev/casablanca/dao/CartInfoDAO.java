@@ -7,14 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.internousdev.casablanca.dto.CartInfoDTO;
 import com.internousdev.casablanca.util.DBConnector;
 
 public class CartInfoDAO {
 
-	public List<CartInfoDTO> getCartInfoDTOList(String loginId){
+	public List<CartInfoDTO> getCartInfoDtoList(String loginId){
 	DBConnector dbConnector = new DBConnector();
 	Connection connection = dbConnector.getConnection();
-	List<CartInfoDTO> cartInfoDTOList = new ArrayList<CartInfoDTO>();
+	List<CartInfoDTO> cartInfoDtoList = new ArrayList<CartInfoDTO>();
 
 	String sql="select"
 			+"ci.id as id,"
@@ -67,7 +68,7 @@ public class CartInfoDAO {
 			cartInfoDTO.setReleaseCompany(resultSet.getString("release_company"));
 			cartInfoDTO.setStatus(resultSet.getString("status"));
 			cartInfoDTO.setSubtotal(resultSet.getInt("subtotal"));
-			cartInfoDTOList.add(cartInfoDTO);
+			cartInfoDtoList.add(cartInfoDTO);
 		}
 	}catch(SQLException e){
 		e.printStackTrace();
@@ -77,7 +78,7 @@ public class CartInfoDAO {
 	}catch(SQLException e){
 		e.printStackTrace();
 	}
-	return cartInfoDTOList;
+	return cartInfoDtoList;
 }
 
 	public int getTotalPrice(String userId){
@@ -116,7 +117,7 @@ public class CartInfoDAO {
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setString(1,userId);
 		preparedStatement.setString(2, tempUserId);
-		preparedStatement.setInt(2, productId);
+		preparedStatement.setInt(3, productId);
 		preparedStatement.setString(4, productCount);
 		preparedStatement.setInt(5, price);
 
