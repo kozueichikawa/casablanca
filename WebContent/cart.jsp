@@ -26,7 +26,7 @@ function goDeleteCartAction(){
 </head>
 <body>
 
-<jsp:include page="header.jsp">
+<s:include value="header.jsp" />
 <div id="contents">
 <h1>カート画面</h1>
 <s:if test="#session.checkListErrorMessageList=null">
