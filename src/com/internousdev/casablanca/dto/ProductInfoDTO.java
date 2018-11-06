@@ -16,7 +16,6 @@ public class ProductInfoDTO {
 	private int status;
 	private String registDate;
 	private String updateDate;
-	private int productCount;
 
 	public int getId(){
 		return id;
@@ -116,12 +115,6 @@ public class ProductInfoDTO {
 		this.updateDate=updateDate;
 	}
 
-	public int getProductCount(){
-		return productCount;
-	}
-	public void setProductCount(int productCount){
-		this.productCount=productCount;
-	}
 
 
 }
