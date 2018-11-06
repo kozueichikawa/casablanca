@@ -104,7 +104,7 @@ function goDeleteCartAction(){
 </s:else>
 </div>
 <div id="footer">
-<jsp:include page="footer.jsp">
+<s:include value="footer.jsp" />
 </div>
 </body>
 </html>
