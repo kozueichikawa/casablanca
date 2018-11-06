@@ -29,16 +29,32 @@
 <tr>
 	<td><s:property value="productName"/></td>
 	<td><s:property value="productNameKana"/></td>
-	<td><img src='<s:propery value="imageFilePath"/>/<s:property value=
+	<td><img src='<s:property value="imageFilePath"/>/<s:property value="imageFileName"/>' width="50px" height="50px"/></td>
+	<td><s:property value="price"/>円</td>
+	<td><s:property value="releaseCompany"/></td>
+	<td><s:property value="releaseDate"/></td>
 
 </tr>
 </s:iterator>
 </tbody>
-</thead>
 </table>
+<div class="submit_btn_box">
+<div id=".content-btn-set">
+<s:form action="DeletePurchaseHistoryAction">
+	<s:submit value="削除" class="submit_btn"/>
+</s:form>
+</div>
+</div>
+
 
 </s:if>
+<s:else>
+<div class="info">
+商品購入情報はありません
 </div>
+</s:else>
+</div>
+<s:include value="footer.jsp"/>
 
 </body>
 </html>
