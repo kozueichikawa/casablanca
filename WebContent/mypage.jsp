@@ -12,7 +12,7 @@
 <s:include value="header.jsp"/>
 <div id="contents">
 <h1>マイページ画面</h1>
-	<s:form action="PurchaseHistoryAction">
+	<s:form action="PurchaseHistoryInfoAction">
 	<table class="vercical-list-table">
 	<tr>
 		<th scope="row"><s:label value="姓"/></th>
