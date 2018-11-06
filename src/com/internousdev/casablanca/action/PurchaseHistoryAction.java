@@ -16,14 +16,13 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PurchaseHistoryAction extends ActionSupport implements SessionAware{
 	private String categoryId;
-	private String keywords;
+
 
 	private List<MCategoryDTO> mCategoryDTOList=new ArrayList<MCategoryDTO>();
 	private Map<String,Object> session;
 
 	public String execute() {
-		System.out.println(categoryId);
-		System.out.println(keywords);
+
 
 		PurchaseHistoryInfoDAO purchaseHistoryInfoDAO=new PurchaseHistoryInfoDAO();
 		List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDTOList= new ArrayList<PurchaseHistoryInfoDTO>();
@@ -51,13 +50,7 @@ public class PurchaseHistoryAction extends ActionSupport implements SessionAware
 		this.categoryId = categoryId;
 	}
 
-	public String getKeywords() {
-		return keywords;
-	}
 
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
-	}
 
 	public List<MCategoryDTO> getmCategoryDTOList() {
 		return mCategoryDTOList;
