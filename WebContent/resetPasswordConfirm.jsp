@@ -9,7 +9,7 @@ pageEncoding="UTF-8"%>
 <title>パスワード再設定画面</title>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<s:include value="header.jsp"/>
 <div id="content">
 <h1>パスワード再設定画面</h1>
 <s:form action="ResetPasswordCompleteAction">
