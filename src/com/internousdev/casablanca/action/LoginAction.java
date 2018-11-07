@@ -35,21 +35,24 @@ public class LoginAction extends ActionSupport implements SessionAware {
 			UserInfoDAO userInfoDAO = new UserInfoDAO();
 			UserInfoDTO userInfoDTO = userInfoDAO.getUserInfo(loginId, password);
 			if (loginId.equals(userInfoDTO.getUserId()) && password.equals(userInfoDTO.getPassword())) {
+				result = SUCCESS;
 				session.put("loginId", userInfoDTO.getUserId());
 
-				/* ログインOKだった場合、DBカラム"logined"に1を立てる。そのloginedをsessionに取得 */
+				/* ログインOKだった場合、DBカラム"logined"を1にupdate。そのloginedをsessionに取得 */
 				userInfoDTO = userInfoDAO.login(loginId, password);
 				session.put("logined", userInfoDTO.getLogined());
+				System.out.println("ログイン成功");
 
 				/* カートの決済ボタン経由(SettlementConfirmAction)でログイン画面にきたかどうか判定。以下、"経由してきた"場合の処理 */
-				if ((boolean)session.get("fromCartFlg")) {
+				if ((boolean)session.get("isFromCart")) {
 					/* 宛先情報をsettlementConfirm.jspで表示用に生成 */
 					DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
 					destinationInfoDTOList = destinationInfoDAO.getDestinationInfo(loginId);
-					result = "gotocart";
+					result = "gotosettlementconfirm";
 				}
-				result = SUCCESS;
 			}
+		} else {
+			System.out.println("ログイン失敗");
 		}
 		return result;
 	}

@@ -9,11 +9,11 @@
 </head>
 <body>
 <ul>
+	<s:form action="SearchItemAction">
 	<li><s:select name="categoryId" list="#session.mCategoryDTOList" listKey="categoryId" listValue="categoryName"/></li>
-	<li><s:textfield name="keyword" placeholder="検索ワード"/></li>
-	<li><s:form action="SearchItemAction">
-		<s:submit value="商品検索"/>
-	</s:form></li>
+	<li><s:textfield name="keywords" value="%{keywords}" placeholder="検索ワード"/></li>
+	<li><s:submit value="商品検索"/></li>
+	</s:form>
 	<s:if test="#session.logined==1">
 		<s:form action="LogoutAction">
 			<s:submit value="ログアウト"/>

@@ -13,17 +13,16 @@ public class HomeAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> session;
 
 	public String execute() {
-		MCategoryDAO mCategoryDao = new MCategoryDAO();
-		List<MCategoryDTO> mCategoryDTOList = mCategoryDao.getMCategoryList();
-		session.put("mCategoryDTOList", mCategoryDTOList);
+		/* ヘッダーのカテゴリ表示用セッションが切れた場合のみDAO実行 */
+		if (!session.containsKey("mCategoryList")) {
+			MCategoryDAO mCategoryDao = new MCategoryDAO();
+			List<MCategoryDTO> mCategoryList = mCategoryDao.getMCategoryList();
+			session.put("mCategoryDTOList", mCategoryList);
+		}
 		return SUCCESS;
 	}
 
-	public Map<String, Object> getSession() {
-		return session;
-	}
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
-
 }
