@@ -32,6 +32,7 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 	}
 	keywordsErrorMessageList =inputChecker.doCheck("検索ワード",keywords,0,16,true,true,true,true,false,true,false);
 
+
 	ProductInfoDAO productInfoDAO = new ProductInfoDAO();
 
 	switch(categoryId){
@@ -41,10 +42,12 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 			break;
 
 		default:
-			productInfoDtoList = productInfoDAO.getProductInfoListByKeywords(keywords.replaceAll("　", " ").split(" "));
+			productInfoDtoList = productInfoDAO.getProductInfoListByKeywords(keywords.replaceAll("　", " ").split(" "),categoryId);
 			result = SUCCESS;
 			break;
 	}
+
+
 	Iterator<ProductInfoDTO> iterator = productInfoDtoList.iterator();
 	if(!(iterator.hasNext())){
 		productInfoDtoList = null;
@@ -57,6 +60,11 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 	}
 	return result;
 }
+
+//sessionを使わずにvalue stackにkeywordsErrorMessageListを格納してます。
+
+
+
 
 	public List<MCategoryDTO> getmCategoryDTOList(){
 		return mCategoryDtoList;
