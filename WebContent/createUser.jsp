@@ -18,6 +18,56 @@
 </head>
 <body>
 
+<s:if test="!session.familyNameErrorMessageList.isEmpty()">
+	<div class="error">
+	<div class="error-message">
+		<s:iterator value="#session.familuNameErrorMessageList"><s:property /><br></s:iterator>
+	</div>
+	</div>
+</s:if>
+<s:if test="!#session.firstNameErrorMessageList.isEmpty()">
+	<div class="error">
+	<div class="error-message">
+	<s:iterator value="!#session.firstNameErrorMessageList"><s:property /><br></s:iterator>
+	</div>
+	</div>
+</s:if>
+<s:if test="!#session.familyNameKanaErrorMessageList.isEmpty()">
+	<div class="error">
+	<div class="error-message">
+	<s:iterator value="#session.familyNameKanaErrorMessageList"><s:property /><br></s:iterator>
+	</div>
+	</div>
+</s:if>
+<s:if test="!#session.firstNameKanaErrorMessageList.isEmpty()">
+	<div class="error">
+	<div class="error-message">
+	<s:iterator value="!#session.firstNameKanaErrorMessageList"><s:property /><br></s:iterator>
+	</div>
+	</div>
+</s:if>
+<s:if test="!#session.emailErrorMessageList.isEmpty()">
+	<div class="error">
+	<div class="error-message">
+	<s:iterator value="#session.emailErrorMessageList"><s:property /><br></s:iterator>
+	</div>
+	</div>
+</s:if>
+<s:if test="!session.loginErrorMessageList.isEmpty()">
+	<div class="error">
+	<div class="error-message">
+	<s:iterator value="#session.loginErrorMessageList"><s:property /><br></s:iterator>
+	</div>
+	</div>
+</s:if>
+<s:if test="!#session.passwordErrorMessageList.isEmpty()">
+	<div class="error">
+	<div class="error-message">
+	<s:iterator value="#session.passwordErrorMessageList"><s:property /><br></s:iterator>
+	</div>
+	</div>
+</s:if>
+
 <s:form action="CreateUserConfirmAction">
 <table class = "user-jouhou">
 	<tr>
