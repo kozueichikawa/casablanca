@@ -14,13 +14,11 @@ public class InputChecker {
 	 * emailを判別したいのであれば英字、数字、記号を含むため下記のようになります。
 	 * 例(質問の内容,値,最小文字数,最大文字数,true,false,false,true,true)となります。
 	 * 結果はList形式で渡されることに気を付けてください。
-	 * @param harfSpace TODO
-	 * @param fullSpace TODO
 	 * @param availableHalfWidthSpace TODO
 	 * @param availableFullWidthSpace TODO
 	 *
 	 */
-	public List<String> doCheck(String propertyName,String value,int minLength,int maxLength,boolean availableAlphabeticCharacters,boolean availableKanji,boolean availableHiragana,boolean availableHalfWidthDigit,boolean availableHalfWidthSymbols,boolean availableKatakana,boolean availableFullWidthSymbols, boolean harfSpace, boolean fullSpace){
+	public List<String> doCheck(String propertyName,String value,int minLength,int maxLength,boolean availableAlphabeticCharacters,boolean availableKanji,boolean availableHiragana,boolean availableHalfWidthDigit,boolean availableHalfWidthSymbols,boolean availableKatakana,boolean availableFullWidthSymbols, boolean availableHalfWidthSpace, boolean availableFullWidthSpace){
 
 		//検証した結果を入れるList
 		List<String> stringList = new ArrayList<String>();
@@ -42,7 +40,7 @@ public class InputChecker {
 
 
 
-		if(availableAlphabeticCharacters || availableKanji || availableHiragana || availableHalfWidthDigit || availableHalfWidthSymbols||availableKatakana||availableFullWidthSymbols){
+		if(availableAlphabeticCharacters || availableKanji || availableHiragana || availableHalfWidthDigit || availableHalfWidthSymbols||availableKatakana||availableFullWidthSymbols || availableHalfWidthSpace||availableFullWidthSpace){
 			regularExpression = "[";
 		}
 
@@ -81,6 +79,15 @@ public class InputChecker {
 			characterTypeList.add("全角記号");
 		}
 
+		if(availableHalfWidthSpace){
+			regularExpression +=" ";
+			characterTypeList.add("半角スペース");
+		}
+
+		if(availableFullWidthSpace){
+			regularExpression +="　";
+			characterTypeList.add("全角スペース");
+		}
 		if(!StringUtils.isEmpty(regularExpression)){
 			regularExpression +="]+";
 		}
