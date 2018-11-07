@@ -42,9 +42,6 @@
 <s:submit value = "新規登録"/>
 </s:form>
 </div>
-<div id="footer">
-<jsp:include page="footer.jsp">
-</div>
-
+<s:include value="footer.jsp"/>
 </body>
 </html>

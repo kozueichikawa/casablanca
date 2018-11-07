@@ -1,4 +1,4 @@
-package com.internousdev.sampleweb.action;
+package com.internousdev.casablanca.action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +28,6 @@ public class ResetPasswordConfirmAction extends ActionSupport implements Session
 	public String execute() {
 		String result = ERROR;
 
-		session.remove("loginIdErrorMessageList");
-		session.remove("passwordErrorMessageList");
-		session.remove("passwordIncorrectErrorMessageList");
-		session.remove("newPasswordErrorMessageList");
-		session.remove("reConfirmationNewPasswordErrorMessageList");
-		session.remove("newPasswordIncorrectErrorMessageList");
 
 		InputChecker inputChecker = new InputChecker();
 
@@ -41,7 +35,7 @@ public class ResetPasswordConfirmAction extends ActionSupport implements Session
 		passwordErrorMessageList = inputChecker.doCheck("現在のパスワード", password, 1, 16, true, false, false, true, false, false, false);
 		newPasswordErrorMessageList = inputChecker.doCheck("新しいパスワード", newPassword, 1, 16, true, false, false, true, false, false, false);
 		reConfirmationNewPasswordErrorMessageList = inputChecker.doCheck("新しいパスワード（再確認）", reConfirmationPassword, 1, 16, true, false, false, true, false, false, false);
-		//TODO
+
 		newPasswordIncorrectErrorMessageList = inputChecker.doPasswordCheck(newPassword, reConfirmationPassword);
 
 		if(loginIdErrorMessageList.size()==0
@@ -57,16 +51,7 @@ public class ResetPasswordConfirmAction extends ActionSupport implements Session
 				session.put("newPassword", newPassword);
 				session.put("concealedPassword", concealedPassword);
 				result = SUCCESS;
-			} else {
-				passwordIncorrectErrorMessageList.add("入力されたパスワードが異なります。");
-				session.put("passwordIncorrectErrorMessageList", passwordIncorrectErrorMessageList);
 			}
-		} else {
-			session.put("loginIdErrorMessageList", loginIdErrorMessageList);
-			session.put("passwordErrorMessageList", passwordErrorMessageList);
-			session.put("newPasswordErrorMessageList", newPasswordErrorMessageList);
-			session.put("reConfirmationNewPasswordErrorMessageList", reConfirmationNewPasswordErrorMessageList);
-			session.put("newPasswordIncorrectErrorMessageList", newPasswordIncorrectErrorMessageList);
 		}
 		return result;
 	}
@@ -163,9 +148,6 @@ public class ResetPasswordConfirmAction extends ActionSupport implements Session
 		this.newPasswordIncorrectErrorMessageList = newPasswordIncorrectErrorMessageList;
 	}
 
-	public Map<String, Object> getSession() {
-		return session;
-	}
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;

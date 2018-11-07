@@ -9,64 +9,58 @@
 <title>宛先情報入力</title>
 </head>
 <body>
-<s:include value="header.jsp"/>
+<jsp:include page="header.jsp"/>
 <div id="contents">
 <h1>宛先情報入力画面</h1>
 
-<s:if test="!familyNameErrorMessageList.isEmpty()">
+<s:if test="!#session.familyNameErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="familyNameErrorMessageList">
+			<s:iterator value="#session.familyNameErrorMessageList">
 				<s:property/><br>
 			</s:iterator>
 		</div>
 	</div>
 </s:if>
-
-<s:if test="!firstNameErrorMessageList.isEmpty()">
+<s:if test="!#session.firstNameErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="firstNameErrorMessageList"><s:property/><br></s:iterator>
+			<s:iterator value="#session.firstNameErrorMessageList"><s:property/><br></s:iterator>
 		</div>
 	</div>
 </s:if>
-
-<s:if test="!familyNameKanaErrorMessageList.isEmpty()">
+<s:if test="!#session.familyNameKanaErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="familyNameKanaErrorMessageList"><s:property/><br></s:iterator>
+			<s:iterator value="#session.familyNameKanaErrorMessageList"><s:property/><br></s:iterator>
 		</div>
 	</div>
 </s:if>
-
-<s:if test="!firstNameKanaErrorMessageList.isEmpty()">
+<s:if test="!#session.firstNameKanaErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="firstNameKanaErrorMessageList"><s:property/><br></s:iterator>
+			<s:iterator value="#session.firstNameKanaErrorMessageList"><s:property/><br></s:iterator>
 		</div>
 	</div>
 </s:if>
-
-<s:if test="!emailErrorMessageList.isEmpty()">
+<s:if test="!#session.emailErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="emailErrorMessageList"><s:property/><br></s:iterator>
+			<s:iterator value="#session.emailErrorMessageList"><s:property/><br></s:iterator>
 		</div>
 	</div>
 </s:if>
-
-<s:if test="!telNumberErrorMessageList.isEmpty()">
+<s:if test="!#session.telNumberErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="telNumberErrorMessageList"><s:property/><br></s:iterator>
+			<s:iterator value="#session.telNumberErrorMessageList"><s:property/><br></s:iterator>
 		</div>
 	</div>
 </s:if>
-
-<s:if test="!userAdressErrorMessageList.isEmpty()">
+<s:if test="!#session.userAdressErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="userAdressErrorMessageList"><s:property/><br></s:iterator>
+			<s:iterator value="#session.userAdressErrorMessageList"><s:property/><br></s:iterator>
 		</div>
 	</div>
 </s:if>
