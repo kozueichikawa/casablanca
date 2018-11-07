@@ -4,27 +4,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript"/>
+<meta http-equiv="imagetoolbar" content="no"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
 <link rel="stylesheet" href="./css/style.css">
-<title>productList画面</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<title>商品一覧</title>
+<script type="text/javascript">
+function loop(){
+for(var a = 1; a <=10 ; a++){
+	for(var b = 1; b <= 3; b++){
+	document.write($('productList'));
+	}
+	document.write("<br>");
+	}}
+</script>
 </head>
 <body>
-<%--<jsp:include page="header.jsp" /> --%>
+<s:include value="header.jsp" />
+<div id="contents">
+    <h1>商品一覧画面</h1>
+        <s:if test='<s:property value="productInfoDTOList=null"/>'>
+        <div id="SearchResult">
+            <h3>検索結果はありません</h3>
+        </div>
+        </s:if>
 
-<s:if test='<s:property value="productInfoDTOList=null"/>'>
-    <div id="SearchResult">
-      <h3>検索結果はありません</h3>
-    </div>
-</s:if>
-
-<s:elseif test='<s:property value="keywordsErrorMessageList!=null"/>'>
-     <h3>検索結果はありません。</h3>
-     <h3><s:property value="productInfoDTOList"/></h3>
-</s:elseif>
+        <s:elseif test='<s:property value="keywordsErrorMessageList!=null"/>'>
+            <h3>検索結果はありません。</h3>
+            <h3><s:property value="keywordsErrorMessageList"/></h3>
+        </s:elseif>
 
 <s:else>
 <div id="productList">
-        <s:iterator value="productList">
+        <s:iterator value="productInfoDtoList">
             <tr>
                 <td>
                     <a href='<s:url action="ProductDetailAction"/>'>
@@ -40,6 +56,7 @@
         </s:iterator>
 </div>
 </s:else>
-<%--<s:include value="footer.jsp"/>  --%>
+</div>
+<s:include value="footer.jsp"/>
 </body>
 </html>

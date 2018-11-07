@@ -24,7 +24,7 @@ public class AddCartAction extends ActionSupport implements SessionAware{
 	private String productCount;
 	private String releaseCompany;
 	private Date releaseDate;
-	private String productDesription;
+	private String productDescription;
 
 	private String categoryId;
 
@@ -41,7 +41,7 @@ public class AddCartAction extends ActionSupport implements SessionAware{
 			session.put("tempUserId", commonUtility.getRamdomValue());
 			}
 		if(session.containsKey("loginId")){
-			userId = String.valueOf(session.get("loginID"));
+			userId = String.valueOf(session.get("loginId"));
 		}
 		if(!(session.containsKey("loginId")) && session.containsKey("tempUserId")){
 			userId=String.valueOf(session.get("tempUserId"));
@@ -101,7 +101,7 @@ public class AddCartAction extends ActionSupport implements SessionAware{
 	public String getImageFileName() {
 		return imageFileName;
 	}
- void setImageFileName(String imageFileName) {
+	public void setImageFileName(String imageFileName) {
 		this.imageFileName = imageFileName;
 	}
 
@@ -133,12 +133,12 @@ public class AddCartAction extends ActionSupport implements SessionAware{
 		this.releaseDate = releaseDate;
 	}
 
-	public String getProductDesription() {
-		return productDesription;
+	public String getProductDescription() {
+		return productDescription;
 	}
 
-	public void setProductDesription(String productDesription) {
-		this.productDesription = productDesription;
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
 	}
 
 	public String getCategoryId() {

@@ -76,7 +76,7 @@ public class CartInfoDTO {
 	}
 
 
-	public String getProdustName(){
+	public String getProductName(){
 		return productName;
 	}
 	public void setProductName(String productName){

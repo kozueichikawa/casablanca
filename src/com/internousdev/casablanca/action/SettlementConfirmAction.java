@@ -1,6 +1,6 @@
 package com.internousdev.casablanca.action;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -19,7 +19,7 @@ public String execute() {
 
 if(session.containsKey("loginId")){
 	DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
-	ArrayList <DestinationInfoDTO> destinationInfoDTOList = destinationInfoDAO.getDestinationInfo();
+	List <DestinationInfoDTO> destinationInfoDTOList = destinationInfoDAO.getDestinationInfo(session.get("loginId").toString());
 	session.put("destinationInfoDTOList",destinationInfoDTOList);
 
  return SUCCESS;

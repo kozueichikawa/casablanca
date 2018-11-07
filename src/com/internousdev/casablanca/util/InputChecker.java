@@ -10,13 +10,14 @@ public class InputChecker {
 
 	/**
 	 * このプログラムは渡された値を正規表現か検証するものです。
-	 * 使い方はdoCheckに9つの引数を渡します。後半部分には当てはまる形式にtrueを入れます。
+	 * 使い方はdoCheckに10つの引数を渡します。後半部分には当てはまる形式にtrueを入れます。
 	 * emailを判別したいのであれば英字、数字、記号を含むため下記のようになります。
-	 * 例(質問の内容,値,最小文字数,最大文字数,true,false,false,true,true)となります。
+	 * 例(質問の内容,値,最小文字数,最大文字数,true,false,false,true,true,false)となります。
 	 * 結果はList形式で渡されることに気を付けてください。
 	 *
+	 *
 	 */
-	public List<String> doCheck(String propertyName,String value,int minLength,int maxLength,boolean availableAlphabeticCharacters,boolean availableKanji,boolean availableHiragana,boolean availableHalfWidthDigit,boolean availableHalfWidthSymbols,boolean availableKatakana,boolean availableFullWidthSymbols){
+	public List<String> doCheck(String propertyName,String value,int minLength,int maxLength,boolean availableAlphabeticCharacters,boolean availableKanji,boolean availableHiragana,boolean availableHalfWidthDigit,boolean availableHalfWidthSymbols,boolean availableKatakana,boolean availableFullWidthSymbols,boolean space){
 
 		//検証した結果を入れるList
 		List<String> stringList = new ArrayList<String>();
@@ -38,7 +39,7 @@ public class InputChecker {
 
 
 
-		if(availableAlphabeticCharacters || availableKanji || availableHiragana || availableHalfWidthDigit || availableHalfWidthSymbols||availableKatakana||availableFullWidthSymbols){
+		if(availableAlphabeticCharacters || availableKanji || availableHiragana || availableHalfWidthDigit || availableHalfWidthSymbols||availableKatakana||availableFullWidthSymbols||space){
 			regularExpression = "[";
 		}
 
@@ -63,7 +64,7 @@ public class InputChecker {
 		}
 
 		if(availableHalfWidthSymbols){
-			regularExpression +="@.,;:!#$%&'*+-/=?^_`{|}~ ";
+			regularExpression +="@.,;:!#$%&'*+-/=?^_`{|}~";
 			characterTypeList.add("半角記号");
 		}
 
@@ -73,8 +74,13 @@ public class InputChecker {
 		}
 
 		if(availableFullWidthSymbols){
-			regularExpression +="、。＠．，；：！＃＄％＆’＊＋／＝？＾＿｀｛｜｝～　";
+			regularExpression +="、。＠．，；：！＃＄％＆’＊＋／＝？＾＿｀｛｜｝～";
 			characterTypeList.add("全角記号");
+		}
+
+		if(space){
+			regularExpression +=" 　";
+			characterTypeList.add("空白");
 		}
 
 		if(!StringUtils.isEmpty(regularExpression)){
