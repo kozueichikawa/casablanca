@@ -13,54 +13,54 @@
 <div id="contents">
 <h1>宛先情報入力画面</h1>
 
-<s:if test="!#session.familyNameErrorMessageList.isEmpty()">
+<s:if test="!familyNameErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="#session.familyNameErrorMessageList">
+			<s:iterator value="familyNameErrorMessageList">
 				<s:property/><br>
 			</s:iterator>
 		</div>
 	</div>
 </s:if>
-<s:if test="!#session.firstNameErrorMessageList.isEmpty()">
+<s:if test="!firstNameErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="#session.firstNameErrorMessageList"><s:property/><br></s:iterator>
+			<s:iterator value="firstNameErrorMessageList"><s:property/><br></s:iterator>
 		</div>
 	</div>
 </s:if>
-<s:if test="!#session.familyNameKanaErrorMessageList.isEmpty()">
+<s:if test="!familyNameKanaErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="#session.familyNameKanaErrorMessageList"><s:property/><br></s:iterator>
+			<s:iterator value="familyNameKanaErrorMessageList"><s:property/><br></s:iterator>
 		</div>
 	</div>
 </s:if>
-<s:if test="!#session.firstNameKanaErrorMessageList.isEmpty()">
+<s:if test="!firstNameKanaErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="#session.firstNameKanaErrorMessageList"><s:property/><br></s:iterator>
+			<s:iterator value="firstNameKanaErrorMessageList"><s:property/><br></s:iterator>
 		</div>
 	</div>
 </s:if>
-<s:if test="!#session.emailErrorMessageList.isEmpty()">
+<s:if test="!emailErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="#session.emailErrorMessageList"><s:property/><br></s:iterator>
+			<s:iterator value="emailErrorMessageList"><s:property/><br></s:iterator>
 		</div>
 	</div>
 </s:if>
-<s:if test="!#session.telNumberErrorMessageList.isEmpty()">
+<s:if test="!telNumberErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="#session.telNumberErrorMessageList"><s:property/><br></s:iterator>
+			<s:iterator value="telNumberErrorMessageList"><s:property/><br></s:iterator>
 		</div>
 	</div>
 </s:if>
-<s:if test="!#session.userAdressErrorMessageList.isEmpty()">
+<s:if test="!userAdressErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="#session.userAdressErrorMessageList"><s:property/><br></s:iterator>
+			<s:iterator value="userAdressErrorMessageList"><s:property/><br></s:iterator>
 		</div>
 	</div>
 </s:if>
