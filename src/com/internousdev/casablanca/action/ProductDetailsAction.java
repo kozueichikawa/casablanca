@@ -37,6 +37,7 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware{
 
 		result=SUCCESS;
 		return result;
+
 	}
 
 
