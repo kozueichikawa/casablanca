@@ -30,7 +30,7 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 	if(keywords==null){
 		keywords="";
 	}
-	keywordsErrorMessageList =inputChecker.doCheck("検索ワード",keywords,0,16,true,true,true,true,false,true,false,true
+	keywordsErrorMessageList =inputChecker.doCheck("検索ワード",keywords,0,16,true,true,true,true,false,true,false,false,true
 
 			);
 
