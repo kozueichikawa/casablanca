@@ -39,7 +39,7 @@ function goDeleteCartAction(){
 </div>
 </s:if>
 
-<s:if test="#session.cartInfoDTOList.size()>0">
+<s:if test="#session.cartInfoDtoList.size()>0">
 <s:form id="form" action="SettlementConfirmAction">
 
 
@@ -55,11 +55,10 @@ function goDeleteCartAction(){
 <th><s:label value="発売年月日" /></th>
 <th><s:label value="購入個数" /></th>
 <th><s:label value="合計金額" /></th>
-<th><s:label value="カート合計金額" /></th>
 </tr>
 </thead>
 <tbody>
-<s:iterator value="#session.cartInfoDTOList">
+<s:iterator value="#session.cartInfoDtoList">
 <tr>
 	<td><s:checkbox name="checkList" value="checked" fieldValue="%{id}" /> </td>
 	<s:hidden name="productId" value="%{productId}" />
@@ -88,9 +87,14 @@ function goDeleteCartAction(){
 </table>
 
 <h2><s:label value="カート合計金額 :"/><s:property value="#session.totalPrice" />円</h2>
-<br>
 <div class="submit_btn_box">
-<div id=".contents-btn_set">
+	<div id=".contents-btn-set">
+	<s:submit value="決済" class="submit_btn" />
+	</div>
+</div>
+
+<div class="submit_btn_box">
+<div id=".contents-btn-set">
 <s:submit value="削除" class="submit_btn" onclick="this.form.action='DeleteCartAction';" />
 
 </div>
