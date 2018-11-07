@@ -56,16 +56,8 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 	    && telNumberErrorMessageList.size()==0
 	    && userAddressErrorMessageList.size()==0){
 			result=SUCCESS;
-		}else{
-			session.put("familyNameErrorMessageList", familyNameErrorMessageList);
-			session.put("firstNameErrorMessageList",firstNameErrorMessageList);
-			session.put("familyNameKanaErrorMessageList", familyNameKanaErrorMessageList);
-			session.put("firstNameKanaErrorMessageList", firstNameKanaErrorMessageList);
-			session.put("emailErrorMessageList",emailErrorMessageList);
-			session.put("telNumberErrorMessageList", telNumberErrorMessageList);
-			session.put("userAddressErrorMessageList", userAddressErrorMessageList);
-			result=ERROR;
 		}
+
 		sexList.add(MAN);
 		sexList.add(WOMAN);
 		return result;
@@ -79,6 +71,7 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 	public void setFamilyName(String familyName){
 		this.familyName=familyName;
 	}
+
 
 	public String getFirstName(){
 		return firstName;

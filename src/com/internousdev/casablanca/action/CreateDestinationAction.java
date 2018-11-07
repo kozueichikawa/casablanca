@@ -18,18 +18,10 @@ public class CreateDestinationAction extends ActionSupport implements SessionAwa
 	private Map<String,Object> session;
 
 	public String execute(){
-		String result=ERROR;
+		String result=SUCCESS;
 		sexList.add(MAN);
 		sexList.add(WOMAN);
 
-		session.remove("familyNameErrorMessageList");
-		session.remove("firstNameErrorMessageList");
-		session.remove("familyNameKanaErrorMessageList");
-		session.remove("firstNameKanaErrorMessageList");
-		session.remove("emailErrorMessageList");
-		session.remove("telNumberErrorMessageList");
-		session.remove("userAdressErrorMessageList");
-		result=SUCCESS;
 		return result;
 	}
 
@@ -59,7 +51,8 @@ public class CreateDestinationAction extends ActionSupport implements SessionAwa
 	}
 	public Map<String,Object> getSession(){
 		return session;
-	}public void setSession(Map<String,Object> session){
+	}
+	public void setSession(Map<String,Object> session){
 		this.session=session;
 	}
 
