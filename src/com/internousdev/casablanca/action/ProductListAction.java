@@ -13,8 +13,8 @@ import com.internousdev.casablanca.dto.ProductInfoDTO;
 import com.opensymphony.xwork2.ActionSupport;
 public class ProductListAction extends ActionSupport implements SessionAware{
 
-	private ArrayList<ProductInfoDTO>productList=new ArrayList<ProductInfoDTO>();
-	private List<MCategoryDTO>mCategoryList=new ArrayList<MCategoryDTO>();
+	private ArrayList<ProductInfoDTO>productInfoDtoList=new ArrayList<ProductInfoDTO>();
+	private List<MCategoryDTO>mCategoryDtoList=new ArrayList<MCategoryDTO>();
 	private Map<String,Object>session;
 
 
@@ -23,31 +23,31 @@ public class ProductListAction extends ActionSupport implements SessionAware{
 		String result=ERROR;
 
 		ProductInfoDAO productInfoDAO=new ProductInfoDAO();
-		productList=productInfoDAO.getProductList();
+		productInfoDtoList=productInfoDAO.getProductList();
 
 		if(!session.containsKey("mCategoryList")){
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();
-			mCategoryList=mCategoryDAO.getMCategoryList();
-			session.put("mCategoryList", mCategoryList);
+			mCategoryDtoList=mCategoryDAO.getMCategoryList();
+			session.put("mCategoryDtoList", mCategoryDtoList);
 		}
 		result=SUCCESS;
 		return result;
 	}
 
-	public ArrayList<ProductInfoDTO>getProductList(){
-		return productList;
+	public ArrayList<ProductInfoDTO>getProductInfoDtoList(){
+		return productInfoDtoList;
 	}
 
-	public void setProductList(ArrayList<ProductInfoDTO>productList){
-		this.productList=productList;
+	public void setProductInfoDtoList(ArrayList<ProductInfoDTO>productDtoList){
+		this.productInfoDtoList=productDtoList;
 	}
 
-	public List<MCategoryDTO> getmCategoryList() {
-		return mCategoryList;
+	public List<MCategoryDTO> getmCategoryDtoList() {
+		return mCategoryDtoList;
 	}
 
-	public void setmCategoryList(List<MCategoryDTO> mCategoryList) {
-		this.mCategoryList = mCategoryList;
+	public void setmCategoryDtoList(List<MCategoryDTO> mCategoryDtoList) {
+		this.mCategoryDtoList = mCategoryDtoList;
 	}
 
 	public Map<String, Object> getSession() {

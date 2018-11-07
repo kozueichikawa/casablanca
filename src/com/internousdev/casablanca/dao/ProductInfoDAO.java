@@ -18,8 +18,8 @@ public class ProductInfoDAO {
 		DBConnector dbConnector=new DBConnector();
 		Connection connection=dbConnector.getConnection();
 
-		ArrayList<ProductInfoDTO>productListDTO=new ArrayList<ProductInfoDTO>();
-		String sql="SELECT*FROM product_info";
+		ArrayList<ProductInfoDTO>roductInfoDTOList=new ArrayList<ProductInfoDTO>();
+		String sql="SELECT*FROM product_info order by product_id";
 
 		try{
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
@@ -41,14 +41,14 @@ public class ProductInfoDAO {
 				dto.setStatus(resultSet.getInt("status"));
 				dto.setRegistDate(resultSet.getString("regist_date"));
 				dto.setUpdateDate(resultSet.getString("update_date"));
-				productListDTO.add(dto);
+				roductInfoDTOList.add(dto);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
 			connection.close();
 		}
-		return productListDTO;
+		return roductInfoDTOList;
 
 	}
 //一覧から詳細情報を取得
@@ -71,12 +71,15 @@ public class ProductInfoDAO {
 				dto.setProductName(resultSet.getString("product_name"));
 				dto.setProductNameKana(resultSet.getString("product_name_kana"));
 				dto.setCategoryId(resultSet.getInt("category_id"));
-				dto.setImageFilePath(resultSet.getString("image_filr_path"));
+				dto.setImageFilePath(resultSet.getString("image_file_path"));
 				dto.setImageFileName(resultSet.getString("image_file_name"));
 				dto.setPrice(resultSet.getInt("price"));
 				dto.setReleaseDate(resultSet.getString("release_date"));
 				dto.setReleaseCompany(resultSet.getString("release_company"));
 				dto.setProductDescription(resultSet.getString("product_description"));
+				dto.setStatus(resultSet.getInt("status"));
+				dto.setRegistDate(resultSet.getString("regist_date"));
+				dto.setUpdateDate(resultSet.getString("update_date"));
 
 			}
 
