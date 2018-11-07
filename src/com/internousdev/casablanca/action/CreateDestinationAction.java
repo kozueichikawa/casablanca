@@ -18,7 +18,7 @@ public class CreateDestinationAction extends ActionSupport implements SessionAwa
 	private Map<String,Object> session;
 
 	public String execute(){
-		String result=ERROR;
+		String result=SUCCESS;
 		sexList.add(MAN);
 		sexList.add(WOMAN);
 
