@@ -155,28 +155,7 @@ public class CartInfoDAO {
 		}
 		return count;
 	}
-	public int deleteAll(String userId){
-		DBConnector dbConnector = new DBConnector();
-		Connection connection = dbConnector.getConnection();
-		int count = 0;
-		String sql = "delete from cart_info where user_id=?";
 
-		try{
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, userId);
-
-			count = preparedStatement.executeUpdate();
-
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		try{
-			connection.close();
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return count;
-	}
 
 	public boolean isExistsCartInfo(){
 		return false;
