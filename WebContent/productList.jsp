@@ -45,7 +45,7 @@ for(var a = 1; a <=10 ; a++){
                 <td>
                     <a href='<s:url action="ProductDetailAction"/>'>
                         <s:param name="productId" value="%{productId}">
-                            <img src='<s:property value="imageFilePath"/>'>
+                            <img src='<s:property value="imageFilePath"/>/<s:property value="imageFileName"/>' width="50px" height="50px"/>
                         </s:param>
                     </a>
                 </td>
