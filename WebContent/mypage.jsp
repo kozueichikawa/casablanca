@@ -13,10 +13,10 @@
 <div id="contents">
 <h1>マイページ画面</h1>
 	<s:form action="PurchaseHistoryInfoAction">
-	<table class="vercical-list-table">
+	<table class="vertical-list-table">
 	<tr>
 		<th scope="row"><s:label value="姓"/></th>
-		<td><s:property value="#session.failyName"/></td>
+		<td><s:property value="#session.familyName"/></td>
 	</tr>
 
 	<tr>
