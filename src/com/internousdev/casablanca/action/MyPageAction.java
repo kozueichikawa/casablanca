@@ -15,7 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class MyPageAction extends ActionSupport implements SessionAware{
 
-	private List<MCategoryDTO> mCategoryDTOList=new ArrayList<MCategoryDTO>();
+	private List<MCategoryDTO> mCategoryDtoList=new ArrayList<MCategoryDTO>();
 
 	private Map<String,Object> session;
 
@@ -30,7 +30,6 @@ public class MyPageAction extends ActionSupport implements SessionAware{
 		session.put("firstNameKana",userInfoDTO.getFirstNameKana());
 		session.put("sex", userInfoDTO.getSex());
 		session.put("email",userInfoDTO.getFirstNameKana());
-		System.out.println(session.get("familyName"));
 		result =SUCCESS;
 
 
@@ -41,19 +40,19 @@ public class MyPageAction extends ActionSupport implements SessionAware{
 
 	if(!session.containsKey("mCategoryList")) {
 		MCategoryDAO mCategoryDAO=new MCategoryDAO();
-		mCategoryDTOList= mCategoryDAO.getMCategoryList();
-		session.put("mCategoryDTOList", mCategoryDTOList);
+		mCategoryDtoList= mCategoryDAO.getMCategoryList();
+		session.put("mCategoryDtoList", mCategoryDtoList);
 	}
 
 
 	}
 
 	public List<MCategoryDTO> getmCategoryDTOList() {
-		return mCategoryDTOList;
+		return mCategoryDtoList;
 	}
 
 	public void setmCategoryDTOList(List<MCategoryDTO> mCategoryDTOList) {
-		this.mCategoryDTOList = mCategoryDTOList;
+		this.mCategoryDtoList = mCategoryDTOList;
 	}
 
 	public Map<String, Object> getSession() {
