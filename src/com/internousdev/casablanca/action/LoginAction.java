@@ -27,8 +27,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
 		/* 入力チェック */
 		InputChecker inputChecker = new InputChecker();
-		loginIdErrorMessageList = inputChecker.doCheck("ログインID", loginId, 1, 8, true, false, false, true, false, false, false);
-		passwordErrorMessageList = inputChecker.doCheck("ログインID", loginId, 1, 16, true, false, false, true, false, false, false);
+		loginIdErrorMessageList = inputChecker.doCheck("ログインID", loginId, 1, 8, true, false, false, true, false, false, false, false, false);
+		passwordErrorMessageList = inputChecker.doCheck("ログインID", loginId, 1, 16, true, false, false, true, false, false, false, false, false);
 
 		/* 入力チェックがOKだった場合、ログイン処理へ。NGの場合は即ERRORをreturn */
 		if (loginIdErrorMessageList.size()==0 && passwordErrorMessageList.size()==0) {
