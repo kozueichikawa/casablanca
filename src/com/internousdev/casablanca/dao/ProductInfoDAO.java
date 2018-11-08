@@ -18,7 +18,7 @@ public class ProductInfoDAO {
 		DBConnector dbConnector=new DBConnector();
 		Connection connection=dbConnector.getConnection();
 
-		ArrayList<ProductInfoDTO>productInfoDTOList=new ArrayList<ProductInfoDTO>();
+		ArrayList<ProductInfoDTO>productInfoDtoList=new ArrayList<ProductInfoDTO>();
 		String sql="SELECT*FROM product_info order by product_id";
 
 		try{
@@ -41,14 +41,14 @@ public class ProductInfoDAO {
 				dto.setStatus(resultSet.getInt("status"));
 				dto.setRegistDate(resultSet.getString("regist_date"));
 				dto.setUpdateDate(resultSet.getString("update_date"));
-				productInfoDTOList.add(dto);
+				productInfoDtoList.add(dto);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
 			connection.close();
 		}
-		return productInfoDTOList;
+		return productInfoDtoList;
 
 	}
 //一覧から詳細情報を取得
@@ -93,7 +93,7 @@ public class ProductInfoDAO {
 	public List<ProductInfoDTO>getProdctInfoListByCategoryId(int categoryId,int productId,int limitOddset,int limitRowCount){
 		DBConnector dbConnector=new DBConnector();
 		Connection connection=dbConnector.getConnection();
-		List<ProductInfoDTO>productInfoDTOList=new ArrayList<ProductInfoDTO>();
+		List<ProductInfoDTO>productInfoDtoList=new ArrayList<ProductInfoDTO>();
 
 		String sql="select*from product_info where category_id=? and product_id not in(?) order by rand() limit ?,?";
 
@@ -121,7 +121,7 @@ public class ProductInfoDAO {
 				dto.setStatus(resultSet.getInt("status"));
 				dto.setRegistDate(resultSet.getString("regist_date"));
 				dto.setUpdateDate(resultSet.getString("update_date"));
-				productInfoDTOList.add(dto);
+				productInfoDtoList.add(dto);
 
 			}
 		}catch(SQLException e){
@@ -131,7 +131,7 @@ public class ProductInfoDAO {
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		return productInfoDTOList;
+		return productInfoDtoList;
 
 	}
 //キーワードによる検索
