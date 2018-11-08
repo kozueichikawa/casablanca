@@ -115,7 +115,7 @@ public class ProductInfoDAO {
 				dto.setProductDescription(resultSet.getString("product_description"));
 				dto.setCategoryId(resultSet.getInt("category_id"));
 				dto.setPrice(resultSet.getInt("price"));
-				dto.setImageFilePath(resultSet.getString("image_filr_path"));
+				dto.setImageFilePath(resultSet.getString("image_file_path"));
 				dto.setImageFileName(resultSet.getString("image_file_name"));
 				dto.setReleaseDate(resultSet.getString("release_date"));
 				dto.setReleaseCompany(resultSet.getString("release_company"));
@@ -164,7 +164,7 @@ public class ProductInfoDAO {
 				dto.setProductDescription(resultSet.getString("product_description"));
 				dto.setCategoryId(resultSet.getInt("category_id"));
 				dto.setPrice(resultSet.getInt("price"));
-				dto.setImageFilePath(resultSet.getString("image_filr_path"));
+				dto.setImageFilePath(resultSet.getString("image_file_path"));
 				dto.setImageFileName(resultSet.getString("image_file_name"));
 				dto.setReleaseDate(resultSet.getString("release_date"));
 				dto.setReleaseCompany(resultSet.getString("release_company"));
@@ -213,7 +213,7 @@ public class ProductInfoDAO {
 				dto.setProductDescription(resultSet.getString("product_description"));
 				dto.setCategoryId(resultSet.getInt("category_id"));
 				dto.setPrice(resultSet.getInt("price"));
-				dto.setImageFilePath(resultSet.getString("image_filr_path"));
+				dto.setImageFilePath(resultSet.getString("image_file_path"));
 				dto.setImageFileName(resultSet.getString("image_file_name"));
 				dto.setReleaseDate(resultSet.getString("release_date"));
 				dto.setReleaseCompany(resultSet.getString("release_company"));
