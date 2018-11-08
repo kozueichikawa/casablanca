@@ -27,13 +27,14 @@ for(var a = 1; a <=10 ; a++){
 <s:include value="header.jsp" />
 <div id="contents">
     <h1>商品一覧画面</h1>
-        <s:if test='<s:property value="productInfoDtoList=null"/>'>
+        <s:if test="productInfoDtoList=null">
         <div id="SearchResult">
             <h3>検索結果はありません</h3>
         </div>
         </s:if>
 
-        <s:elseif test='<s:property value="keywordsErrorMessageList!=null"/>'>
+
+        <s:elseif test="keywordsErrorMessageList!=null">
             <h3>検索結果はありません。</h3>
             <h3><s:property value="keywordsErrorMessageList"/></h3>
         </s:elseif>
