@@ -16,7 +16,7 @@ public class PurchaseHistoryInfoDAO {
 		Connection con=db.getConnection();
 		List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDTOList=new ArrayList<PurchaseHistoryInfoDTO>();
 
-		String sql="select"
+		String sql="select "
 				+ "phi.id as id," /*ID*/
 				+ "phi.user_id as user_id,"/*ユーザーID*/
 				+ "phi.product_count as product_count,"/*個数*/
@@ -40,13 +40,13 @@ public class PurchaseHistoryInfoDAO {
 				+ "di.email as email,"/*メールアドレス*/
 				+ "di.tel_number as tel_number,"/*電話番号*/
 				+ "di.user_address as user_address,"
-				+ "FROM purchase_history_info as phi"
-				+ "LEFT JOIN product_info as pi"
-				+ "ON phi.product_id=pi.droduct_id"
-				+ "LEFT JOIN destination_info as di"
-				+ "ON phi.destination_id=di.id"
-				+ "WHERE phi.user_id=?"
-				+ "ORDER BY regist_date DESC";
+				+ " FROM purchase_history_info as phi"
+				+ " LEFT JOIN product_info as pi"
+				+ " ON phi.product_id=pi.product_id"
+				+ " LEFT JOIN destination_info as di"
+				+ " ON phi.destination_id=di.id"
+				+ " WHERE phi.user_id=?"
+				+ " ORDER BY regist_date DESC";
 
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
