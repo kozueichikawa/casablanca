@@ -63,9 +63,6 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 	return result;
 }
 
-//sessionを使わずにvalue stackにkeywordsErrorMessageListを格納してます。
-
-
 
 
 	public List<MCategoryDTO> getmCategoryDtoList(){

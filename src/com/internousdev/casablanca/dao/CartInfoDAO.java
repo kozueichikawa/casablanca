@@ -17,7 +17,7 @@ public class CartInfoDAO {
 	Connection connection = dbConnector.getConnection();
 	List<CartInfoDTO> cartInfoDtoList = new ArrayList<CartInfoDTO>();
 
-	String sql="select"
+	String sql="select "
 			+"ci.id as id,"
 			+"ci.user_id as user_id,"
 			+"ci.temp_user_id as temp_user_id,"
@@ -35,16 +35,16 @@ public class CartInfoDAO {
 			+"pi.release_date as release_date,"
 			+"pi.release_company as release_company,"
 			+"pi.status as status,"
-			+"(sum(ci.product_count) * pi.price) as subtotal"
-			+"FROM cart_info as ci"
-			+"LEFT JOIN product_info as pi"
-			+"ON ci.product_id = pi.product_id"
-			+"WHERE ci.user_id = ?"
+			+"(sum(ci.product_count) * pi.price) as subtotal "
+			+"FROM cart_info as ci "
+			+"LEFT JOIN product_info as pi "
+			+"ON ci.product_id = pi.product_id "
+
+			+"WHERE ci.user_id = ? "
 			+"group by product_id";
 
 	try{
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		System.out.println("cartinfodao-getcartinfodtolist:"+loginId);
 		preparedStatement.setString(1,loginId);
 		ResultSet resultSet = preparedStatement.executeQuery();
 

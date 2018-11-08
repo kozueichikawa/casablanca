@@ -40,7 +40,7 @@
             <tr>
                 <th>購入個数</th>
                 <td>
-                    <select name="ProductCount">
+                    <select name="productCount">
                        <option value="1" selected="selected">1</option>
                        <option value="2">2</option>
                        <option value="3">3</option>
