@@ -65,6 +65,15 @@
     </div>
     </div>
     <div id="addCart">
+        <s:hidden name="productId" value="%{productInfoDTO.productId}"/>
+        <s:hidden name="imageFilePath" value="%{productInfoDTO.imageFilePath}"/>
+        <s:hidden name="imageFileName" value="%{productInfoDTO.imageFileName}"/>
+        <s:hidden name="productName" value="%{productInfoDTO.productName}"/>
+        <s:hidden name="productNameKana" value="%{productInfoDTO.productNameKana}"/>
+        <s:hidden name="price" value="%{productInfoDTO.price}"/>
+        <s:hidden name="releaseCompany" value="%{productInfoDTO.releaseCompany}"/>
+        <s:hidden name="releaseDate" value="%{productInfoDTO.releaseDate}"/>
+        <s:hidden name="productDescription" value="%{productInfoDTO.productDescription}"/>
         <s:submit value="カートに追加"/>
     </div>
     </s:form>
