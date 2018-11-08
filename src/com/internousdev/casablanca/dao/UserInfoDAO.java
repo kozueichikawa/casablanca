@@ -84,7 +84,6 @@ public class UserInfoDAO {
 		return userInfoDTO;
 	}
 
-/*
 public boolean isExistsUserInfo(String loginId, String password) {
 	DBConnector db = new DBConnector();
 	Connection con = db.getConnection();
@@ -110,7 +109,6 @@ try {
 }
 return result;} // ←????????????
 }
-*/
 
 /*
 public UserInfoDTO getUserInfo(String loginId, String password) {
