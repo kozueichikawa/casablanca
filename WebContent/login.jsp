@@ -9,7 +9,7 @@
 </head>
 <body>
 	<s:if test="%{loginIdErrorMessageList.size()}>0">
-		<s:iterator value="loginIdErrorMessageList">
+		<s:iterator value="%{loginIdErrorMessageList}">
 			<s:property/>
 		</s:iterator>
 	</s:if>
