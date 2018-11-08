@@ -10,7 +10,7 @@
 <body>
 <ul>
 	<s:form action="SearchItemAction">
-	<li><s:select name="categoryId" list="#session.mCategoryDTOList" listKey="categoryId" listValue="categoryName"/></li>
+	<li><s:select name="categoryId" list="#session.mCategoryList" listKey="categoryId" listValue="categoryName"/></li>
 	<li><s:textfield name="keywords" value="%{keywords}" placeholder="検索ワード"/></li>
 	<li><s:submit value="商品検索"/></li>
 	</s:form>
