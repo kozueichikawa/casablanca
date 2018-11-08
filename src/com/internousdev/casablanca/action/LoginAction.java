@@ -35,7 +35,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		/* 入力チェックがOKだった場合、ログイン処理へ。NGの場合は即ERRORをreturn */
 		if (loginIdErrorMessageList.size()==0 && passwordErrorMessageList.size()==0) {
 			UserInfoDAO userInfoDAO = new UserInfoDAO();
-			UserInfoDTO userInfoDTO = userInfoDAO.getUserInfo(loginId, password);
+			UserInfoDTO userInfoDTO = userInfoDAO.getLoginInfo(loginId, password);
 			if (loginId.equals(userInfoDTO.getUserId()) && password.equals(userInfoDTO.getPassword())) {
 				/* ログインOKだった場合、DBカラム"logined"を1にupdate。そのloginedをsessionに取得 */
 				userInfoDAO.login(loginId, password);

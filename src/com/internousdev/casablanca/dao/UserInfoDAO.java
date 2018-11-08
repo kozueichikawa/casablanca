@@ -50,7 +50,7 @@ public class UserInfoDAO {
 		return count;
 	}
 
-	public UserInfoDTO getUserInfo(String loginId, String password) {
+	public UserInfoDTO getLoginInfo(String loginId, String password) {
 		UserInfoDTO userInfoDTO = new UserInfoDTO();
 		DBConnector db = new DBConnector();
 		con = db.getConnection();
@@ -98,18 +98,27 @@ public boolean isExistsUserInfo(String loginId, String password) {
 			if (rs.getInt("count") <0){
 				result = true;
 			}
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result; // ←????????????
+		}
 	}
-} catch (SQLException e) {
-	e.printStackTrace();
-}
-try {
-	con.close();
-}catch (SQLException e) {
-	e.printStackTrace();
-}
-return result;} // ←????????????
-}
-
 /*
 public UserInfoDTO getUserInfo(String loginId, String password) {
 	DBConnector db = new DBConnector();
@@ -206,6 +215,9 @@ public UserInfoDTO getUserInfo(String loginId) {
 			e.printStackTrace();
 		} finally {
 			try {
+				if (rs != null) {
+					rs.close();
+				}
 				if (ps != null) {
 					ps.close();
 				}
@@ -251,15 +263,21 @@ public UserInfoDTO getUserInfo(String loginId) {
 		String sql = "update user_info set logined=0 where user_id=?";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps .setString(1, loginId);
+			ps.setString(1, loginId);
 			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try {
-			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -271,8 +289,5 @@ public UserInfoDTO getUserInfo(String loginId) {
 
 		String concealPassword = stringBuilder.replace(beginIndex, endIndex, password.substring(beginIndex,endIndex)).toString();
 		return concealPassword;
-
-
-
 		}
 }
