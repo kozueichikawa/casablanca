@@ -22,7 +22,7 @@
 
 <tr>
 	<th scope="row">
-		<s:label valu="姓"/>
+		<s:label value="姓"/>
 	</th>
 	<td>
 		<s:property value="familyName"/>
@@ -64,10 +64,14 @@
 	<th scope="row">
 		<s:label value="性別"/>
 	</th>
-	<td>
-		<s:property value="sex"/>
+
+		<s:if test="%{sex==0}">
+			<td>男</td>
+		</s:if>
+		<s:else>
+			<td>女</td>
+		</s:else>
 		<s:hidden name="sex" value="%{sex}"/>
-	</td>
 </tr>
 
 <tr>

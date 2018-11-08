@@ -6,27 +6,35 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン</title>
+<script>
+</script>
 </head>
 <body>
-	<s:if test="%{loginIdErrorMessageList.size()}>0">
-		<s:iterator value="%{loginIdErrorMessageList}">
+<s:include value="header.jsp"/>
+	<s:if test="!loginIdErrorMessageList.isEmpty()">
+		<s:iterator value="loginIdErrorMessageList">
 			<s:property/>
 		</s:iterator>
 	</s:if>
-	<s:if test="%{passwordErrorMessageList.size()}>0">
+	<s:if test="!passwordErrorMessageList.isEmpty()">
 		<s:iterator value="passwordErrorMessageList">
 			<s:property/>
 		</s:iterator>
 	</s:if>
 	<s:form action="LoginAction">
-	<s:if test="#session.isSavedLoginId">
-		<s:textfield name="loginId" value="#session.loginId"/>
+	<s:if test="#session.saveLoginStatus">
+		<s:textfield name="loginId" value="%{#session.loginId}"/>
 	</s:if>
 	<s:else>
 		<s:textfield name="loginId"/>
 	</s:else>
 		<s:password name="password"/>
-		<s:checkbox name="isSavedLoginId"/>
+	<s:if test="#session.saveLoginStatus">
+		<s:checkbox name="saveLoginStatus" checked="checked"/>
+	</s:if>
+	<s:else>
+	<s:checkbox name="saveLoginStatus"/>
+	</s:else>
 	<s:submit value="ログイン"/>
 	</s:form>
 	<s:form action="CreateUserAction">

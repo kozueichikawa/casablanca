@@ -13,47 +13,56 @@ import com.internousdev.casablanca.util.DBConnector;
 
 
 public class DestinationInfoDAO {
+	private Connection con = null;
+	private PreparedStatement ps = null;
+	private ResultSet rs = null;
 
 	public int insert(String userId,String familyName,String firstName,String familyNameKana,String firstNameKana,String email,String telNumber,String userAddress){
-		DBConnector dbConnector=new DBConnector();
-		Connection connection=dbConnector.getConnection();
-		int count=0;
-		String sql="insert into destination_info(user_id,family_name,first_name,family_name_kana,first_name_kana,email,tel_number,user_address,regist_date,update_date)"
+		DBConnector db = new DBConnector();
+		con = db.getConnection();
+		int count = 0;
+		String sql = "insert into destination_info(user_id,family_name,first_name,family_name_kana,first_name_kana,email,tel_number,user_address,regist_date,update_date)"
 				+ "values(?,?,?,?,?,?,?,?,now(),'0000-01-01')";
 		try{
-			PreparedStatement preparedStatement=connection.prepareStatement(sql);
-			preparedStatement.setString(1,userId);
-			preparedStatement.setString(2,familyName);
-			preparedStatement.setString(3,firstName);
-			preparedStatement.setString(4,familyNameKana);
-			preparedStatement.setString(5,firstNameKana);
-			preparedStatement.setString(6,email);
-			preparedStatement.setString(7,telNumber);
-			preparedStatement.setString(8,userAddress);
-			count=preparedStatement.executeUpdate();
-		}catch(SQLException e){
+			ps=con.prepareStatement(sql);
+			ps.setString(1,userId);
+			ps.setString(2,familyName);
+			ps.setString(3,firstName);
+			ps.setString(4,familyNameKana);
+			ps.setString(5,firstNameKana);
+			ps.setString(6,email);
+			ps.setString(7,telNumber);
+			ps.setString(8,userAddress);
+			count=ps.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try{
-			connection.close();
-		}catch(SQLException e){
-			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return count;
 	}
 
 	public List<DestinationInfoDTO> getDestinationInfo(String loginId) {
-		DBConnector dbConnector=new DBConnector();
-		Connection connection=dbConnector.getConnection();
+		DBConnector db=new DBConnector();
+		con=db.getConnection();
 		List<DestinationInfoDTO> destinationInfoDtoList=new ArrayList<DestinationInfoDTO>();
 
 		String sql="SELECT id,family_name,first_name,family_name_kana,first_name_kana,user_address,tel_number,email FROM destination_info WHERE user_id=?";
 
 		try{
-			connection=dbConnector.getConnection();
-			PreparedStatement ps=connection.prepareStatement(sql);
+			con = db.getConnection();
+			ps = con.prepareStatement(sql);
 			ps.setString(1,loginId);
-			ResultSet rs=ps.executeQuery();
+			rs=ps.executeQuery();
 
 			while(rs.next()){
 				DestinationInfoDTO destinationInfoDTO=new DestinationInfoDTO();
@@ -67,13 +76,22 @@ public class DestinationInfoDAO {
 				destinationInfoDTO.setTelNumber(rs.getString("tel_number"));
 				destinationInfoDtoList.add(destinationInfoDTO);
 			}
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try{
-			connection.close();
-		}catch(SQLException e){
-			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return destinationInfoDtoList;
 	}

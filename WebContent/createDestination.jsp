@@ -27,10 +27,10 @@
 		</div>
 	</div>
 </s:if>
-<s:if test="!famimyNameKanaErrorMessageList.isEmpty()">
+<s:if test="!familyNameKanaErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="famimyNameKanaErrorMessageList"><s:property /><br></s:iterator>
+			<s:iterator value="familyNameKanaErrorMessageList"><s:property /><br></s:iterator>
 		</div>
 	</div>
 </s:if>
@@ -41,10 +41,10 @@
 		</div>
 	</div>
 </s:if>
-<s:if test="!emailErrorMessageList.isEmpty()">
+<s:if test="!userAddressErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="emailErrorMessageList"><s:property /><br></s:iterator>
+			<s:iterator value="userAddressErrorMessageList"><s:property /><br></s:iterator>
 		</div>
 	</div>
 </s:if>
@@ -55,14 +55,13 @@
 		</div>
 	</div>
 </s:if>
-<s:if test="!userAddressErrorMessageList.isEmpty()">
+<s:if test="!emailErrorMessageList.isEmpty()">
 	<div class="error">
 		<div class="error-message">
-			<s:iterator value="userAddressErrorMessageList"><s:property /><br></s:iterator>
+			<s:iterator value="emailErrorMessageList"><s:property /><br></s:iterator>
 		</div>
 	</div>
 </s:if>
-
 <s:form action="CreateDestinationConfirmAction">
 <table class="vertical-list-table">
 <tr>
@@ -87,8 +86,8 @@
 
 <tr>
 	<th scope="row"><s:label value="性別"/></th>
-	<td><label>男</label><input type="radio" name="sex"value="">
-			<label>女</label><input type="radio" name="sex" value=""></td>
+	<td><label>男</label><input type="radio" name="sex" value="0">
+			<label>女</label><input type="radio" name="sex" value="1"></td>
 </tr>
 
 <tr>

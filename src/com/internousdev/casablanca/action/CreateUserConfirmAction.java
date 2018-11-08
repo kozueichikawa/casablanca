@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.casablanca.dao.MCategoryDAO;
+import com.internousdev.casablanca.dto.MCategoryDTO;
 import com.internousdev.casablanca.util.InputChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -33,87 +35,77 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 	private Map<String, Object> session;
 
 	public String execute() {
-			 String result = ERROR;
-			 InputChecker inputChecker = new InputChecker();
+		String result = ERROR;
+		InputChecker inputChecker = new InputChecker();
+		familyNameErrorMessageList = inputChecker.doCheck("姓", familyName, 1, 16, true, true, true, false, false, false, false, false, false);
+		firstNameErrorMessageList = inputChecker.doCheck("名", firstName, 1, 16, true, true, true, false, false, false, false, false, false);
+		familyNameKanaErrorMessageList = inputChecker.doCheck("姓ふりがな", familyNameKana, 1, 16, false, false, true, false, false, false, false, false, false);
+		firstNameKanaErrorMessageList = inputChecker.doCheck("名ふりがな", firstNameKana, 1, 16, false, false, true, false, false, false, false, false, false);
+		emailErrorMessageList = inputChecker.doCheck("メールアドレス", email, 14, 32, true, false, false, true, true, false, false, false, false);
+		loginIdErrorMessageList = inputChecker.doCheck("ログインID", loginId, 1, 8, true, false, false, true, false, false ,false, false, false);
+		passwordErrorMessageList = inputChecker.doCheck("パスワード", password, 1, 16, true, false, false, true, false, false ,false, false, false);
 
-
-
-			 familyNameErrorMessageList = inputChecker.doCheck("姓", familyName, 1, 16, true, true, true, false, false, false, false, false, false);
-			 firstNameErrorMessageList = inputChecker.doCheck("名", firstName, 1, 16, true, true, true, false, false, false, false, false, false);
-			 familyNameKanaErrorMessageList = inputChecker.doCheck("姓ふりがな", familyNameKana, 1, 16, false, false, true, false, false, false, false, false, false);
-			 firstNameKanaErrorMessageList = inputChecker.doCheck("名ふりがな", firstNameKana, 1, 16, false, false, true, false, false, false, false, false, false);
-			 emailErrorMessageList = inputChecker.doCheck("メールアドレス", email, 14, 32, true, false, false, true, true, false, false, false, false);
-			 loginIdErrorMessageList = inputChecker.doCheck("ログインID", loginId, 1, 8, true, false, false, true, false, false ,false, false, false);
-			 passwordErrorMessageList = inputChecker.doCheck("パスワード", password, 1, 16, true, false, false, true, false, false ,false, false, false);
-
-			 if(familyNameErrorMessageList.size()==0
-			 && firstNameErrorMessageList.size()==0
-			 && firstNameKanaErrorMessageList.size()==0
-			 && firstNameErrorMessageList.size()==0
-			 && emailErrorMessageList.size()==0
-			 && loginIdErrorMessageList.size()==0
-			 && passwordErrorMessageList.size()==0) {
-
-			 }session.put("family_name", familyName);
-			  session.put("first_Name", firstName);
-			  session.put("familuyt_Name_Kana", familyNameKana);
-			  session.put("first_Nama_Kana", firstNameKana);
-			  session.put("sex", sex);
-			  session.put("email", email);
-			  session.put("loginId", loginId);
-			  session.put("password", password);{
-					 result = SUCCESS;
-			 }
-			 	return result;
-			}
-			public List<String> getLoginIdErrorMessageList() {
+		if(familyNameErrorMessageList.size()==0
+		&& firstNameErrorMessageList.size()==0
+		&& firstNameKanaErrorMessageList.size()==0
+		&& firstNameErrorMessageList.size()==0
+		&& emailErrorMessageList.size()==0
+		&& loginIdErrorMessageList.size()==0
+		&& passwordErrorMessageList.size()==0) {
+			result = SUCCESS;
+		}
+		if(!session.containsKey("mCategoryDtoList")) {
+			MCategoryDAO mCategoryDAO=new MCategoryDAO();
+			List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
+			session.put("mCategoryDtoList", mCategoryDtoList);
+		}
+		return result;
+	}
+	public List<String> getLoginIdErrorMessageList() {
 		return loginIdErrorMessageList;
 	}
-	public void setLoginIdErrorMessageList(List<String> loginIdErrorMessageList) {
-		this.loginIdErrorMessageList = loginIdErrorMessageList;
+	public List<String> getSexList() {
+		return sexList;
 	}
-			public List<String> getSexList() {
-				return sexList;
-			}
-			public void setSexList(List<String> sexList) {
-				this.sexList = sexList;
-			}
-			public String getCategoryId() {
-				return categoryId;
-			}
-			public void setCategoryId(String categoryId) {
-				this.categoryId = categoryId;
-			}
-			public String getFamilyName() {
-				return familyName;
-			}
-			public void setFamilyName(String familyName) {
-				this.familyName = familyName;
-			}
-			public String getFirstName() {
-				return firstName;
-			}
-			public void setFirstName(String firstName) {
-				this.firstName = firstName;
-			}
-			public String getFamilyNameKana() {
-				return familyNameKana;
-			}
-			public void setFamilyNameKana(String familyNameKana) {
-				this.familyNameKana = familyNameKana;
-			}
-			public String getFirstNameKana() {
-				return firstNameKana;
-			}
-			public void setFirstNameKana(String firstNameKana) {
-				this.firstNameKana = firstNameKana;
-			}
-			public String getSex() {
-				return sex;
-			}
-			public void setSex(String sex){
-				this.sex = sex;
-			}
+	public void setSexList(List<String> sexList) {
+		this.sexList = sexList;
+	}
+	public String getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
+	public String getFamilyName() {
+		return familyName;
+	}
+	public void setFamilyName(String familyName) {
+		this.familyName = familyName;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getFamilyNameKana() {
+		return familyNameKana;
+	}
+	public void setFamilyNameKana(String familyNameKana) {
+		this.familyNameKana = familyNameKana;
+	}
+	public String getFirstNameKana() {
+		return firstNameKana;
+	}
+	public void setFirstNameKana(String firstNameKana) {
+		this.firstNameKana = firstNameKana;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex){
+		this.sex = sex;
+	}
 	//		public List<String> getSexList() {
 	//		return sexList;
 	//		}
@@ -121,72 +113,47 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 	//		this.sexList = sexList;
 	//		}
 
-			public String getEmail() {
-				return email;
-			}
-			public void setEmail(String email) {
-				this.email = email;
-			}
-			public String getLoginId() {
-				return loginId;
-			}
-			public void setLoginId(String loginId) {
-				this.loginId = loginId;
-			}
-			public String getPassword() {
-				return password;
-			}
-			public void setPassword(String password) {
-				this.password = password;
-			}
-			public List<String> getFamilyNameErrorMessageList() {
-				return familyNameErrorMessageList;
-			}
-			public void setFamilyNameErrorMessageList(List<String> familyNameErrorMessageList) {
-				this.familyNameErrorMessageList = familyNameErrorMessageList;
-			}
-		    public List<String> getFirstNameErrorMessageList() {
-		    	return firstNameErrorMessageList;
-		    }
-		    public void setFirstNameErrorMessageList(List<String> firstNameErrorMessageList) {
-		    	this.firstNameErrorMessageList = firstNameErrorMessageList;
-		    }
-		    public List<String> getFamilyNameKanaErrorMessageList() {
-		    	return familyNameKanaErrorMessageList;
-		    }
-		    public void setFamilyNameKanaErrorMessageList(List<String> familyNameKanaErrorMessageList) {
-		    	this.familyNameKanaErrorMessageList = familyNameKanaErrorMessageList;
-		    }
-		    public List<String> getFirstNameKanaErrorMessageList() {
-		    	return firstNameKanaErrorMessageList;
-		    }
-		    public void setFirstNameKanaErrorMessageList(List<String> firstNameKanaErrorMessageList) {
-		    	this.firstNameKanaErrorMessageList = firstNameKanaErrorMessageList;
-		    }
-		    public List<String> getEmailErrorMessageList() {
-		    	return emailErrorMessageList;
-		    }
-		    public void setEmailErrorMessageList(List<String> emailErrorMessageList) {
-		    	this.emailErrorMessageList = emailErrorMessageList;
-		    }
-		    public List<String> getLoginErrorMessageList() {
-		    	return loginIdErrorMessageList;
-		    }
-		    public void setLoginIdrrorMessageList(List<String> loginIdErrorMessageList) {
-		    	this.loginIdErrorMessageList =loginIdErrorMessageList;
-		    }
-		    public List<String> getPasswordErrorMessageList() {
-		    	return passwordErrorMessageList;
-		    }
-		    public void setPasswordErrorMessageList(List<String> passwordErrorMessageList) {
-		    	this.passwordErrorMessageList = passwordErrorMessageList;
-		    }
-		    public Map<String, Object> getSession() {
-		    	return session;
-		    }
-
-		    @Override
-		    public void setSession(Map<String, Object> session) {
-		    	this.session = session;
-		    }
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getLoginId() {
+		return loginId;
+	}
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public List<String> getFamilyNameErrorMessageList() {
+		return familyNameErrorMessageList;
+	}
+	public List<String> getFirstNameErrorMessageList() {
+		return firstNameErrorMessageList;
+	}
+	public List<String> getFamilyNameKanaErrorMessageList() {
+		return familyNameKanaErrorMessageList;
+	}
+	public List<String> getFirstNameKanaErrorMessageList() {
+		return firstNameKanaErrorMessageList;
+	}
+	public List<String> getEmailErrorMessageList() {
+		return emailErrorMessageList;
+	}
+	public List<String> getLoginErrorMessageList() {
+		return loginIdErrorMessageList;
+	}
+	public List<String> getPasswordErrorMessageList() {
+		return passwordErrorMessageList;
+	}
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
 }

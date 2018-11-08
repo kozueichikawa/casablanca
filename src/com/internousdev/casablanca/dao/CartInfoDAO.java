@@ -11,10 +11,13 @@ import com.internousdev.casablanca.dto.CartInfoDTO;
 import com.internousdev.casablanca.util.DBConnector;
 
 public class CartInfoDAO {
+	private Connection con = null;
+	private PreparedStatement ps = null;
+	private ResultSet rs = null;
 
 	public List<CartInfoDTO> getCartInfoDtoList(String loginId){
-	DBConnector dbConnector = new DBConnector();
-	Connection connection = dbConnector.getConnection();
+	DBConnector db = new DBConnector();
+	con = db.getConnection();
 	List<CartInfoDTO> cartInfoDtoList = new ArrayList<CartInfoDTO>();
 
 	String sql="select "
@@ -44,114 +47,142 @@ public class CartInfoDAO {
 			+"group by product_id";
 
 	try{
-		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.setString(1,loginId);
-		ResultSet resultSet = preparedStatement.executeQuery();
+		ps = con.prepareStatement(sql);
+		ps.setString(1,loginId);
+		rs = ps.executeQuery();
 
-		while(resultSet.next()){
+		while(rs.next()){
 			CartInfoDTO cartInfoDTO = new CartInfoDTO();
-			cartInfoDTO.setId(resultSet.getInt("id"));
-			cartInfoDTO.setUserId(resultSet.getString("user_id"));
-			cartInfoDTO.setTempUserId(resultSet.getString("temp_user_id"));
-			cartInfoDTO.setProductId(resultSet.getInt("product_id"));
-			cartInfoDTO.setProductCount(resultSet.getInt("product_count"));
-			cartInfoDTO.setPrice(resultSet.getInt("price"));
-			cartInfoDTO.setRegistDate(resultSet.getDate("regist_date"));
-			cartInfoDTO.setUpdateDate(resultSet.getDate("update_date"));
-			cartInfoDTO.setProductName(resultSet.getString("product_name"));
-			cartInfoDTO.setProductNameKana(resultSet.getString("product_name_kana"));
-			cartInfoDTO.setProductDescription(resultSet.getString("product_description"));
-			cartInfoDTO.setCategoryId(resultSet.getInt("category_id"));
-			cartInfoDTO.setImageFilePath(resultSet.getString("image_file_path"));
-			cartInfoDTO.setImageFileName(resultSet.getString("image_file_name"));
-			cartInfoDTO.setReleaseDate(resultSet.getDate("release_date"));
-			cartInfoDTO.setReleaseCompany(resultSet.getString("release_company"));
-			cartInfoDTO.setStatus(resultSet.getString("status"));
-			cartInfoDTO.setSubtotal(resultSet.getInt("subtotal"));
+			cartInfoDTO.setId(rs.getInt("id"));
+			cartInfoDTO.setUserId(rs.getString("user_id"));
+			cartInfoDTO.setTempUserId(rs.getString("temp_user_id"));
+			cartInfoDTO.setProductId(rs.getInt("product_id"));
+			cartInfoDTO.setProductCount(rs.getInt("product_count"));
+			cartInfoDTO.setPrice(rs.getInt("price"));
+			cartInfoDTO.setRegistDate(rs.getDate("regist_date"));
+			cartInfoDTO.setUpdateDate(rs.getDate("update_date"));
+			cartInfoDTO.setProductName(rs.getString("product_name"));
+			cartInfoDTO.setProductNameKana(rs.getString("product_name_kana"));
+			cartInfoDTO.setProductDescription(rs.getString("product_description"));
+			cartInfoDTO.setCategoryId(rs.getInt("category_id"));
+			cartInfoDTO.setImageFilePath(rs.getString("image_file_path"));
+			cartInfoDTO.setImageFileName(rs.getString("image_file_name"));
+			cartInfoDTO.setReleaseDate(rs.getDate("release_date"));
+			cartInfoDTO.setReleaseCompany(rs.getString("release_company"));
+			cartInfoDTO.setStatus(rs.getString("status"));
+			cartInfoDTO.setSubtotal(rs.getInt("subtotal"));
 			cartInfoDtoList.add(cartInfoDTO);
 		}
-	}catch(SQLException e){
+	} catch (SQLException e) {
 		e.printStackTrace();
-	}
-	try{
-		connection.close();
-	}catch(SQLException e){
-		e.printStackTrace();
+	} finally {
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			if (ps != null) {
+				ps.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	return cartInfoDtoList;
 }
 
 	public int getTotalPrice(String userId){
 		int totalPrice = 0;
-		DBConnector dbConnector = new DBConnector();
-		Connection connection = dbConnector.getConnection();
+		DBConnector db = new DBConnector();
+		con = db.getConnection();
 		String sql = "select sum(product_count * price) as total_price from cart_info where user_id=? group by user_id";
 
 		try{
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, userId);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+			rs = ps.executeQuery();
 
-			if(resultSet.next()){
-				totalPrice = resultSet.getInt("total_price");
+			if(rs.next()){
+				totalPrice = rs.getInt("total_price");
 			}
-		}catch(SQLException e){
+		}catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try{
-			connection.close();
-		}catch(SQLException e){
-			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	return totalPrice;
 	}
 
 
 	public int regist(String userId,String tempUserId,int productId,String productCount,int price){
-		DBConnector dbConnector = new DBConnector();
-		Connection connection = dbConnector.getConnection();
+		DBConnector db = new DBConnector();
+		con = db.getConnection();
 		int count = 0;
 		String sql = "insert into cart_info(user_id,temp_user_id,product_id,product_count,price,regist_date)"
 				+"values (?,?,?,?,?,now())";
-	try{
-		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.setString(1,userId);
-		preparedStatement.setString(2, tempUserId);
-		preparedStatement.setInt(3, productId);
-		preparedStatement.setString(4, productCount);
-		preparedStatement.setInt(5, price);
+		try{
+			ps = con.prepareStatement(sql);
+			ps.setString(1,userId);
+			ps.setString(2, tempUserId);
+			ps.setInt(3, productId);
+			ps.setString(4, productCount);
+			ps.setInt(5, price);
 
-		count = preparedStatement.executeUpdate();
-	}catch(SQLException e){
-		e.printStackTrace();
-	}
-	try{
-		connection.close();
-		}catch(SQLException e){
+			count = ps.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return count;
 	}
 
 	public int delete(String id){
-		DBConnector dbConnector = new DBConnector();
-		Connection connection = dbConnector.getConnection();
+		DBConnector db = new DBConnector();
+		con = db.getConnection();
 		int count = 0;
 		String sql = "delete from cart_info where id=?";
-
-
 		try{
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, id);
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
 
-			count = preparedStatement.executeUpdate();
-		}catch(SQLException e){
+			count = ps.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try{
-			connection.close();
-		}catch(SQLException e){
-			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return count;
 	}
@@ -162,38 +193,31 @@ public class CartInfoDAO {
 		}
 
 	public int linkToLoginId(String tempUserId,String loginId){
-		DBConnector dbConnector = new DBConnector();
-		Connection connection = dbConnector.getConnection();
+		DBConnector db = new DBConnector();
+		con = db.getConnection();
 		int count = 0;
 		String sql = "update cart_info set user_id=?,temp_user_id = null where temp_user_id=?";
 
 		try{
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, loginId);
-			preparedStatement.setString(2, tempUserId);
-			count = preparedStatement.executeUpdate();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, loginId);
+			ps.setString(2, tempUserId);
+			count = ps.executeUpdate();
 
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try{
-			connection.close();
-		}catch(SQLException e){
-			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return count;
 	}
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

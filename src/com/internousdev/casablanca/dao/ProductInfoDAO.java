@@ -11,133 +11,168 @@ import com.internousdev.casablanca.dto.ProductInfoDTO;
 import com.internousdev.casablanca.util.DBConnector;
 
 public class ProductInfoDAO {
+	private Connection con = null;
+	private PreparedStatement ps = null;
+	private ResultSet rs = null;
 
 //一覧情報取得
 	public ArrayList<ProductInfoDTO>getProductList()throws SQLException{
 
-		DBConnector dbConnector=new DBConnector();
-		Connection connection=dbConnector.getConnection();
+		DBConnector db=new DBConnector();
+		con=db.getConnection();
 
 		ArrayList<ProductInfoDTO>productInfoDtoList=new ArrayList<ProductInfoDTO>();
 		String sql="SELECT*FROM product_info order by product_id";
 
 		try{
-			PreparedStatement preparedStatement=connection.prepareStatement(sql);
-			ResultSet resultSet=preparedStatement.executeQuery();
+			ps=con.prepareStatement(sql);
+			rs=ps.executeQuery();
 
-			while(resultSet.next()){
+			while(rs.next()){
 				ProductInfoDTO dto=new ProductInfoDTO();
-				dto.setId(resultSet.getInt("id"));
-				dto.setProductId(resultSet.getInt("product_id"));
-				dto.setProductName(resultSet.getString("product_name"));
-				dto.setProductNameKana(resultSet.getString("product_name_kana"));
-				dto.setProductDescription(resultSet.getString("product_description"));
-				dto.setCategoryId(resultSet.getInt("category_id"));
-				dto.setPrice(resultSet.getInt("price"));
-				dto.setImageFilePath(resultSet.getString("image_file_path"));
-				dto.setImageFileName(resultSet.getString("image_file_name"));
-				dto.setReleaseDate(resultSet.getString("release_date"));
-				dto.setReleaseCompany(resultSet.getString("release_company"));
-				dto.setStatus(resultSet.getInt("status"));
-				dto.setRegistDate(resultSet.getString("regist_date"));
-				dto.setUpdateDate(resultSet.getString("update_date"));
+				dto.setId(rs.getInt("id"));
+				dto.setProductId(rs.getInt("product_id"));
+				dto.setProductName(rs.getString("product_name"));
+				dto.setProductNameKana(rs.getString("product_name_kana"));
+				dto.setProductDescription(rs.getString("product_description"));
+				dto.setCategoryId(rs.getInt("category_id"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setImageFilePath(rs.getString("image_file_path"));
+				dto.setImageFileName(rs.getString("image_file_name"));
+				dto.setReleaseDate(rs.getString("release_date"));
+				dto.setReleaseCompany(rs.getString("release_company"));
+				dto.setStatus(rs.getInt("status"));
+				dto.setRegistDate(rs.getString("regist_date"));
+				dto.setUpdateDate(rs.getString("update_date"));
 				productInfoDtoList.add(dto);
 			}
-		}catch(SQLException e){
+		}catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			connection.close();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return productInfoDtoList;
 
 	}
 //一覧から詳細情報を取得
 	public ProductInfoDTO getProductInfo(int productId)throws SQLException{
-		DBConnector dbConnector=new DBConnector();
-		Connection connection=dbConnector.getConnection();
+		DBConnector db=new DBConnector();
+		con=db.getConnection();
 		ProductInfoDTO dto=new ProductInfoDTO();
 
 		String sql="SELECT*FROM product_info where product_id=?";
 
 		try{
-			PreparedStatement preparedStatement=connection.prepareStatement(sql);
-			preparedStatement.setInt(1, productId);
-			ResultSet resultSet=preparedStatement.executeQuery();
+			ps=con.prepareStatement(sql);
+			ps.setInt(1, productId);
+			rs=ps.executeQuery();
 
-			if(resultSet.next()){
-				dto.setId(resultSet.getInt("id"));
-				dto.setProductId(resultSet.getInt("product_id"));
-				dto.setProductName(resultSet.getString("product_name"));
-				dto.setProductNameKana(resultSet.getString("product_name_kana"));
-				dto.setCategoryId(resultSet.getInt("category_id"));
-				dto.setImageFilePath(resultSet.getString("image_file_path"));
-				dto.setImageFileName(resultSet.getString("image_file_name"));
-				dto.setPrice(resultSet.getInt("price"));
-				dto.setReleaseDate(resultSet.getString("release_date"));
-				dto.setReleaseCompany(resultSet.getString("release_company"));
-				dto.setProductDescription(resultSet.getString("product_description"));
-				dto.setStatus(resultSet.getInt("status"));
-				dto.setRegistDate(resultSet.getString("regist_date"));
-				dto.setUpdateDate(resultSet.getString("update_date"));
-
+			if(rs.next()){
+				dto.setId(rs.getInt("id"));
+				dto.setProductId(rs.getInt("product_id"));
+				dto.setProductName(rs.getString("product_name"));
+				dto.setProductNameKana(rs.getString("product_name_kana"));
+				dto.setCategoryId(rs.getInt("category_id"));
+				dto.setImageFilePath(rs.getString("image_file_path"));
+				dto.setImageFileName(rs.getString("image_file_name"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setReleaseDate(rs.getString("release_date"));
+				dto.setReleaseCompany(rs.getString("release_company"));
+				dto.setProductDescription(rs.getString("product_description"));
+				dto.setStatus(rs.getInt("status"));
+				dto.setRegistDate(rs.getString("regist_date"));
+				dto.setUpdateDate(rs.getString("update_date"));
 			}
-
-		}catch(SQLException e){
+		}catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			connection.close();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return dto;
 	}
 //カテゴリによる検索
 	public List<ProductInfoDTO>getProdctInfoListByCategoryId(int categoryId,int productId,int limitOddset,int limitRowCount){
-		DBConnector dbConnector=new DBConnector();
-		Connection connection=dbConnector.getConnection();
+		DBConnector db=new DBConnector();
+		con=db.getConnection();
 		List<ProductInfoDTO>productInfoDtoList=new ArrayList<ProductInfoDTO>();
 
 		String sql="select*from product_info where category_id=? and product_id not in(?) order by rand() limit ?,?";
 
 		try{
-			PreparedStatement preparedStatement=connection.prepareStatement(sql);
-			preparedStatement.setInt(1, categoryId);
-			preparedStatement.setInt(2, productId);
-			preparedStatement.setInt(3, limitOddset);
-			preparedStatement.setInt(4, limitRowCount);
-			ResultSet resultSet=preparedStatement.executeQuery();
+			ps=con.prepareStatement(sql);
+			ps.setInt(1, categoryId);
+			ps.setInt(2, productId);
+			ps.setInt(3, limitOddset);
+			ps.setInt(4, limitRowCount);
+			rs=ps.executeQuery();
 
-			while(resultSet.next()){
+			while(rs.next()){
 				ProductInfoDTO dto=new ProductInfoDTO();
-				dto.setId(resultSet.getInt("id"));
-				dto.setProductId(resultSet.getInt("product_id"));
-				dto.setProductName(resultSet.getString("product_name"));
-				dto.setProductNameKana(resultSet.getString("product_name_kana"));
-				dto.setProductDescription(resultSet.getString("product_description"));
-				dto.setCategoryId(resultSet.getInt("category_id"));
-				dto.setPrice(resultSet.getInt("price"));
-				dto.setImageFilePath(resultSet.getString("image_file_path"));
-				dto.setImageFileName(resultSet.getString("image_file_name"));
-				dto.setReleaseDate(resultSet.getString("release_date"));
-				dto.setReleaseCompany(resultSet.getString("release_company"));
-				dto.setStatus(resultSet.getInt("status"));
-				dto.setRegistDate(resultSet.getString("regist_date"));
-				dto.setUpdateDate(resultSet.getString("update_date"));
+				dto.setId(rs.getInt("id"));
+				dto.setProductId(rs.getInt("product_id"));
+				dto.setProductName(rs.getString("product_name"));
+				dto.setProductNameKana(rs.getString("product_name_kana"));
+				dto.setProductDescription(rs.getString("product_description"));
+				dto.setCategoryId(rs.getInt("category_id"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setImageFilePath(rs.getString("image_file_path"));
+				dto.setImageFileName(rs.getString("image_file_name"));
+				dto.setReleaseDate(rs.getString("release_date"));
+				dto.setReleaseCompany(rs.getString("release_company"));
+				dto.setStatus(rs.getInt("status"));
+				dto.setRegistDate(rs.getString("regist_date"));
+				dto.setUpdateDate(rs.getString("update_date"));
 				productInfoDtoList.add(dto);
 
 			}
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}try{
-			connection.close();
-		}catch(SQLException e){
-			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return productInfoDtoList;
-
 	}
+
 //キーワードによる検索
 	public List<ProductInfoDTO>getProductInfoListAll(String[]keywordsList){
-		DBConnector dbConnector=new DBConnector();
-		Connection connection=dbConnector.getConnection();
+		DBConnector db=new DBConnector();
+		con=db.getConnection();
 		List<ProductInfoDTO>productInfoDtoList=new ArrayList<ProductInfoDTO>();
 
 		String sql="SELECT*FROM product_info where";
@@ -151,42 +186,52 @@ public class ProductInfoDAO {
 			}
 		}
 		try{
-			PreparedStatement preparedStatement=connection.prepareStatement(sql);
-			ResultSet resultSet=preparedStatement.executeQuery();
+			ps=con.prepareStatement(sql);
+			rs=ps.executeQuery();
 
-			while(resultSet.next()){
+			while(rs.next()){
 				ProductInfoDTO dto=new ProductInfoDTO();
-				dto.setId(resultSet.getInt("id"));
-				dto.setProductId(resultSet.getInt("product_id"));
-				dto.setProductName(resultSet.getString("product_name"));
-				dto.setProductNameKana(resultSet.getString("product_name_kana"));
-				dto.setProductDescription(resultSet.getString("product_description"));
-				dto.setCategoryId(resultSet.getInt("category_id"));
-				dto.setPrice(resultSet.getInt("price"));
-				dto.setImageFilePath(resultSet.getString("image_file_path"));
-				dto.setImageFileName(resultSet.getString("image_file_name"));
-				dto.setReleaseDate(resultSet.getString("release_date"));
-				dto.setReleaseCompany(resultSet.getString("release_company"));
-				dto.setStatus(resultSet.getInt("status"));
-				dto.setRegistDate(resultSet.getString("regist_date"));
-				dto.setUpdateDate(resultSet.getString("update_date"));
+				dto.setId(rs.getInt("id"));
+				dto.setProductId(rs.getInt("product_id"));
+				dto.setProductName(rs.getString("product_name"));
+				dto.setProductNameKana(rs.getString("product_name_kana"));
+				dto.setProductDescription(rs.getString("product_description"));
+				dto.setCategoryId(rs.getInt("category_id"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setImageFilePath(rs.getString("image_file_path"));
+				dto.setImageFileName(rs.getString("image_file_name"));
+				dto.setReleaseDate(rs.getString("release_date"));
+				dto.setReleaseCompany(rs.getString("release_company"));
+				dto.setStatus(rs.getInt("status"));
+				dto.setRegistDate(rs.getString("regist_date"));
+				dto.setUpdateDate(rs.getString("update_date"));
 				productInfoDtoList.add(dto);
 
 			}
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}try{
-			connection.close();
-		}catch(SQLException e){
-			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return productInfoDtoList;
 
 	}
 //キーワードとカテゴリによる検索
 	public List<ProductInfoDTO>getProductInfoListByKeywords(String[]keywordsList,String categoryId){
-		DBConnector dbConnector=new DBConnector();
-		Connection connection =dbConnector.getConnection();
+		DBConnector db=new DBConnector();
+		con =db.getConnection();
 		List<ProductInfoDTO>productInfoDtoList=new ArrayList<ProductInfoDTO>();
 		String sql="SELECT*FROM product_info where";
 		boolean initializeFlag=true;
@@ -200,34 +245,44 @@ public class ProductInfoDAO {
 		}
 			sql +=")";
 		try{
-			PreparedStatement preparedStatement=connection.prepareStatement(sql);
-			ResultSet resultSet=preparedStatement.executeQuery();
+			ps=con.prepareStatement(sql);
+			rs=ps.executeQuery();
 
-			while(resultSet.next()){
+			while(rs.next()){
 				ProductInfoDTO dto=new ProductInfoDTO();
-				dto.setId(resultSet.getInt("id"));
-				dto.setProductId(resultSet.getInt("product_id"));
-				dto.setProductName(resultSet.getString("product_name"));
-				dto.setProductNameKana(resultSet.getString("product_name_kana"));
-				dto.setProductDescription(resultSet.getString("product_description"));
-				dto.setCategoryId(resultSet.getInt("category_id"));
-				dto.setPrice(resultSet.getInt("price"));
-				dto.setImageFilePath(resultSet.getString("image_file_path"));
-				dto.setImageFileName(resultSet.getString("image_file_name"));
-				dto.setReleaseDate(resultSet.getString("release_date"));
-				dto.setReleaseCompany(resultSet.getString("release_company"));
-				dto.setStatus(resultSet.getInt("status"));
-				dto.setRegistDate(resultSet.getString("regist_date"));
-				dto.setUpdateDate(resultSet.getString("update_date"));
+				dto.setId(rs.getInt("id"));
+				dto.setProductId(rs.getInt("product_id"));
+				dto.setProductName(rs.getString("product_name"));
+				dto.setProductNameKana(rs.getString("product_name_kana"));
+				dto.setProductDescription(rs.getString("product_description"));
+				dto.setCategoryId(rs.getInt("category_id"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setImageFilePath(rs.getString("image_file_path"));
+				dto.setImageFileName(rs.getString("image_file_name"));
+				dto.setReleaseDate(rs.getString("release_date"));
+				dto.setReleaseCompany(rs.getString("release_company"));
+				dto.setStatus(rs.getInt("status"));
+				dto.setRegistDate(rs.getString("regist_date"));
+				dto.setUpdateDate(rs.getString("update_date"));
 				productInfoDtoList.add(dto);
 
 			}
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}try{
-			connection.close();
-		}catch(SQLException e){
-			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return productInfoDtoList;
 	}

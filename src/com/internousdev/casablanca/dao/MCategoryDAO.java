@@ -28,9 +28,6 @@ public class MCategoryDAO {
 				mCategoryDTO.setId(rs.getInt("id"));
 				mCategoryDTO.setCategoryId(rs.getInt("category_id"));
 				mCategoryDTO.setCategoryName(rs.getString("category_name"));
-				mCategoryDTO.setCategoryDescription(rs.getString("category_description"));
-				mCategoryDTO.setInsertDate(rs.getDate("insert_date"));
-				mCategoryDTO.setUpdateDate(rs.getDate("update_date"));
 				mCategoryDTOList.add(mCategoryDTO);
 			}
 		} catch (SQLException e) {

@@ -9,11 +9,12 @@
 <title>決済確認</title>
 </head>
 <body>
-<jsp:include page="header.jsp">
+<s:include value="header.jsp"/>
 <div id="contents">
-<s:if test="destinationInfoDtoList.size()==0">
+<s:if test="destinationInfoDtoList==null || destinationInfoDtoList.size()==0">
    <h3>宛先情報はありません</h3>
 </s:if>
+
 <s:else>
 <h3>送り先情報を選択してください</h3>
 <s:form action="SettlementCompleteAction">
@@ -27,23 +28,25 @@
 <th>メールアドレス</th>
 </tr>
 <s:iterator value="destinationInfoDtoList" status="index">
+<tr>
 	<s:if test="#index.first">
-    	<input type="radio" name="id" checked="checked" value='<s:property value="id"/>'/>
+    	<td><input type="radio" name="id" checked="checked" value='<s:property value="id"/>'/></td>
     </s:if>
     <s:else>
-    	<input type="radio" name="id" value='<s:property value="id"/>'/>
+    	<td><input type="radio" name="id" value='<s:property value="id"/>'/></td>
     </s:else>
-    <s:property value="familyName"/> <s:property value = "firstName"/>
-    <s:property value="familyNameKana"/> <s:property value = "firstNameKana"/>
-    <s:property value="address"/>
-    <s:property value="tel"/>
-    <s:property value="email"/>
+    <td><s:property value="familyName"/> <s:property value = "firstName"/></td>
+    <td><s:property value="familyNameKana"/> <s:property value = "firstNameKana"/></td>
+    <td><s:property value="address"/></td>
+    <td><s:property value="tel"/></td>
+    <td><s:property value="email"/></td>
+    </tr>
 </s:iterator>
 </table>
 <s:submit value = "決済"/>
 </s:form>
 </s:else>
-<s:form action = "createDestinationAction">
+<s:form action = "CreateDestinationAction">
 <s:submit value = "新規登録"/>
 </s:form>
 </div>

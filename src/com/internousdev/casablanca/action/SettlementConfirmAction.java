@@ -6,7 +6,9 @@ import java.util.Objects;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.casablanca.dao.DestinationInfoDAO;
+import com.internousdev.casablanca.dao.MCategoryDAO;
 import com.internousdev.casablanca.dto.DestinationInfoDTO;
+import com.internousdev.casablanca.dto.MCategoryDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 
@@ -22,7 +24,12 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 			DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
 			destinationInfoDtoList = destinationInfoDAO.getDestinationInfo(session.get("loginId").toString());
 		} else {
-			session.put("isFromCart", true);
+			session.put("fromCart", true);
+		}
+		if(!session.containsKey("mCategoryList")) {
+			MCategoryDAO mCategoryDAO=new MCategoryDAO();
+			List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
+			session.put("mCategoryDtoList", mCategoryDtoList);
 		}
 		return result;
 	}
@@ -36,5 +43,3 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 		this.session = session;
 	}
 }
-
-

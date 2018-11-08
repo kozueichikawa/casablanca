@@ -9,9 +9,9 @@ import com.internousdev.casablanca.dto.UserInfoDTO;
 import com.internousdev.casablanca.util.DBConnector;
 
 public class UserInfoDAO {
-	Connection con = null;
-	PreparedStatement ps = null;
-	ResultSet rs = null;
+	private Connection con = null;
+	private PreparedStatement ps = null;
+	private ResultSet rs = null;
 
 	public int createUser(String familyName, String firstName, String familyNameKana, String firstNameKana, String sex, String email, String loginId, String password) {
 		DBConnector db = new DBConnector();

@@ -18,7 +18,6 @@ import com.opensymphony.xwork2.ActionSupport;
 public class SearchItemAction extends ActionSupport implements SessionAware{
 	private String categoryId;
 	private String keywords;
-	private List<MCategoryDTO> mCategoryDtoList = new ArrayList<MCategoryDTO>();
 	private List<String> keywordsErrorMessageList = new ArrayList<String>();
 	private List<ProductInfoDTO> productInfoDtoList = new ArrayList<ProductInfoDTO>();
 	private Map<String,Object> session;
@@ -30,10 +29,7 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 	if(keywords==null){
 		keywords="";
 	}
-	keywordsErrorMessageList =inputChecker.doCheck("検索ワード",keywords,0,16,true,true,true,true,false,true,false,false,true
-
-			);
-
+	keywordsErrorMessageList =inputChecker.doCheck("検索ワード",keywords,0,16,true,true,true,true,false,true,false,false,true);
 
 	ProductInfoDAO productInfoDAO = new ProductInfoDAO();
 
@@ -42,43 +38,28 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 			productInfoDtoList = productInfoDAO.getProductInfoListAll(keywords.replaceAll("　"," ").split(" "));
 			result = SUCCESS;
 			break;
-
 		default:
 			productInfoDtoList = productInfoDAO.getProductInfoListByKeywords(keywords.replaceAll("　", " ").split(" "),categoryId);
 			result = SUCCESS;
 			break;
 	}
 
-
 	Iterator<ProductInfoDTO> iterator = productInfoDtoList.iterator();
 	if(!(iterator.hasNext())){
 		productInfoDtoList = null;
 	}
-
 	if(!session.containsKey("mCategoryList")){
 		MCategoryDAO mCategoryDAO = new MCategoryDAO();
-		mCategoryDtoList = mCategoryDAO.getMCategoryList();
+		List<MCategoryDTO> mCategoryDtoList = mCategoryDAO.getMCategoryList();
 		session.put("mCategoryDtoList", mCategoryDtoList);
 	}
 	return result;
 }
 
-
-
-	public List<MCategoryDTO> getmCategoryDtoList(){
-		return mCategoryDtoList;
-	}
-
-	public void setmCategoryDtoList(List<MCategoryDTO> mCategoryDtoList){
-		this.mCategoryDtoList = mCategoryDtoList;
-	}
-	public String getCategoryId(){
-		return categoryId;
-	}
 	public void setCategoryId(String categoryId){
 		this.categoryId = categoryId;
 	}
-	public String getKeywords(){
+	public String getKeywords() {
 		return keywords;
 	}
 	public void setKeywords(String keywords){
@@ -90,14 +71,7 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 	public List<ProductInfoDTO> getProductInfoDtoList(){
 		return productInfoDtoList;
 	}
-	public void setProductInfoDtoList(List<ProductInfoDTO>productInfoDtoList){
-		this.productInfoDtoList = productInfoDtoList;
-	}
-	public Map<String,Object> getSession(){
-		return session;
-	}
 	public void setSession(Map<String,Object> session){
 		this.session = session;
 	}
-
 }

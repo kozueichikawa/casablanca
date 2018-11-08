@@ -12,13 +12,12 @@ import com.opensymphony.xwork2.ActionSupport;
 public class HomeAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> session;
 
-
 	public String execute() {
 		/* ヘッダーのカテゴリ表示用セッションが切れた場合のみDAO実行 */
 		if (!session.containsKey("mCategoryList")) {
 			MCategoryDAO mCategoryDao = new MCategoryDAO();
-			List<MCategoryDTO> mCategoryList = mCategoryDao.getMCategoryList();
-			session.put("mCategoryList", mCategoryList);
+			List<MCategoryDTO> mCategoryDtoList = mCategoryDao.getMCategoryList();
+			session.put("mCategoryDtoList", mCategoryDtoList);
 		}
 		return SUCCESS;
 	}
