@@ -37,14 +37,14 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 			 InputChecker inputChecker = new InputChecker();
 
 
-			
-			 familyNameErrorMessageList = inputChecker.doCheck("姓", familyName, 1, 16, true, true, true, false, false, false, false);
-			 firstNameErrorMessageList = inputChecker.doCheck("名", firstName, 1, 16, true, true, true, false, false, false, false);
-			 familyNameKanaErrorMessageList = inputChecker.doCheck("姓ふりがな", firstNameKana, 1, 16, false, false, true, false, false, false, false);
-			 firstNameKanaErrorMessageList = inputChecker.doCheck("名ふりがな", firstNameKana, 1, 16, false, false, true, false, false, false, false);
-			 emailErrorMessageList = inputChecker.doCheck("メールアドレス", email, 14, 32, true, false, false, true, true, false, false);
-			 loginIdErrorMessageList = inputChecker.doCheck("ログインID", loginId, 1, 8, true, false, false, true, false, false ,false);
-			 passwordErrorMessageList = inputChecker.doCheck("パスワード", password, 1, 16, true, false, false, true, false, false ,false);
+
+			 familyNameErrorMessageList = inputChecker.doCheck("姓", familyName, 1, 16, true, true, true, false, false, false, false, false, false);
+			 firstNameErrorMessageList = inputChecker.doCheck("名", firstName, 1, 16, true, true, true, false, false, false, false, false, false);
+			 familyNameKanaErrorMessageList = inputChecker.doCheck("姓ふりがな", firstNameKana, 1, 16, false, false, true, false, false, false, false, false, false);
+			 firstNameKanaErrorMessageList = inputChecker.doCheck("名ふりがな", firstNameKana, 1, 16, false, false, true, false, false, false, false, false, false);
+			 emailErrorMessageList = inputChecker.doCheck("メールアドレス", email, 14, 32, true, false, false, true, true, false, false, false, false);
+			 loginIdErrorMessageList = inputChecker.doCheck("ログインID", loginId, 1, 8, true, false, false, true, false, false ,false, false, false);
+			 passwordErrorMessageList = inputChecker.doCheck("パスワード", password, 1, 16, true, false, false, true, false, false ,false, false, false);
 
 			 if(familyNameErrorMessageList.size()==0
 			 && firstNameErrorMessageList.size()==0
