@@ -40,7 +40,7 @@
 			<s:submit value="登録"/>
 			<s:hidden name="loginId" value="%{loginId}" />
 			<s:hidden name="password" value="%{password}" />
-			<s:hidden name="familyName"value="%{familyName}" />
+			<s:hidden name="familyName" value="%{familyName}" />
 			<s:hidden name="firstName" value="%{firstName}" />
 			<s:hidden name="familyNameKana" value="%{familyNameKana}" />
 			<s:hidden name="firstNameKana" value="%{firstNameKana}" />
