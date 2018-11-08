@@ -81,12 +81,12 @@
 
 	<tr>
 
-		<td><s:textfield name="familyNameKana" value="%{#session.firstNameKana}" label="姓ふりがな" placeholder="姓ふりがな" class="txt" /></td>
+		<td><s:textfield name="familyNameKana" value="%{#session.familyNameKana}" label="姓ふりがな" placeholder="姓ふりがな" class="txt" /></td>
 	<tr>
 
 	<tr>
 
-		<td><s:textfield name="familyNameKana" value="%{#session.familyNameKana}" label="名ふりがな" placeholder="名ふりがな" class="txt" /></td>
+		<td><s:textfield name="firstNameKana" value="%{#session.firstNameKana}" label="名ふりがな" placeholder="名ふりがな" class="txt" /></td>
 	</tr>
 
 	<tr>
@@ -97,7 +97,7 @@
 	</tr>
 
 	<tr>
-		<td><s:textfield name="email" value="%{session.email}" label="メールアドレス" placeholder="メールアドレス" class="txt" /></td>
+		<td><s:textfield name="email" value="%{#session.email}" label="メールアドレス" placeholder="メールアドレス" class="txt" /></td>
 	</tr>
 
 	<tr>
