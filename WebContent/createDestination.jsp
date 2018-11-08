@@ -67,7 +67,7 @@
 
 
 <s:form action="CreateDestinationConfirmAction">
-<table class="list-table">
+<table class="vertical-list-table">
 
 <tr>
 	<th scope="row">
