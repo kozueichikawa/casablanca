@@ -192,7 +192,7 @@ public class ProductInfoDAO {
 		boolean initializeFlag=true;
 		for(String keyword: keywordsList){
 			if(initializeFlag){
-				sql += "category_id="+ categoryId +" and((produt_name like '%" + keyword + "%' or product_name_kana like '%" + keyword + "%')";
+				sql += " category_id="+ categoryId +" and((product_name like '%" + keyword + "%' or product_name_kana like '%" + keyword + "%')";
 				initializeFlag=false;
 			}else{
 				sql += "or (product_name like '%" + keyword + "%' or product_name_kana like '%" + keyword + "%')";

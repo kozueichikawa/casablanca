@@ -13,15 +13,6 @@
 <link rel="stylesheet" href="./css/style.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <title>商品一覧</title>
-<script type="text/javascript">
-function loop(){
-for(var a = 1; a <=10 ; a++){
-	for(var b = 1; b <= 3; b++){
-	document.write($('productList'));
-	}
-	document.write("<br>");
-	}}
-</script>
 </head>
 <body>
 <s:include value="header.jsp" />
@@ -33,13 +24,6 @@ for(var a = 1; a <=10 ; a++){
         </div>
         </s:if>--%>
 
-
-        <s:elseif test="keywordsErrorMessageList!=null">
-            <h3>検索結果はありません。</h3>
-            <h3><s:property value="keywordsErrorMessageList"/></h3>
-        </s:elseif>
-
-<s:else>
 <div id="productList">
         <s:iterator value="productInfoDtoList">
             <tr>
@@ -55,7 +39,10 @@ for(var a = 1; a <=10 ; a++){
             </tr>
         </s:iterator>
 </div>
-</s:else>
+<s:if test="keywordsErrorMessageList!=null">
+            <h3>検索結果はありません。</h3>
+            <h3><s:property value="keywordsErrorMessageList"/></h3>
+        </s:if>
 </div>
 <s:include value="footer.jsp"/>
 </body>
