@@ -18,12 +18,19 @@
 <s:include value="header.jsp" />
 <div id="contents">
     <h1>商品一覧画面</h1>
-        <%-- <s:if test="productInfoDtoList=null">
-        <div id="SearchResult">
-            <h3>検索結果はありません</h3>
-        </div>
-        </s:if>--%>
+<s:if test="productInfoDtoList==null">
+    <div id="NoResult">
+        <h3>検索結果はありません</h3>
+    </div>
+</s:if>
 
+<s:if test="keywordsErrorMessageList!=null">
+    <div id="ErrorMessage">
+        <h3><s:property value="keywordsErrorMessageList"/></h3>
+    </div>
+</s:if>
+
+<s:elseif test="productInfoDtoList!=null">
 <div id="productList">
         <s:iterator value="productInfoDtoList">
             <tr>
@@ -39,10 +46,8 @@
             </tr>
         </s:iterator>
 </div>
-<s:if test="keywordsErrorMessageList!=null">
-            <h3>検索結果はありません。</h3>
-            <h3><s:property value="keywordsErrorMessageList"/></h3>
-        </s:if>
+</s:elseif>
+
 </div>
 <s:include value="footer.jsp"/>
 </body>

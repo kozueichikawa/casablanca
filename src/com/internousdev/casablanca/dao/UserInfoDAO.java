@@ -95,7 +95,7 @@ public boolean isExistsUserInfo(String loginId, String password) {
 		ps.setString(2, password);
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()) {
-			if (rs.getInt("count") <0){
+			if (rs.getInt("count") >0){
 				result = true;
 			}
 		}
@@ -283,7 +283,7 @@ public UserInfoDTO getUserInfo(String loginId) {
 
 	public String concealPassword(String password) {
 		int beginIndex = 0;
-		int endIndex = 0;
+		int endIndex = 1;
 
 		StringBuilder stringBuilder = new StringBuilder("****************");
 

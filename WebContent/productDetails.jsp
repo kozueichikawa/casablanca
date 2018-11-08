@@ -40,7 +40,7 @@
             <tr>
                 <th>購入個数</th>
                 <td>
-                    <select name="ProductCount">
+                    <select name="productCount">
                        <option value="1" selected="selected">1</option>
                        <option value="2">2</option>
                        <option value="3">3</option>
@@ -65,6 +65,15 @@
     </div>
     </div>
     <div id="addCart">
+        <s:hidden name="productId" value="%{productInfoDTO.productId}"/>
+        <s:hidden name="imageFilePath" value="%{productInfoDTO.imageFilePath}"/>
+        <s:hidden name="imageFileName" value="%{productInfoDTO.imageFileName}"/>
+        <s:hidden name="productName" value="%{productInfoDTO.productName}"/>
+        <s:hidden name="productNameKana" value="%{productInfoDTO.productNameKana}"/>
+        <s:hidden name="price" value="%{productInfoDTO.price}"/>
+        <s:hidden name="releaseCompany" value="%{productInfoDTO.releaseCompany}"/>
+        <s:hidden name="releaseDate" value="%{productInfoDTO.releaseDate}"/>
+        <s:hidden name="productDescription" value="%{productInfoDTO.productDescription}"/>
         <s:submit value="カートに追加"/>
     </div>
     </s:form>
