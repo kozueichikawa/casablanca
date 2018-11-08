@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="header.jsp">
 <div id="contents">
-<s:if test="--list == null">
+<s:if test="destinationInfoDTOList.size()==0">
    <h3>宛先情報はありません</h3>
 </s:if>
 <s:else>
@@ -26,8 +26,13 @@
 <th>電話番号</th>
 <th>メールアドレス</th>
 </tr>
-<s:iterator value="--list">
-    <input type="radio" name="id" checked="checked" value = "<s:property value= 'id'/>"/>
+<s:iterator value="destinationInfoDTOList" status="index">
+	<s:if test="#index.first">
+    	<input type="radio" name="id" checked="checked" value='<s:property value="id"/>'/>
+    </s:if>
+    <s:else>
+    	<input type="radio" name="id" value='<s:property value="id"/>'/>
+    </s:else>
     <s:property value="familyName"/> <s:property value = "firstName"/>
     <s:property value="familyNameKana"/> <s:property value = "firstNameKana"/>
     <s:property value="address"/>
