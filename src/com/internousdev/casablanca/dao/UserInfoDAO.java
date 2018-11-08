@@ -88,7 +88,7 @@ public UserInfoDTO getUserInfo(String loginId, String password) {
 			 userInfoDTO.setEmail(resultSet.getString("email"));
 			 userInfoDTO.setStatus(resultSet.getString("status"));
 			 userInfoDTO.setLogined(resultSet.getInt("status"));
-			 userInfoDTO.RegistDate(resultSet.getDate("regist_date"));
+			 userInfoDTO.setRegistDate(resultSet.getDate("regist_date"));
 			 userInfoDTO.setUpdateDate(resultSet.getDate("update_date"));
 		 }
 	} catch (SQLException e) {
@@ -118,7 +118,7 @@ public UserInfoDTO getUserInfo(String loginId) {
 			userInfoDTO.setFamilyName(resultSet.getString("family_name"));
 			userInfoDTO.setFirstName(resultSet.getString("firstName"));
 			userInfoDTO.setFamilyNameKana(resultSet.getString("family_name_kana"));
-			userInfoDTO.setFirstNameKane(resultSet.getString("first_name_kana"));
+			userInfoDTO.setFirstNameKana(resultSet.getString("first_name_kana"));
 			userInfoDTO.setSex(resultSet.getInt("sex"));
 			userInfoDTO.setEmail(resultSet.getString("email"));
 			userInfoDTO.setStatus(resultSet.getString("status"));
@@ -203,17 +203,16 @@ public UserInfoDTO getUserInfo(String loginId) {
 		}
 		return result;
 	}
-
-
-
 	public String concealPassword(String password) {
 		int beginIndex = 0;
 		int endIndex = 0;
-		}
-	StringBuilder stringBuilder = new StringBuilder("****************");
-ing(beginIndex,en
-	String concealPassword = stringBuilder.replace(beginIndex, endIndex, password.substrdIndex).toString();
-	return concealPassword;
+
+		StringBuilder stringBuilder = new StringBuilder("****************");
+
+		String concealPassword = stringBuilder.replace(beginIndex, endIndex, password.substring(beginIndex,endIndex)).toString();
+		return concealPassword;
+
+
 
 		}
 }
