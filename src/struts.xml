@@ -79,12 +79,10 @@
 		<result name="error">index.jsp</result>
 	</action>
 
-<!--
 	<action name="MyPageAction" class="com.internousdev.casablanca.action.MyPageAction" method="execute">
 		<result name="success">mypage.jsp</result>
 		<result name="error">home.jsp</result>
 	</action>
--->
 
    <action name="ProductDetailsAction" class="com.internousdev.casablanca.action.ProductDetailsAction" method="execute">
 		<result name="success">productDetails.jsp</result>
