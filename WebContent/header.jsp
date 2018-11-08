@@ -31,8 +31,8 @@
 		<s:submit value="商品一覧"/>
 	</s:form></li>
 	<s:if test="#session.logined==1">
-		<li><s:form>
-			<li><s:submit value="マイページ"/>
+		<li><s:form action="MyPageAction">
+			<s:submit value="マイページ"/>
 		</s:form></li>
 	</s:if>
 </ul>
