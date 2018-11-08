@@ -171,7 +171,7 @@ public UserInfoDTO getUserInfo(String loginId) {
 			userInfoDTO.setUserId(rs.getString("user_id"));
 			userInfoDTO.setPassword(rs.getString("password"));
 			userInfoDTO.setFamilyName(rs.getString("family_name"));
-			userInfoDTO.setFirstName(rs.getString("firstName"));
+			userInfoDTO.setFirstName(rs.getString("first_name"));
 			userInfoDTO.setFamilyNameKana(rs.getString("family_name_kana"));
 			userInfoDTO.setFirstNameKana(rs.getString("first_name_kana"));
 			userInfoDTO.setSex(rs.getInt("sex"));
