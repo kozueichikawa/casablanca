@@ -235,7 +235,7 @@ public UserInfoDTO getUserInfo(String loginId) {
 	public void login(String loginId, String password) {
 		DBConnector db =new DBConnector();
 		Connection con = db.getConnection();
-		String sql = "update user_info set logined==1 where user_id=? and password=?";
+		String sql = "update user_info set logined=1 where user_id = ? and password = ?";
 		try {
 			PreparedStatement ps =con.prepareStatement(sql);
 			ps.setString(1, loginId);

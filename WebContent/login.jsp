@@ -8,12 +8,12 @@
 <title>ログイン</title>
 </head>
 <body>
-	<s:if test="loginIdErrorMessageList.size()>0">
+	<s:if test="%{loginIdErrorMessageList.size()}>0">
 		<s:iterator value="loginIdErrorMessageList">
 			<s:property/>
 		</s:iterator>
 	</s:if>
-	<s:if test="!passwordErrorMessageList.isEmpty()">
+	<s:if test="%{passwordErrorMessageList.size()}>0">
 		<s:iterator value="passwordErrorMessageList">
 			<s:property/>
 		</s:iterator>
