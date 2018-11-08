@@ -53,6 +53,15 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 			 && emailErrorMessageList.size()==0
 			 && loginIdErrorMessageList.size()==0
 			 && passwordErrorMessageList.size()==0) {
+
+			 }session.put("family_name", familyName);
+			  session.put("first_Name", firstName);
+			  session.put("familuyt_Name_Kana", familyNameKana);
+			  session.put("first_Nama_Kana", firstNameKana);
+			  session.put("sex", sex);
+			  session.put("email", email);
+			  session.put("loginId", loginId);
+			  session.put("password", password);{
 					 result = SUCCESS;
 			 }
 			 	return result;

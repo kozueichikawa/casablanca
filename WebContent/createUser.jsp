@@ -33,8 +33,7 @@
 	</div>
 </s:if>
 <s:if test="!#session.familyNameKanaErrorMessageList.isEmpty()">
-	<div class="error">
-	<div class="error-message">
+	<div class="error">	<div class="error-message">
 	<s:iterator value="#session.familyNameKanaErrorMessageList"><s:property /><br></s:iterator>
 	</div>
 	</div>
