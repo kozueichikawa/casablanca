@@ -11,7 +11,7 @@
 	<meta http-equiv="imagetoolbar" content="no"/>
 	<meta name="description" content=""/>
 	<meta name="keywords" content=""/>
-	<meta http-equiv="refresh" content="5;URL=http://localhost:8080/home.jsp">
+	<meta http-equiv="refresh" content="5;URL=HomeAction">
 	<title>UserCreateComplete画面</title>
 </head>
 <body>
