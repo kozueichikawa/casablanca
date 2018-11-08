@@ -44,6 +44,9 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware{
 	public ProductInfoDTO getProductInfoDTO() {
 		return productInfoDTO;
 	}
+	public void setProductInfoDTO(ProductInfoDTO productInfoDTO){
+		this.productInfoDTO=productInfoDTO;
+	}
 
 	public int getProductId() {
 		return productId;

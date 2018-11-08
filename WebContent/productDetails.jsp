@@ -21,7 +21,7 @@
     <s:form action="AddCartAction">
     <div class="box">
     <div class="image">
-        <img src='<s:property value="productInfoDTO.imageFilePath"/>'>
+        <img src='<s:property value="productInfoDTO.imageFilePath"/>/<s:property value="productInfoDTO.imageFileName"/>' width="50px" height="50px"/>
     </div>
     <div class="product">
         <table border="1">
@@ -72,10 +72,9 @@
 <div id="sameCategory">
     <s:iterator value="productInfoDTOList">
         <div id="recommend-item">
-            <a href='<s:url action="ProductDetailAction"/>'>
-                <s:param name="productId" value="%{productId}">
-                    <img src='<s:property value="imageFilePath"/>'>
-                </s:param>
+            <a href='<s:url action="ProductDetailsAction">
+                        <s:param name="productId" value="%{productId}"/></s:url>'>
+                            <img src='<s:property value="imageFilePath"/>/<s:property value="imageFileName"/>' width="50px" height="50px"/>
             </a>
             <s:property value="productName"/>
         </div>

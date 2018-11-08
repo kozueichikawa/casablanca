@@ -18,7 +18,7 @@ public class ProductInfoDAO {
 		DBConnector dbConnector=new DBConnector();
 		Connection connection=dbConnector.getConnection();
 
-		ArrayList<ProductInfoDTO>roductInfoDTOList=new ArrayList<ProductInfoDTO>();
+		ArrayList<ProductInfoDTO>productInfoDTOList=new ArrayList<ProductInfoDTO>();
 		String sql="SELECT*FROM product_info order by product_id";
 
 		try{
@@ -41,21 +41,21 @@ public class ProductInfoDAO {
 				dto.setStatus(resultSet.getInt("status"));
 				dto.setRegistDate(resultSet.getString("regist_date"));
 				dto.setUpdateDate(resultSet.getString("update_date"));
-				roductInfoDTOList.add(dto);
+				productInfoDTOList.add(dto);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
 			connection.close();
 		}
-		return roductInfoDTOList;
+		return productInfoDTOList;
 
 	}
 //一覧から詳細情報を取得
 	public ProductInfoDTO getProductInfo(int productId)throws SQLException{
 		DBConnector dbConnector=new DBConnector();
 		Connection connection=dbConnector.getConnection();
-		ProductInfoDTO productInfoDTO=new ProductInfoDTO();
+		ProductInfoDTO dto=new ProductInfoDTO();
 
 		String sql="SELECT*FROM product_info where product_id=?";
 
@@ -64,8 +64,7 @@ public class ProductInfoDAO {
 			preparedStatement.setInt(1, productId);
 			ResultSet resultSet=preparedStatement.executeQuery();
 
-			while(resultSet.next()){
-				ProductInfoDTO dto=new ProductInfoDTO();
+			if(resultSet.next()){
 				dto.setId(resultSet.getInt("id"));
 				dto.setProductId(resultSet.getInt("product_id"));
 				dto.setProductName(resultSet.getString("product_name"));
@@ -88,7 +87,7 @@ public class ProductInfoDAO {
 		}finally{
 			connection.close();
 		}
-		return productInfoDTO;
+		return dto;
 	}
 //カテゴリによる検索
 	public List<ProductInfoDTO>getProdctInfoListByCategoryId(int categoryId,int productId,int limitOddset,int limitRowCount){
@@ -96,7 +95,7 @@ public class ProductInfoDAO {
 		Connection connection=dbConnector.getConnection();
 		List<ProductInfoDTO>productInfoDTOList=new ArrayList<ProductInfoDTO>();
 
-		String sql="select*from product_info where category_id=? and product_id not in(?) order by rand() limit?,?";
+		String sql="select*from product_info where category_id=? and product_id not in(?) order by rand() limit ?,?";
 
 		try{
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
@@ -139,7 +138,7 @@ public class ProductInfoDAO {
 	public List<ProductInfoDTO>getProductInfoListAll(String[]keywordsList){
 		DBConnector dbConnector=new DBConnector();
 		Connection connection=dbConnector.getConnection();
-		List<ProductInfoDTO>productInfoDTOList=new ArrayList<ProductInfoDTO>();
+		List<ProductInfoDTO>productInfoDtoList=new ArrayList<ProductInfoDTO>();
 
 		String sql="SELECT*FROM product_info where";
 		boolean initializeFlag=true;
@@ -171,7 +170,7 @@ public class ProductInfoDAO {
 				dto.setStatus(resultSet.getInt("status"));
 				dto.setRegistDate(resultSet.getString("regist_date"));
 				dto.setUpdateDate(resultSet.getString("update_date"));
-				productInfoDTOList.add(dto);
+				productInfoDtoList.add(dto);
 
 			}
 		}catch(SQLException e){
@@ -181,14 +180,14 @@ public class ProductInfoDAO {
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		return productInfoDTOList;
+		return productInfoDtoList;
 
 	}
 //キーワードとカテゴリによる検索
 	public List<ProductInfoDTO>getProductInfoListByKeywords(String[]keywordsList,String categoryId){
 		DBConnector dbConnector=new DBConnector();
 		Connection connection =dbConnector.getConnection();
-		List<ProductInfoDTO>productInfoDTOList=new ArrayList<ProductInfoDTO>();
+		List<ProductInfoDTO>productInfoDtoList=new ArrayList<ProductInfoDTO>();
 		String sql="SELECT*FROM product_info where";
 		boolean initializeFlag=true;
 		for(String keyword: keywordsList){
@@ -220,7 +219,7 @@ public class ProductInfoDAO {
 				dto.setStatus(resultSet.getInt("status"));
 				dto.setRegistDate(resultSet.getString("regist_date"));
 				dto.setUpdateDate(resultSet.getString("update_date"));
-				productInfoDTOList.add(dto);
+				productInfoDtoList.add(dto);
 
 			}
 		}catch(SQLException e){
@@ -230,6 +229,6 @@ public class ProductInfoDAO {
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		return productInfoDTOList;
+		return productInfoDtoList;
 	}
 }
