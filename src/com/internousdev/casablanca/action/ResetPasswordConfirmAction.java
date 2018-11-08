@@ -52,7 +52,9 @@ public class ResetPasswordConfirmAction extends ActionSupport implements Session
 				session.put("newPassword", newPassword);
 				session.put("concealedPassword", concealedPassword);
 				result = SUCCESS;
-			}
+			}else{
+			passwordIncorrectErrorMessageList.add("入力されたパスワードが異なります。");
+		}
 		}
 		return result;
 	}
