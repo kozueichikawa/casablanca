@@ -25,7 +25,7 @@ public class PurchaseHistoryInfoDAO {
 				+ "pi.product_name_kana as product_name_kana,"/*商品名かな*/
 				+ "pi.product_description as product_description,"/*商品詳細*/
 				+ "pi.category_id as category_id,"/*カテゴリID*/
-				+ "pi.price"/*価格*/
+				+ "pi.price,"/*価格*/
 				+ "pi.image_file_name as image_file_name,"/*画像ファイル名*/
 				+ "pi.image_file_path as image_file_path,"/*画像ファイルパス*/
 				+ "pi.release_company,"/*発売会社名*/
@@ -39,7 +39,7 @@ public class PurchaseHistoryInfoDAO {
 				+ "di.first_name_kana as first_name_kana,"/*名かな*/
 				+ "di.email as email,"/*メールアドレス*/
 				+ "di.tel_number as tel_number,"/*電話番号*/
-				+ "di.user_address as user_address,"
+				+ "di.user_address as user_address"
 				+ " FROM purchase_history_info as phi"
 				+ " LEFT JOIN product_info as pi"
 				+ " ON phi.product_id=pi.product_id"
