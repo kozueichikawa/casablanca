@@ -88,7 +88,7 @@ public UserInfoDTO getUserInfo(String loginId, String password) {
 			 userInfoDTO.setEmail(resultSet.getString("email"));
 			 userInfoDTO.setStatus(resultSet.getString("status"));
 			 userInfoDTO.setLogined(resultSet.getInt("status"));
-			 userInfoDTO.RegistDate(resultSet.getDate("regist_date"));
+			 userInfoDTO.setRegistDate(resultSet.getDate("regist_date"));
 			 userInfoDTO.setUpdateDate(resultSet.getDate("update_date"));
 		 }
 	} catch (SQLException e) {
