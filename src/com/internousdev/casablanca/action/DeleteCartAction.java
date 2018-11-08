@@ -24,7 +24,7 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 	private static final String MALE = "男性";
 	private static final String FEMALE = "女性";
 	private String defaultSexValue = MALE;
-	private  List<String> checkListErrorMessageList;
+	private  List<String> checkListErrorMessageList = new ArrayList<String>();
 	private String productName;
 	private String productNameKana;
 	private String imageFilePath;
@@ -42,7 +42,7 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 		CartInfoDAO cartInfoDAO = new CartInfoDAO();
 
 		int count = 0;
-		List<String> checkListErrorMessageList = new ArrayList<String>();
+//		List<String> checkListErrorMessageList = new ArrayList<String>();
 
 		if ( checkList == null ) {
 			checkList = new ArrayList<>();

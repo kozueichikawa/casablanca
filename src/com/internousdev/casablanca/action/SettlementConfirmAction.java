@@ -11,7 +11,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 public class SettlementConfirmAction extends ActionSupport implements SessionAware {
-	List<DestinationInfoDTO> destinationInfoDTOList;
+	List<DestinationInfoDTO> destinationInfoDtoList;
 	private Map<String,Object> session;
 
 	public String execute() {
@@ -20,15 +20,15 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 		if(Objects.equals(session.get("logined"), "1")){
 			result = SUCCESS;
 			DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
-			destinationInfoDTOList = destinationInfoDAO.getDestinationInfo(session.get("loginId").toString());
+			destinationInfoDtoList = destinationInfoDAO.getDestinationInfo(session.get("loginId").toString());
 		} else {
 			session.put("isFromCart", true);
 		}
 		return result;
 	}
 
-	public List<DestinationInfoDTO> getDestinationInfoDTOList() {
-		return destinationInfoDTOList;
+	public List<DestinationInfoDTO> getDestinationInfoDtoList() {
+		return destinationInfoDtoList;
 	}
 
 @Override
