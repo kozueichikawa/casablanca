@@ -24,7 +24,7 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 	private static final String MALE = "男性";
 	private static final String FEMALE = "女性";
 	private String defaultSexValue = MALE;
-
+	private  List<String> checkListErrorMessageList;
 	private String productName;
 	private String productNameKana;
 	private String imageFilePath;
@@ -54,7 +54,6 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 		}
 		if(count <= 0){
 			checkListErrorMessageList.add("チェックされていません。");
-			session.put("checkListErrorMessageList", checkListErrorMessageList);
 			return ERROR;
 		}else{
 			String userId = null;
@@ -81,7 +80,9 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 		return result;
 	}
 
-
+	public List<String> getCheckListErrorMessageList(){
+		return checkListErrorMessageList;
+	}
 
 	public Collection<String> getCheckList() {
 		return checkList;
