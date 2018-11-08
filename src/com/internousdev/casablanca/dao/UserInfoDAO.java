@@ -9,200 +9,278 @@ import com.internousdev.casablanca.dto.UserInfoDTO;
 import com.internousdev.casablanca.util.DBConnector;
 
 public class UserInfoDAO {
+	Connection con = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+
 	public int createUser(String familyName, String firstName, String familyNameKana, String firstNameKana, String sex, String email, String loginId, String password) {
-		DBConnector dbConnector = new DBConnector();
-		Connection connection = dbConnector.getConnection();
+		DBConnector db = new DBConnector();
+		Connection con = db.getConnection();
 		int count =0;
-		String sql = "insert into user_info(user_id, password, familu_name, first_name, family_name_kana,"
-					+ " first_name_kana, sex, email, status, logine, rsgist_date, update_date)"
+		String sql = "insert into user_info(user_id, password, family_name, first_name, family_name_kana,"
+					+ " first_name_kana, sex, email, status, logined, regist_date, update_date)"
 					+ " values (?,?,?,?,?,?,?,?,?,?, now(), 0)";
 		try {
-			PreparedStatement preparedStatement= connection.prepareStatement(sql);
-			preparedStatement.setString(1, loginId);
-			preparedStatement.setString(2, password);
-			preparedStatement.setString(3, familyName);
-			preparedStatement.setString(4, firstName);
-			preparedStatement.setString(5, familyNameKana);
-			preparedStatement.setString(6, firstNameKana);
-			preparedStatement.setString(7, sex);
-			preparedStatement.setString(8, email);
-			preparedStatement.setInt(9, 0);
-			preparedStatement.setInt(10, 1);
-			count = preparedStatement.executeUpdate();
+			PreparedStatement ps= con.prepareStatement(sql);
+			ps.setString(1, loginId);
+			ps.setString(2, password);
+			ps.setString(3, familyName);
+			ps.setString(4, firstName);
+			ps.setString(5, familyNameKana);
+			ps.setString(6, firstNameKana);
+			ps.setString(7, sex);
+			ps.setString(8, email);
+			ps.setInt(9, 0);
+			ps.setInt(10, 1);
+			count = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return count;
 	}
 
+	public UserInfoDTO getLoginInfo(String loginId, String password) {
+		UserInfoDTO userInfoDTO = new UserInfoDTO();
+		DBConnector db = new DBConnector();
+		con = db.getConnection();
+		String sql = "select * from user_info where user_id = ? and password = ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, loginId);
+			ps.setString(2, password);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				userInfoDTO.setUserId(rs.getString("user_id"));
+				userInfoDTO.setPassword(rs.getString("password"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return userInfoDTO;
+	}
+
 public boolean isExistsUserInfo(String loginId, String password) {
-	DBConnector dbConnector = new DBConnector();
-	Connection connection = dbConnector.getConnection();
+	DBConnector db = new DBConnector();
+	Connection con = db.getConnection();
 	boolean result = false;{
 	String sql = "select count(*) as count from user_info where user_id=? and password=?";
 	try {
-		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.setString(1, loginId);
-		preparedStatement.setString(2, password);
-		ResultSet resultSet = preparedStatement.executeQuery();
-		while(resultSet.next()) {
-			if (resultSet.getInt("count") <0){
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, loginId);
+		ps.setString(2, password);
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()) {
+			if (rs.getInt("count") <0){
 				result = true;
 			}
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result; // ←????????????
+		}
 	}
-} catch (SQLException e) {
-	e.printStackTrace();
-}
-try {
-	connection.close();
-}catch (SQLException e) {
-	e.printStackTrace();
-}
-return result;} // ←????????????
-}
-
+/*
 public UserInfoDTO getUserInfo(String loginId, String password) {
-	DBConnector dbConnector = new DBConnector();
-	Connection connection =dbConnector.getConnection();
+	DBConnector db = new DBConnector();
+	Connection con =db.getConnection();
 	UserInfoDTO userInfoDTO = new UserInfoDTO();
 	String sql = "select * from user_info where user_id=? and password=?";
 	try {
-		 PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		 preparedStatement.setString(1, loginId);
-		 preparedStatement.setString(2, password);
-		 ResultSet resultSet = preparedStatement.executeQuery();
-		 while(resultSet.next()) {
-			 userInfoDTO.setId(resultSet.getInt("id"));
-			 userInfoDTO.setUserId(resultSet.getString("user_id"));
-			 userInfoDTO.setPassword(resultSet.getString("password"));
-			 userInfoDTO.setFamilyName(resultSet.getString("family_name"));
-			 userInfoDTO.setFirstName(resultSet.getString("first_name"));
-			 userInfoDTO.setFamilyNameKana(resultSet.getString("family_name_kana"));
-			 userInfoDTO.setFirstNameKana(resultSet.getString("first_name_kana"));
-			 userInfoDTO.setSex(resultSet.getInt("sex"));
-			 userInfoDTO.setEmail(resultSet.getString("email"));
-			 userInfoDTO.setStatus(resultSet.getString("status"));
-			 userInfoDTO.setLogined(resultSet.getInt("status"));
-			 userInfoDTO.setRegistDate(resultSet.getDate("regist_date"));
-			 userInfoDTO.setUpdateDate(resultSet.getDate("update_date"));
+		 PreparedStatement ps = con.prepareStatement(sql);
+		 ps.setString(1, loginId);
+		 ps.setString(2, password);
+		 ResultSet rs = ps.executeQuery();
+		 while(rs.next()) {
+			 userInfoDTO.setId(rs.getInt("id"));
+			 userInfoDTO.setUserId(rs.getString("user_id"));
+			 userInfoDTO.setPassword(rs.getString("password"));
+			 userInfoDTO.setFamilyName(rs.getString("family_name"));
+			 userInfoDTO.setFirstName(rs.getString("first_name"));
+			 userInfoDTO.setFamilyNameKana(rs.getString("family_name_kana"));
+			 userInfoDTO.setFirstNameKana(rs.getString("first_name_kana"));
+			 userInfoDTO.setSex(rs.getInt("sex"));
+			 userInfoDTO.setEmail(rs.getString("email"));
+			 userInfoDTO.setStatus(rs.getString("status"));
+			 userInfoDTO.setLogined(rs.getInt("status"));
+			 userInfoDTO.setRegistDate(rs.getDate("regist_date"));
+			 userInfoDTO.setUpdateDate(rs.getDate("update_date"));
 		 }
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
 	try {
-		connection.close();
+		con.close();
 	}catch (SQLException e) {
 		e.printStackTrace();
 	}
 	return userInfoDTO;
 }
+*/
 
 public UserInfoDTO getUserInfo(String loginId) {
-	DBConnector dbConnector = new DBConnector();
-	Connection connection = dbConnector.getConnection();
+	DBConnector db = new DBConnector();
+	Connection con = db.getConnection();
 	UserInfoDTO userInfoDTO = new UserInfoDTO();
 	String sql = "select * from user_info where user_id=?";
 	try {
-		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.setString(1, loginId);
-		ResultSet resultSet = preparedStatement.executeQuery();
-		while(resultSet.next()) {
-			userInfoDTO.setId(resultSet.getInt("id"));
-			userInfoDTO.setUserId(resultSet.getString("user_id"));
-			userInfoDTO.setPassword(resultSet.getString("password"));
-			userInfoDTO.setFamilyName(resultSet.getString("family_name"));
-			userInfoDTO.setFirstName(resultSet.getString("firstName"));
-			userInfoDTO.setFamilyNameKana(resultSet.getString("family_name_kana"));
-			userInfoDTO.setFirstNameKana(resultSet.getString("first_name_kana"));
-			userInfoDTO.setSex(resultSet.getInt("sex"));
-			userInfoDTO.setEmail(resultSet.getString("email"));
-			userInfoDTO.setStatus(resultSet.getString("status"));
-			userInfoDTO.setLogined(resultSet.getInt("logined"));
-			userInfoDTO.setRegistDate(resultSet.getDate("regist_date"));
-			userInfoDTO.setUpdateDate(resultSet.getDate("update_date"));
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, loginId);
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()) {
+			userInfoDTO.setId(rs.getInt("id"));
+			userInfoDTO.setUserId(rs.getString("user_id"));
+			userInfoDTO.setPassword(rs.getString("password"));
+			userInfoDTO.setFamilyName(rs.getString("family_name"));
+			userInfoDTO.setFirstName(rs.getString("firstName"));
+			userInfoDTO.setFamilyNameKana(rs.getString("family_name_kana"));
+			userInfoDTO.setFirstNameKana(rs.getString("first_name_kana"));
+			userInfoDTO.setSex(rs.getInt("sex"));
+			userInfoDTO.setEmail(rs.getString("email"));
+			userInfoDTO.setStatus(rs.getString("status"));
+			userInfoDTO.setLogined(rs.getInt("logined"));
+			userInfoDTO.setRegistDate(rs.getDate("regist_date"));
+			userInfoDTO.setUpdateDate(rs.getDate("update_date"));
 		}
 	}catch (SQLException e) {
 		e.printStackTrace();
-	}
-	try {
-		connection.close();
-	}catch (SQLException e) {
-		e.printStackTrace();
+	} finally {
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			if (ps != null) {
+				ps.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	return userInfoDTO;
 }
 
-
-
-
-
 	public int resetPassword(String loginId, String password) {
-		DBConnector dbConnector = new DBConnector();
-		Connection connection = dbConnector.getConnection();
+		DBConnector db = new DBConnector();
+		Connection con = db.getConnection();
 		String sql = "update user_info set password=? where user_id=?";
 		int result = 0;
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, password);
-			preparedStatement.setString(2, loginId);
-			result = preparedStatement.executeUpdate();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, password);
+			ps.setString(2, loginId);
+			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
  	}
 
 
-	public int login(String loginId, String password) {
-		DBConnector dbConnector =new DBConnector();
-		Connection connection = dbConnector.getConnection();
-		int result=0;
+	public void login(String loginId, String password) {
+		DBConnector db =new DBConnector();
+		Connection con = db.getConnection();
 		String sql = "update user_info set logined==1 where user_id=? and password=?";
 		try {
-			PreparedStatement preparedStatement =connection.prepareStatement(sql);
-			preparedStatement.setString(1, loginId);
-			preparedStatement.setString(2, password);
-			result = preparedStatement.executeUpdate();
+			PreparedStatement ps =con.prepareStatement(sql);
+			ps.setString(1, loginId);
+			ps.setString(2, password);
+			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
 	}
 
-	public int logout(String loginId) {
-		DBConnector dbConnector = new DBConnector();
-		Connection connection = dbConnector.getConnection();
-		int result=0;
+	public void logout(String loginId) {
+		DBConnector db = new DBConnector();
+		Connection con = db.getConnection();
 		String sql = "update user_info set logined=0 where user_id=?";
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement .setString(1, loginId);
-			result = preparedStatement.executeUpdate();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, loginId);
+			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
 	}
+
 	public String concealPassword(String password) {
 		int beginIndex = 0;
 		int endIndex = 0;
@@ -211,8 +289,5 @@ public UserInfoDTO getUserInfo(String loginId) {
 
 		String concealPassword = stringBuilder.replace(beginIndex, endIndex, password.substring(beginIndex,endIndex)).toString();
 		return concealPassword;
-
-
-
 		}
 }

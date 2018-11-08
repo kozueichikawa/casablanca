@@ -27,13 +27,14 @@ for(var a = 1; a <=10 ; a++){
 <s:include value="header.jsp" />
 <div id="contents">
     <h1>商品一覧画面</h1>
-        <s:if test='<s:property value="productInfoDTOList=null"/>'>
+        <%-- <s:if test="productInfoDtoList=null">
         <div id="SearchResult">
             <h3>検索結果はありません</h3>
         </div>
-        </s:if>
+        </s:if>--%>
 
-        <s:elseif test='<s:property value="keywordsErrorMessageList!=null"/>'>
+
+        <s:elseif test="keywordsErrorMessageList!=null">
             <h3>検索結果はありません。</h3>
             <h3><s:property value="keywordsErrorMessageList"/></h3>
         </s:elseif>
@@ -43,10 +44,9 @@ for(var a = 1; a <=10 ; a++){
         <s:iterator value="productInfoDtoList">
             <tr>
                 <td>
-                    <a href='<s:url action="ProductDetailAction"/>'>
-                        <s:param name="productId" value="%{productId}">
+                    <a href='<s:url action="ProductDetailsAction">
+                        <s:param name="productId" value="%{productId}"/></s:url>'>
                             <img src='<s:property value="imageFilePath"/>/<s:property value="imageFileName"/>' width="50px" height="50px"/>
-                        </s:param>
                     </a>
                 </td>
                 <td><s:property value="productName"/></td>

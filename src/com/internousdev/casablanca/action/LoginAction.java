@@ -1,12 +1,14 @@
 package com.internousdev.casablanca.action;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.casablanca.dao.DestinationInfoDAO;
 import com.internousdev.casablanca.dao.UserInfoDAO;
 import com.internousdev.casablanca.dto.DestinationInfoDTO;
+import com.internousdev.casablanca.dto.UserInfoDTO;
 import com.internousdev.casablanca.util.InputChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -33,18 +35,16 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		/* 入力チェックがOKだった場合、ログイン処理へ。NGの場合は即ERRORをreturn */
 		if (loginIdErrorMessageList.size()==0 && passwordErrorMessageList.size()==0) {
 			UserInfoDAO userInfoDAO = new UserInfoDAO();
-			UserInfoDTO userInfoDTO = userInfoDAO.getUserInfo(loginId, password);
+			UserInfoDTO userInfoDTO = userInfoDAO.getLoginInfo(loginId, password);
 			if (loginId.equals(userInfoDTO.getUserId()) && password.equals(userInfoDTO.getPassword())) {
+				/* ログインOKだった場合、DBカラム"logined"を1にupdate。そのloginedをsessionに取得 */
+				userInfoDAO.login(loginId, password);
 				result = SUCCESS;
 				session.put("loginId", userInfoDTO.getUserId());
-
-				/* ログインOKだった場合、DBカラム"logined"を1にupdate。そのloginedをsessionに取得 */
-				userInfoDTO = userInfoDAO.login(loginId, password);
-				session.put("logined", userInfoDTO.getLogined());
+				session.put("logined", "1");
 				System.out.println("ログイン成功");
-
 				/* カートの決済ボタン経由(SettlementConfirmAction)でログイン画面にきたかどうか判定。以下、"経由してきた"場合の処理 */
-				if ((boolean)session.get("isFromCart")) {
+				if (Objects.equals(session.get("isFromCart"), "true")) {
 					/* 宛先情報をsettlementConfirm.jspで表示用に生成 */
 					DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
 					destinationInfoDTOList = destinationInfoDAO.getDestinationInfo(loginId);
@@ -63,10 +63,6 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
 	public void setLoginId(String loginId) {
 		this.loginId = loginId;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 
 	public void setPassword(String password) {

@@ -17,10 +17,12 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 	public String execute() {
 		String result = ERROR;
 		/* ログイン状態なら宛先選択画面へ宛先一覧をListで送り、未ログイン状態ならログイン画面へ */
-		if(Objects.equals("logined", "1")){
+		if(Objects.equals(session.get("logined"), "1")){
 			result = SUCCESS;
 			DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
 			destinationInfoDTOList = destinationInfoDAO.getDestinationInfo(session.get("loginId").toString());
+		} else {
+			session.put("isFromCart", true);
 		}
 		return result;
 	}
