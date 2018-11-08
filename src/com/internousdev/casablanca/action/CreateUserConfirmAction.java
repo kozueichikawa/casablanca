@@ -57,6 +57,12 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 			 }
 			 	return result;
 			}
+			public List<String> getLoginIdErrorMessageList() {
+		return loginIdErrorMessageList;
+	}
+	public void setLoginIdErrorMessageList(List<String> loginIdErrorMessageList) {
+		this.loginIdErrorMessageList = loginIdErrorMessageList;
+	}
 			public List<String> getSexList() {
 				return sexList;
 			}

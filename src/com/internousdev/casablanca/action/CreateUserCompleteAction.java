@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.casablanca.dao.UserInfoDAO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CreateUserCompleteAction extends ActionSupport implements SessionAware{
@@ -20,7 +21,7 @@ public class CreateUserCompleteAction extends ActionSupport implements SessionAw
 	private Map<String, Object> session;
 	public String execute(){
 		String result = ERROR;
-		UserInfoDAO userInfoDao = new UserInfoDAO();
+		UserInfoDAO UserInfoDao = new UserInfoDAO();
 		int count = UserInfoDao.createUser(familyName,firstName,familyNameKana,firstNameKana,sex,email,loginId,password);
 		if(count > 0) {
 			result = SUCCESS;
