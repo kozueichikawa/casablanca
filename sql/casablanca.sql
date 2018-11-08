@@ -51,6 +51,7 @@ id int not null primary key auto_increment,
 user_id varchar(16) not null,
 temp_user_id varchar(16),
 product_id int not null,
+product_count int not null,
 price int not null,
 regist_date datetime not null,
 update_date datetime
