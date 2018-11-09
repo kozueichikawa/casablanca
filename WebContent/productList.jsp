@@ -36,21 +36,28 @@
 </s:if>
 
 <s:if test="productInfoDtoList!=null">
-<div id="productList">
-        <s:iterator value="productInfoDtoList">
+    <s:iterator value="productInfoDtoList">
+        <div id="productList">
+        <table>
             <tr>
                 <td>
                     <a href='<s:url action="ProductDetailsAction">
                         <s:param name="productId" value="%{productId}"/></s:url>'>
-                            <img src='<s:property value="imageFilePath"/>/<s:property value="imageFileName"/>' width="50px" height="50px"/>
-                    </a>
+                        <img src='<s:property value="imageFilePath"/>/<s:property value="imageFileName"/>' width="200px" height="200px"/></a>
                 </td>
+            </tr>
+            <tr>
                 <td><s:property value="productName"/></td>
+            </tr>
+            <tr>
                 <td><s:property value="productNameKana"/></td>
+            </tr>
+            <tr>
                 <td><s:property value="price"/><span>円</span></td>
             </tr>
-        </s:iterator>
-</div>
+        </table>
+        </div>
+    </s:iterator>
 </s:if>
 </div>
 <s:include value="footer.jsp"/>
