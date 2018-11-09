@@ -10,18 +10,18 @@
 
 	<action name="AddCartAction" class="com.internousdev.casablanca.action.AddCartAction" method="execute">
 		<result name="success">cart.jsp</result>
-		<result name="error">home.jsp</result>
+		<result name="error">index.jsp</result>
 		<result name="input">cart.jsp</result>
 	</action>
 
 	<action name="CartAction" class="com.internousdev.casablanca.action.CartAction" method="execute">
 		<result name="success">cart.jsp</result>
-		<result name="error">home.jsp</result>
+		<result name="error">index.jsp</result>
 	</action>
 
 	<action name="CreateDestinationAction" class="com.internousdev.casablanca.action.CreateDestinationAction" method="execute">
 		<result name="success">createDestination.jsp</result>
-		<result name="error">home.jsp</result>
+		<result name="error">index.jsp</result>
 	</action>
 
 	<action name="CreateDestinationCompleteAction" class="com.internousdev.casablanca.action.CreateDestinationCompleteAction" method="execute">
@@ -36,7 +36,7 @@
 
 	<action name="CreateUserAction" class="com.internousdev.casablanca.action.CreateUserAction" method="execute">
 		<result name="success">createUser.jsp</result>
-		<result name="error">home.jsp</result>
+		<result name="error">index.jsp</result>
 	</action>
 
     <action name="CreateUserCompleteAction" class="com.internousdev.casablanca.action.CreateUserCompleteAction" method="execute">
@@ -57,12 +57,12 @@
 
   <action name="DeletePurchaseHistoryAction" class="com.internousdev.casablanca.action.DeletePurchaseHistoryAction" method="execute">
 		<result name="success">purchaseHistory.jsp</result>
-		<result name="error">home.jsp</result>
+		<result name="error">index.jsp</result>
 	</action>
 
   <action name="GoLoginAction" class="com.internousdev.casablanca.action.GoLoginAction" method="execute">
 		<result name="success">login.jsp</result>
-		<result name="error">home.jsp</result>
+		<result name="error">index.jsp</result>
 	</action>
 
    <action name="HomeAction" class="com.internousdev.casablanca.action.HomeAction" method="execute">
@@ -70,7 +70,7 @@
 	</action>
 
     <action name="LoginAction" class="com.internousdev.casablanca.action.LoginAction" method="execute">
-		<result name="success">home.jsp</result>
+		<result name="success">index.jsp</result>
 		<result name="gotosettlementconfirm">settlementConfirm.jsp</result>
 		<result name="error">login.jsp</result>
 	</action>
@@ -82,7 +82,7 @@
 
 	<action name="MyPageAction" class="com.internousdev.casablanca.action.MyPageAction" method="execute">
 		<result name="success">mypage.jsp</result>
-		<result name="error">home.jsp</result>
+		<result name="error">index.jsp</result>
 	</action>
 
    <action name="ProductDetailsAction" class="com.internousdev.casablanca.action.ProductDetailsAction" method="execute">
@@ -92,7 +92,7 @@
 
    <action name="ProductListAction" class="com.internousdev.casablanca.action.ProductListAction" method="execute">
 		<result name="success">productList.jsp</result>
-		<result name="error">home.jsp</result>
+		<result name="error">index.jsp</result>
 	</action>
 
 	<action name="PurchaseHistoryAction" class="com.internousdev.casablanca.action.PurchaseHistoryAction" method="execute">
