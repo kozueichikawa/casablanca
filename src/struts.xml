@@ -54,12 +54,12 @@
 		<result name="success">cart.jsp</result>
 		<result name="error">cart.jsp</result>
 	</action>
-<!--
+
   <action name="DeletePurchaseHistoryAction" class="com.internousdev.casablanca.action.DeletePurchaseHistoryAction" method="execute">
 		<result name="success">purchaseHistory.jsp</result>
 		<result name="error">home.jsp</result>
 	</action>
--->
+
   <action name="GoLoginAction" class="com.internousdev.casablanca.action.GoLoginAction" method="execute">
 		<result name="success">login.jsp</result>
 		<result name="error">home.jsp</result>
