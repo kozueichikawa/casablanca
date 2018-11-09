@@ -16,7 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PurchaseHistoryAction extends ActionSupport implements SessionAware{
 
-
+	private List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDtoList;
 	private List<MCategoryDTO> mCategoryDTOList=new ArrayList<MCategoryDTO>();
 	private Map<String,Object> session;
 
@@ -24,14 +24,12 @@ public class PurchaseHistoryAction extends ActionSupport implements SessionAware
 
 
 		PurchaseHistoryInfoDAO purchaseHistoryInfoDAO=new PurchaseHistoryInfoDAO();
-		List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDTOList= new ArrayList<PurchaseHistoryInfoDTO>();
-		purchaseHistoryInfoDTOList=purchaseHistoryInfoDAO.getPurchaseHistoryList(String.valueOf(session.get("loginId")));
-		Iterator<PurchaseHistoryInfoDTO> iterator=purchaseHistoryInfoDTOList.iterator();
-		if(!(iterator.hasNext())) {
-			purchaseHistoryInfoDTOList=null;
-		}
-		session.put("purchaseHistoryInfoDTOList", purchaseHistoryInfoDTOList);
 
+		purchaseHistoryInfoDtoList=purchaseHistoryInfoDAO.getPurchaseHistoryList(String.valueOf(session.get("loginId")));
+		Iterator<PurchaseHistoryInfoDTO> iterator=purchaseHistoryInfoDtoList.iterator();
+		if(!(iterator.hasNext())) {
+			purchaseHistoryInfoDtoList=null;
+		}
 		if(!session.containsKey("mCategoryList")){
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();
 			mCategoryDTOList= mCategoryDAO.getMCategoryList();
@@ -57,6 +55,12 @@ public class PurchaseHistoryAction extends ActionSupport implements SessionAware
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+
+
+	public List<PurchaseHistoryInfoDTO> getPurchaseHistoryDtoList() {
+		return purchaseHistoryInfoDtoList;
 	}
 
 

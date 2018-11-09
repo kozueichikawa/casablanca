@@ -13,6 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 public class DeletePurchaseHistoryAction extends ActionSupport implements SessionAware{
+	private List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDtoList;
 	private  Map<String,Object> session;
 	public String execute() {
 
@@ -20,15 +21,13 @@ public class DeletePurchaseHistoryAction extends ActionSupport implements Sessio
 		PurchaseHistoryInfoDAO purchaseHistoryInfoDAO=new PurchaseHistoryInfoDAO();
 		int count=purchaseHistoryInfoDAO.deleteAll(String.valueOf(session.get("loginId")));
 		if(count>0) {
-			List<PurchaseHistoryInfoDTO> purchaseHistoryDtoList=purchaseHistoryInfoDAO.getPurchaseHistoryList(String.valueOf(session.get("loginId")));
-			Iterator<PurchaseHistoryInfoDTO> iterator=purchaseHistoryDtoList.iterator();
+			purchaseHistoryInfoDtoList=purchaseHistoryInfoDAO.getPurchaseHistoryList(String.valueOf(session.get("loginId")));
+			Iterator<PurchaseHistoryInfoDTO> iterator=purchaseHistoryInfoDtoList.iterator();
 			if(!(iterator.hasNext())) {
 
-				purchaseHistoryDtoList=null;
+				purchaseHistoryInfoDtoList=null;
 			}
-			session.put("purchaseHistoryInfoDtoList", purchaseHistoryDtoList);
-
-			result="SUCCESS";
+			result=SUCCESS;
 		}
 		if(!session.containsKey("mCategoryList")) {
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();
@@ -36,7 +35,12 @@ public class DeletePurchaseHistoryAction extends ActionSupport implements Sessio
 			mCategoryDtoList=mCategoryDAO.getMCategoryList();
 			session.put("mCategoryDtoList", mCategoryDtoList);
 		}
+
 		return result;
+	}
+
+	public List<PurchaseHistoryInfoDTO> getPurchaseHistoryDtoList() {
+		return purchaseHistoryInfoDtoList;
 	}
 
 	public void setSession(Map<String, Object> session) {
