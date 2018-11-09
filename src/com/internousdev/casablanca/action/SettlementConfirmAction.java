@@ -29,7 +29,6 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 			PurchaseHistoryInfoDAO purchaseHistoryInfoDAO = new PurchaseHistoryInfoDAO();
 			List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDtoList = purchaseHistoryInfoDAO.getPurchaseHistoryList(session.get("loginId").toString());
 			session.put("purchaseHistoryInfoDtoList", purchaseHistoryInfoDtoList);
-
 		} else {
 			session.put("fromCart", true);
 		}
