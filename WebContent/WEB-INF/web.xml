@@ -24,6 +24,6 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1"
 		<location>/error.html</location>
 	</error-page>
 	<session-config>
-  <session-timeout>30</session-timeout>
+  <session-timeout>1</session-timeout>
 </session-config>
 </web-app>
