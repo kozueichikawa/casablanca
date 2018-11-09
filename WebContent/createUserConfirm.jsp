@@ -12,7 +12,7 @@
 	<s:form action="CreateUserCompleteAction">
 		<table>
 			<tr>
-				<td>性</td>
+				<td>姓</td>
 				<td><s:property value="familyName" /></td>
 			</tr>
 			<tr>
@@ -20,7 +20,7 @@
 				<td><s:property value="firstName" /></td>
 			</tr>
 			<tr>
-				<td>性かな</td>
+				<td>姓かな</td>
 				<td><s:property value="familyNameKana" /></td>
 			</tr>
 			<tr>
