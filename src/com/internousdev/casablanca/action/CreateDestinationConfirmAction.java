@@ -20,9 +20,9 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 	private String telNumber;
 	private String userAddress;
 	private List<String> sexList=new ArrayList<String>();
-	private static final String MAN="男性";
-	private static final String WOMAN="女性";
-	private String defaultSexValue=MAN;
+	private static final String MALE="男性";
+	private static final String FEMALE="女性";
+	private String defaultSexValue=MALE;
 
 
 	private List<String> familyNameErrorMessageList=new ArrayList<String>();
@@ -58,8 +58,8 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 			result=SUCCESS;
 		}
 
-		sexList.add(MAN);
-		sexList.add(WOMAN);
+		sexList.add(MALE);
+		sexList.add(FEMALE);
 		return result;
 	}
 
