@@ -2,6 +2,7 @@ package com.internousdev.casablanca.action;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -18,6 +19,7 @@ public class DeletePurchaseHistoryAction extends ActionSupport implements Sessio
 	public String execute() {
 
 		String result=ERROR;
+		if(Objects.equals(session.get("logined"),"1")) {
 		PurchaseHistoryInfoDAO purchaseHistoryInfoDAO=new PurchaseHistoryInfoDAO();
 		int count=purchaseHistoryInfoDAO.deleteAll(String.valueOf(session.get("loginId")));
 		if(count>0) {
@@ -29,11 +31,13 @@ public class DeletePurchaseHistoryAction extends ActionSupport implements Sessio
 			}
 			result=SUCCESS;
 		}
+		}
 		if(!session.containsKey("mCategoryList")) {
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();
 			List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
 			mCategoryDtoList=mCategoryDAO.getMCategoryList();
 			session.put("mCategoryDtoList", mCategoryDtoList);
+
 		}
 
 		return result;

@@ -3,6 +3,7 @@ package com.internousdev.casablanca.action;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -19,6 +20,7 @@ public class PurchaseHistoryAction extends ActionSupport implements SessionAware
 	private Map<String,Object> session;
 
 	public String execute() {
+		if(Objects.equals(session.get("logined"),"1")) {
 
 
 		PurchaseHistoryInfoDAO purchaseHistoryInfoDAO=new PurchaseHistoryInfoDAO();
@@ -28,14 +30,18 @@ public class PurchaseHistoryAction extends ActionSupport implements SessionAware
 		if(!(iterator.hasNext())) {
 			purchaseHistoryInfoDtoList=null;
 		}
+		}
 		if(!session.containsKey("mCategoryList")){
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();
 			List<MCategoryDTO> mCategoryDTOList= mCategoryDAO.getMCategoryList();
 			session.put("mCategoryDTOList", mCategoryDTOList);
 		}
+
+
 		return SUCCESS;
 
 	}
+
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
