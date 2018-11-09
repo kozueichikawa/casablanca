@@ -29,7 +29,7 @@ function goDeleteCartAction(){
 <s:include value="header.jsp" />
 <div id="contents">
 <h1>カート画面</h1>
-<s:if test="checkListErrorMessageList=null">
+<s:if test="checkListErrorMessageList!=null">
 	<div class="error">
 		<div class="error-message">
 		<s:iterator value="checkListErrorMessageList">
