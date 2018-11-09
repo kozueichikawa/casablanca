@@ -7,8 +7,10 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.casablanca.dao.DestinationInfoDAO;
 import com.internousdev.casablanca.dao.MCategoryDAO;
+import com.internousdev.casablanca.dao.PurchaseHistoryInfoDAO;
 import com.internousdev.casablanca.dto.DestinationInfoDTO;
 import com.internousdev.casablanca.dto.MCategoryDTO;
+import com.internousdev.casablanca.dto.PurchaseHistoryInfoDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 
@@ -23,6 +25,10 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 			result = SUCCESS;
 			DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
 			destinationInfoDtoList = destinationInfoDAO.getDestinationInfo(session.get("loginId").toString());
+
+			PurchaseHistoryInfoDAO purchaseHistoryInfoDAO = new PurchaseHistoryInfoDAO();
+			List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDtoList = purchaseHistoryInfoDAO.getPurchaseHistoryList(session.get("loginId").toString());
+			session.put("purchaseHistoryInfoDtoList", purchaseHistoryInfoDtoList);
 		} else {
 			session.put("fromCart", true);
 		}

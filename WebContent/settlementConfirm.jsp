@@ -37,8 +37,8 @@
     </s:else>
     <td><s:property value="familyName"/> <s:property value = "firstName"/></td>
     <td><s:property value="familyNameKana"/> <s:property value = "firstNameKana"/></td>
-    <td><s:property value="address"/></td>
-    <td><s:property value="tel"/></td>
+    <td><s:property value="userAddress"/></td>
+    <td><s:property value="telNumber"/></td>
     <td><s:property value="email"/></td>
     </tr>
 </s:iterator>
