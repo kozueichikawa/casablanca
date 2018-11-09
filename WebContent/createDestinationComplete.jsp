@@ -8,6 +8,16 @@
 <link rel="stylesheet" href="./css/style.css">
 <title>宛先情報完了</title>
 
+<script type="text/javascript">
+	window.onload=function(){
+		setInterval('backSettlementConfirmAction(back)',3000);
+	}
+
+	function backSettlementConfirmAction(form){
+		form.submit();
+	}
+
+</script>
 
 
 </head>
