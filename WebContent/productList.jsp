@@ -14,10 +14,27 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <title>商品一覧</title>
 </head>
+
 <body>
 <s:include value="header.jsp" />
 <div id="contents">
     <h1>商品一覧画面</h1>
+
+<s:if test="productInfoDtoList==null">
+    <div id="NoResult">
+        <h3>検索結果はありません</h3>
+
+
+    <s:if test="keywordsErrorMessageList!=null">
+        <div id="ErrorMessage">
+        <s:iterator value="keywordsErrorMessageList">
+            <h3><s:property value="keywordsErrorMessageList"/></h3>
+        </s:iterator>
+        </div>
+    </s:if>
+    </div>
+</s:if>
+
 <s:if test="productInfoDtoList!=null">
 <div id="productList">
         <s:iterator value="productInfoDtoList">
@@ -35,24 +52,6 @@
         </s:iterator>
 </div>
 </s:if>
-
-<s:if test="productInfoDtoList==null">
-    <div id="NoResult">
-        <h3>検索結果はありません</h3>
-    </div>
-
-
-<s:if test="keywordsErrorMessageList!=null">
-    <div id="ErrorMessage">
-    <s:iterator value="keywordsErrorMessageList">
-        <h3><s:property value="keywordsErrorMessageList"/></h3>
-    </s:iterator>
-    </div>
-</s:if>
-</s:if>
-
-
-
 </div>
 <s:include value="footer.jsp"/>
 </body>
