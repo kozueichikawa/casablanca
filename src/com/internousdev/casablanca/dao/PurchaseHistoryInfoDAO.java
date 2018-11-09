@@ -14,7 +14,7 @@ public class PurchaseHistoryInfoDAO {
 	public List<PurchaseHistoryInfoDTO> getPurchaseHistoryList(String loginId){
 		DBConnector db=new DBConnector();
 		Connection con=db.getConnection();
-		List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDTOList=new ArrayList<PurchaseHistoryInfoDTO>();
+		List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDtoList=new ArrayList<PurchaseHistoryInfoDTO>();
 
 		String sql="select "
 				+ "phi.id as id," /*ID*/
@@ -76,7 +76,7 @@ public class PurchaseHistoryInfoDAO {
 				purchaseHistoryInfoDto.setEmail(rs.getString("email"));
 				purchaseHistoryInfoDto.setTelNumber(rs.getString("tel_number"));
 				purchaseHistoryInfoDto.setUserAddress(rs.getString("user_address"));
-				purchaseHistoryInfoDTOList.add(purchaseHistoryInfoDto);
+				purchaseHistoryInfoDtoList.add(purchaseHistoryInfoDto);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -86,7 +86,7 @@ public class PurchaseHistoryInfoDAO {
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}
-			return purchaseHistoryInfoDTOList;
+			return purchaseHistoryInfoDtoList;
 		}
 	public int regist(String loginId,int productId,int productCount,int destinationId,int price) {
 		DBConnector db=new DBConnector();
