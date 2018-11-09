@@ -63,7 +63,7 @@ public class PurchaseHistoryInfoDAO {
 				purchaseHistoryInfoDto.setUpdateDate(rs.getDate("update_date"));
 				purchaseHistoryInfoDto.setProductName(rs.getString("product_name"));
 				purchaseHistoryInfoDto.setProductNameKana(rs.getString("product_name_kana"));
-				purchaseHistoryInfoDto.setProductDescription(rs.getString("productDescription"));
+				purchaseHistoryInfoDto.setProductDescription(rs.getString("product_description"));
 				purchaseHistoryInfoDto.setCategoryId(rs.getInt("category_id"));
 				purchaseHistoryInfoDto.setImageFileName(rs.getString("image_file_name"));
 				purchaseHistoryInfoDto.setImageFilePath(rs.getString("image_file_path"));
