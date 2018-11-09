@@ -1,6 +1,5 @@
 package com.internousdev.casablanca.action;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,6 @@ import com.opensymphony.xwork2.ActionSupport;
 public class PurchaseHistoryAction extends ActionSupport implements SessionAware{
 
 	private List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDtoList;
-	private List<MCategoryDTO> mCategoryDTOList=new ArrayList<MCategoryDTO>();
 	private Map<String,Object> session;
 
 	public String execute() {
@@ -32,7 +30,7 @@ public class PurchaseHistoryAction extends ActionSupport implements SessionAware
 		}
 		if(!session.containsKey("mCategoryList")){
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();
-			mCategoryDTOList= mCategoryDAO.getMCategoryList();
+			List<MCategoryDTO> mCategoryDTOList= mCategoryDAO.getMCategoryList();
 			session.put("mCategoryDTOList", mCategoryDTOList);
 		}
 		System.out.println(purchaseHistoryInfoDtoList.get(0));
