@@ -12,7 +12,12 @@
 <s:include value="header.jsp"/>
 <div id="contents">
 <h1>商品購入履歴</h1>
-<s:if test="%{purchaseHistoryInfoDtoList}.size()>0">
+<s:if test="purchaseHistoryInfoDtoList==null">
+<div class="info">
+商品購入情報はありません
+</div>
+</s:if>
+<s:else>
 <table class="horizontal-list-table">
 <thead>
 <tr>
@@ -47,11 +52,6 @@
 </div>
 
 
-</s:if>
-<s:else>
-<div class="info">
-商品購入情報はありません
-</div>
 </s:else>
 </div>
 <s:include value="footer.jsp"/>

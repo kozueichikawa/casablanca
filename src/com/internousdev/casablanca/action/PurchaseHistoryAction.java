@@ -35,35 +35,18 @@ public class PurchaseHistoryAction extends ActionSupport implements SessionAware
 			mCategoryDTOList= mCategoryDAO.getMCategoryList();
 			session.put("mCategoryDTOList", mCategoryDTOList);
 		}
+		System.out.println(purchaseHistoryInfoDtoList.get(0));
 		return SUCCESS;
 
-	}
-
-
-
-	public List<MCategoryDTO> getmCategoryDTOList() {
-		return mCategoryDTOList;
-	}
-
-	public void setmCategoryDTOList(List<MCategoryDTO> mCategoryDTOList) {
-		this.mCategoryDTOList = mCategoryDTOList;
-	}
-
-	public Map<String, Object> getSession() {
-		return session;
 	}
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
 
-
-
-	public List<PurchaseHistoryInfoDTO> getPurchaseHistoryDtoList() {
+	public List<PurchaseHistoryInfoDTO> getPurchaseHistoryInfoDtoList() {
 		return purchaseHistoryInfoDtoList;
 	}
-
-
 
 
 }

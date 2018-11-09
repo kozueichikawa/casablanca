@@ -60,7 +60,8 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 		   result = SUCCESS;
 		}
 	}
-	 return result;
+	System.out.println(result);
+	return result;
 	}
 
 	public String getId(){
