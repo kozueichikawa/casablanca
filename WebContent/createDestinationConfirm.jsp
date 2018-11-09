@@ -26,7 +26,7 @@
 	</th>
 	<td>
 		<s:property value="familyName"/>
-		<s:hidden Name="familyName" value="%{familyName}"/>
+		<s:hidden name="familyName" value="%{familyName}"/>
 	</td>
 </tr>
 

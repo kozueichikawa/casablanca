@@ -25,6 +25,8 @@ public class CreateDestinationCompleteAction extends ActionSupport implements Se
 
 	public String execute(){
 		String result=ERROR;
+		System.out.println(familyName);
+		System.out.println(firstName);
 		DestinationInfoDAO destinationInfoDao=new DestinationInfoDAO();
 		int count=destinationInfoDao.insert(String.valueOf(session.get("loginId")),familyName,firstName,familyNameKana,firstNameKana,email,telNumber,userAddress);
 		if(count>0){
@@ -34,15 +36,18 @@ public class CreateDestinationCompleteAction extends ActionSupport implements Se
 	}
 
 
-	public String getFamilyName(){
+
+	public String getFamilyName() {
 		return familyName;
 	}
 
-	public void setFamilyName(String familyName){
-		this.familyName=familyName;
+
+
+	public void setFamilyName(String familyName) {
+		this.familyName = familyName;
 	}
 
-	public String getfirstName(){
+	public String getFirstName(){
 		return firstName;
 	}
 
@@ -82,13 +87,18 @@ public class CreateDestinationCompleteAction extends ActionSupport implements Se
 		this.telNumber=telNumber;
 	}
 
-	public String UserAddress(){
+
+	public String getUserAddress() {
 		return userAddress;
 	}
 
-	public void setUserAddress(String userAddress){
-		this.userAddress=userAddress;
+
+
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
 	}
+
+
 
 	public String getCategoryId(){
 		return categoryId;

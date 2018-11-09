@@ -37,6 +37,7 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 	private String categoryId;
 	private Map<String,Object> session;
 	public String execute(){
+		System.out.println(familyName);
 		String result=ERROR;
 		InputChecker inputChecker=new InputChecker();
 //フォームの内容をinputCheckerを使ってチェックする。
