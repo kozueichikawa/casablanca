@@ -85,9 +85,10 @@
 </tr>
 
 <tr>
-	<th scope="row"><s:label value="性別"/></th>
-	<td><label>男</label><input type="radio" name="sex" value="0">
-			<label>女</label><input type="radio" name="sex" value="1"></td>
+	<td>
+			<label>男性<input type="radio" value="0" checked="checked" name="sex"/></label>
+			<label>女性<input type="radio" value="1" name="sex"/></label>
+		</td>
 </tr>
 
 <tr>

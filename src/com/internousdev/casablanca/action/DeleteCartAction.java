@@ -40,7 +40,6 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 	public String execute(){
 		String result=ERROR;
 		CartInfoDAO cartInfoDAO = new CartInfoDAO();
-
 		int count = 0;
 //		List<String> checkListErrorMessageList = new ArrayList<String>();
 

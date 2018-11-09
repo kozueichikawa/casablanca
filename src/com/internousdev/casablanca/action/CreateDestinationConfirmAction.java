@@ -20,9 +20,9 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 	private String telNumber;
 	private String userAddress;
 	private List<String> sexList=new ArrayList<String>();
-	private static final String MAN="男性";
-	private static final String WOMAN="女性";
-	private String defaultSexValue=MAN;
+	private static final String MALE="男性";
+	private static final String FEMALE="女性";
+	private String defaultSexValue=MALE;
 
 
 	private List<String> familyNameErrorMessageList=new ArrayList<String>();
@@ -46,7 +46,7 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 		firstNameKanaErrorMessageList=inputChecker.doCheck("名ふりがな", firstNameKana, 1, 16, false, false, true, false, false, false, false,false,false);
 		userAddressErrorMessageList=inputChecker.doCheck("住所", userAddress, 15, 50, false, true, true, true,true,true,false,false,false);
 		telNumberErrorMessageList=inputChecker.doCheck("電話番号", telNumber,10, 13, false, false, false, true, false, false, false,false,false);
-		emailErrorMessageList=inputChecker.doCheck("メールアドレス", email, 18, 32, true, false, false, true, true,false,false,false,false);
+		emailErrorMessageList=inputChecker.doCheck("メールアドレス", email, 14, 32, true, false, false, true, true,false,false,false,false);
 
 		if(familyNameErrorMessageList.size()==0
 	    && firstNameErrorMessageList.size()==0
@@ -58,8 +58,8 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 			result=SUCCESS;
 		}
 
-		sexList.add(MAN);
-		sexList.add(WOMAN);
+		sexList.add(MALE);
+		sexList.add(FEMALE);
 		return result;
 	}
 

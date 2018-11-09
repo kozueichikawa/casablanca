@@ -45,7 +45,7 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 	}
 	if(count > 0){
 		CartInfoDAO cartInfoDAO = new CartInfoDAO();
-		count = cartInfoDAO.deleteAll(String.valueOf(session.get("loginId")));
+		count = cartInfoDAO.delete(String.valueOf(session.get("loginId")));
 		if(count > 0){
 			List<CartInfoDTO> cartInfoDtoList = new ArrayList<CartInfoDTO>();
 			cartInfoDtoList = cartInfoDAO.getCartInfoDtoList(String.valueOf(session.get("loginId")));
@@ -60,7 +60,8 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 		   result = SUCCESS;
 		}
 	}
-	 return result;
+	System.out.println(result);
+	return result;
 	}
 
 	public String getId(){
