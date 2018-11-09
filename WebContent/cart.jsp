@@ -93,6 +93,7 @@ function goDeleteCartAction(){
 	</div>
 </div>
 
+
 <div class="submit_btn_box">
 <div id=".contents-btn-set">
 <s:submit value="削除" class="submit_btn" onclick="this.form.action='DeleteCartAction';" />
