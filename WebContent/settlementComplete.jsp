@@ -10,7 +10,7 @@
 <title>決済完了</title>
 </head>
 <body>
-<jsp:include page = "header.jsp"/>
+<s:include value= "header.jsp"/>
 <div id="contents">
 <h1>決済完了画面</h1>
 <div class = "success">
