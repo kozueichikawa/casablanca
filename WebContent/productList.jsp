@@ -28,7 +28,7 @@
     <s:if test="keywordsErrorMessageList!=null">
         <div id="ErrorMessage">
         <s:iterator value="keywordsErrorMessageList">
-            <h3><s:property value="keywordsErrorMessageList"/></h3>
+            <h3><s:property/></h3>
         </s:iterator>
         </div>
     </s:if>
