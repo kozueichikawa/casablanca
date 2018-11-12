@@ -34,14 +34,12 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 		String result=ERROR;
 		CartInfoDAO cartInfoDAO = new CartInfoDAO();
 		int count = 0;
-//		List<String> checkListErrorMessageList = new ArrayList<String>();
-
 		if ( checkList == null ) {
 			checkList = new ArrayList<>();
 		}
 
 		for(String id:checkList){
-			System.out.println(id);
+			System.out.println("カートから削除:id " + id);
 			count += cartInfoDAO.delete(id);
 		}
 		if(count <= 0){

@@ -11,7 +11,6 @@
 	<action name="AddCartAction" class="com.internousdev.casablanca.action.AddCartAction" method="execute">
 		<result name="success">cart.jsp</result>
 		<result name="error">index.jsp</result>
-		<result name="input">cart.jsp</result>
 	</action>
 
 	<action name="CartAction" class="com.internousdev.casablanca.action.CartAction" method="execute">
@@ -26,12 +25,13 @@
 
 	<action name="CreateDestinationCompleteAction" class="com.internousdev.casablanca.action.CreateDestinationCompleteAction" method="execute">
 		<result name="success">createDestinationComplete.jsp</result>
-		<result name="error">createDestination.jsp</result>
+		<result name="error">index.jsp</result>
 	</action>
 
 	<action name="CreateDestinationConfirmAction" class="com.internousdev.casablanca.action.CreateDestinationConfirmAction" method="execute">
 		<result name="success">createDestinationConfirm.jsp</result>
 		<result name="error">createDestination.jsp</result>
+		<result name="timeout">index.jsp</result>
 	</action>
 
 	<action name="CreateUserAction" class="com.internousdev.casablanca.action.CreateUserAction" method="execute">
@@ -42,7 +42,7 @@
     <action name="CreateUserCompleteAction" class="com.internousdev.casablanca.action.CreateUserCompleteAction" method="execute">
 		<result name="success">createUserComplete.jsp</result>
 		<result name="gotosettlementconfirm">settlementConfirm.jsp</result>
-		<result name="error">createUser.jsp</result>
+		<result name="error">index.jsp</result>
 	</action>
 
     <action name="CreateUserConfirmAction" class="com.internousdev.casablanca.action.CreateUserConfirmAction" method="execute">
@@ -97,6 +97,7 @@
 
 	<action name="PurchaseHistoryAction" class="com.internousdev.casablanca.action.PurchaseHistoryAction" method="execute">
 		<result name="success">purchaseHistory.jsp</result>
+		<result name="error">index.jsp</result>
 	</action>
 
 	<action name="ResetPasswordAction" class="com.internousdev.casablanca.action.ResetPasswordAction" method="execute">
@@ -121,7 +122,7 @@
 
    <action name="SettlementCompleteAction" class="com.internousdev.casablanca.action.SettlementCompleteAction" method="execute">
 		<result name="success">settlementComplete.jsp</result>
-		<result name="error">settlementConfirm.jsp</result>
+		<result name="error">index.jsp</result>
 	</action>
 
    <action name="SettlementConfirmAction" class="com.internousdev.casablanca.action.SettlementConfirmAction" method="execute">

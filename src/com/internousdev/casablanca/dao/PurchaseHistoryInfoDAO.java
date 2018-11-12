@@ -11,9 +11,13 @@ import com.internousdev.casablanca.dto.PurchaseHistoryInfoDTO;
 import com.internousdev.casablanca.util.DBConnector;
 
 public class PurchaseHistoryInfoDAO {
+	private Connection con = null;
+	private PreparedStatement ps = null;
+	private ResultSet rs = null;
+
 	public List<PurchaseHistoryInfoDTO> getPurchaseHistoryList(String loginId){
 		DBConnector db=new DBConnector();
-		Connection con=db.getConnection();
+		con=db.getConnection();
 		List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDtoList=new ArrayList<PurchaseHistoryInfoDTO>();
 
 		String sql="select "
@@ -49,9 +53,9 @@ public class PurchaseHistoryInfoDAO {
 				+ " ORDER BY regist_date DESC";
 
 		try {
-			PreparedStatement ps=con.prepareStatement(sql);
+			ps=con.prepareStatement(sql);
 			ps.setString(1,loginId);
-			ResultSet rs=ps.executeQuery();
+			rs=ps.executeQuery();
 			while(rs.next()) {
 				PurchaseHistoryInfoDTO purchaseHistoryInfoDto=new PurchaseHistoryInfoDTO();
 				purchaseHistoryInfoDto.setId(rs.getInt("id"));
@@ -78,26 +82,34 @@ public class PurchaseHistoryInfoDAO {
 				purchaseHistoryInfoDto.setUserAddress(rs.getString("user_address"));
 				purchaseHistoryInfoDtoList.add(purchaseHistoryInfoDto);
 			}
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		} finally {
 			try {
-				con.close();
-			}catch(SQLException e) {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
 			return purchaseHistoryInfoDtoList;
 		}
+
 	public int regist(String loginId,int productId,int productCount,int destinationId,int price) {
 		DBConnector db=new DBConnector();
-		Connection con=db.getConnection();
+		con=db.getConnection();
 		String sql="insert into purchase_history_info(user_id,product_id,product_count,price,destination_id,regist_date,update_date)"
 				+ "values(?,?,?,?,?,now(),now())";
-
-
 		int count=0;
 		try {
-			PreparedStatement ps=con.prepareStatement(sql);
+			ps=con.prepareStatement(sql);
 			ps.setString(1,loginId);
 			ps.setInt(2, productId);
 			ps.setInt(3, productCount);
@@ -105,38 +117,50 @@ public class PurchaseHistoryInfoDAO {
 			ps.setInt(5, destinationId);
 
 			count=ps.executeUpdate();
-		}catch(SQLException e) {
+		}catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try {
-			con.close();
-		}catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return count;
 
 	}
 	public int deleteAll(String loginId) {
 		DBConnector db=new DBConnector();
-		Connection con=db.getConnection();
+		con=db.getConnection();
 		String sql="delete from purchase_history_info where user_id=?";
 		int count=0;
 		try {
-			PreparedStatement ps=con.prepareStatement(sql);
+			ps=con.prepareStatement(sql);
 			ps.setString(1, loginId);
 			count=ps.executeUpdate();
-
-		}catch(SQLException e) {
+		}catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try {
-			con.close();
-		}catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return count;
-
 	}
-
-	}
+}
 

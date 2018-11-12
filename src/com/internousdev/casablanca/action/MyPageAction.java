@@ -24,6 +24,8 @@ public class MyPageAction extends ActionSupport implements SessionAware{
 		UserInfoDAO userInfoDAO= new UserInfoDAO();
 		userInfoDTO=userInfoDAO.getUserInfo(String.valueOf(session.get("loginId")));
 		result =SUCCESS;
+		} else {
+			System.out.println("セッションタイムアウト");
 		}
 		if(!session.containsKey("mCategoryList")) {
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();
@@ -31,8 +33,6 @@ public class MyPageAction extends ActionSupport implements SessionAware{
 			session.put("mCategoryDtoList", mCategoryDtoList);
 		}
 		return result;
-
-
 	}
 
 	public void setSession(Map<String, Object> session) {

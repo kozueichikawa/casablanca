@@ -2,6 +2,7 @@ package com.internousdev.casablanca.action;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -17,17 +18,23 @@ public class CreateDestinationCompleteAction extends ActionSupport implements Se
 	private String familyNameKana;
 	private String firstNameKana;
 	private String email;
+	@SuppressWarnings("unused")
+	private String sex;
 	private String telNumber;
 	private String userAddress;
 	private Map<String,Object> session;
 
 	public String execute(){
 		String result = ERROR;
-		DestinationInfoDAO destinationInfoDao = new DestinationInfoDAO();
-		System.out.println(session.get("loginId"));
-		int count = destinationInfoDao.insert(String.valueOf(session.get("loginId")),familyName,firstName,familyNameKana,firstNameKana,email,telNumber,userAddress);
-		if(count > 0){
-			result=SUCCESS;
+		if(Objects.equals(session.get("logined"),"1")){
+			DestinationInfoDAO destinationInfoDao = new DestinationInfoDAO();
+			int count = destinationInfoDao.insert(String.valueOf(session.get("loginId")),familyName,firstName,familyNameKana,firstNameKana,email,telNumber,userAddress);
+
+			if(count > 0){
+				result=SUCCESS;
+			}
+		} else {
+			System.out.println("セッションタイムアウト");
 		}
 		if(!session.containsKey("mCategoryDtoList")) {
 			MCategoryDAO mCategoryDAO = new MCategoryDAO();
@@ -65,6 +72,9 @@ public class CreateDestinationCompleteAction extends ActionSupport implements Se
 		this.userAddress = userAddress;
 	}
 
+	public void setSex(String sex){
+		this.sex=sex;
+	}
 
 	public void setSession(Map<String,Object> session){
 		this.session=session;

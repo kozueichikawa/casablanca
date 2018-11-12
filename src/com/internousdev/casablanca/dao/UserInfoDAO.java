@@ -21,7 +21,7 @@ public class UserInfoDAO {
 					+ " first_name_kana, sex, email, status, logined, regist_date, update_date)"
 					+ " values (?,?,?,?,?,?,?,?,?,?, now(), now())";
 		try {
-			PreparedStatement ps= con.prepareStatement(sql);
+			ps= con.prepareStatement(sql);
 			ps.setString(1, loginId);
 			ps.setString(2, password);
 			ps.setString(3, familyName);
@@ -86,14 +86,14 @@ public class UserInfoDAO {
 
 public boolean isExistsUserInfo(String loginId, String password) {
 	DBConnector db = new DBConnector();
-	Connection con = db.getConnection();
+	con = db.getConnection();
 	boolean result = false;{
 	String sql = "select count(*) as count from user_info where user_id=? and password=?";
 	try {
-		PreparedStatement ps = con.prepareStatement(sql);
+		ps = con.prepareStatement(sql);
 		ps.setString(1, loginId);
 		ps.setString(2, password);
-		ResultSet rs = ps.executeQuery();
+		rs = ps.executeQuery();
 		while(rs.next()) {
 			if (rs.getInt("count") >0){
 				result = true;
@@ -119,53 +119,16 @@ public boolean isExistsUserInfo(String loginId, String password) {
 		return result; // ←????????????
 		}
 	}
-/*
-public UserInfoDTO getUserInfo(String loginId, String password) {
-	DBConnector db = new DBConnector();
-	Connection con =db.getConnection();
-	UserInfoDTO userInfoDTO = new UserInfoDTO();
-	String sql = "select * from user_info where user_id=? and password=?";
-	try {
-		 PreparedStatement ps = con.prepareStatement(sql);
-		 ps.setString(1, loginId);
-		 ps.setString(2, password);
-		 ResultSet rs = ps.executeQuery();
-		 while(rs.next()) {
-			 userInfoDTO.setId(rs.getInt("id"));
-			 userInfoDTO.setUserId(rs.getString("user_id"));
-			 userInfoDTO.setPassword(rs.getString("password"));
-			 userInfoDTO.setFamilyName(rs.getString("family_name"));
-			 userInfoDTO.setFirstName(rs.getString("first_name"));
-			 userInfoDTO.setFamilyNameKana(rs.getString("family_name_kana"));
-			 userInfoDTO.setFirstNameKana(rs.getString("first_name_kana"));
-			 userInfoDTO.setSex(rs.getInt("sex"));
-			 userInfoDTO.setEmail(rs.getString("email"));
-			 userInfoDTO.setStatus(rs.getString("status"));
-			 userInfoDTO.setLogined(rs.getInt("status"));
-			 userInfoDTO.setRegistDate(rs.getDate("regist_date"));
-			 userInfoDTO.setUpdateDate(rs.getDate("update_date"));
-		 }
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-	try {
-		con.close();
-	}catch (SQLException e) {
-		e.printStackTrace();
-	}
-	return userInfoDTO;
-}
-*/
 
 public UserInfoDTO getUserInfo(String loginId) {
 	DBConnector db = new DBConnector();
-	Connection con = db.getConnection();
+	con = db.getConnection();
 	UserInfoDTO userInfoDTO = new UserInfoDTO();
 	String sql = "select * from user_info where user_id=?";
 	try {
-		PreparedStatement ps = con.prepareStatement(sql);
+		ps = con.prepareStatement(sql);
 		ps.setString(1, loginId);
-		ResultSet rs = ps.executeQuery();
+		rs = ps.executeQuery();
 		while(rs.next()) {
 			userInfoDTO.setId(rs.getInt("id"));
 			userInfoDTO.setUserId(rs.getString("user_id"));
@@ -203,11 +166,11 @@ public UserInfoDTO getUserInfo(String loginId) {
 
 	public int resetPassword(String loginId, String password) {
 		DBConnector db = new DBConnector();
-		Connection con = db.getConnection();
+		con = db.getConnection();
 		String sql = "update user_info set password=? where user_id=?";
 		int result = 0;
 		try {
-			PreparedStatement ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(sql);
 			ps.setString(1, password);
 			ps.setString(2, loginId);
 			result = ps.executeUpdate();
@@ -234,10 +197,10 @@ public UserInfoDTO getUserInfo(String loginId) {
 
 	public void login(String loginId, String password) {
 		DBConnector db =new DBConnector();
-		Connection con = db.getConnection();
+		con = db.getConnection();
 		String sql = "update user_info set logined=1 where user_id = ? and password = ?";
 		try {
-			PreparedStatement ps =con.prepareStatement(sql);
+			ps =con.prepareStatement(sql);
 			ps.setString(1, loginId);
 			ps.setString(2, password);
 			ps.execute();
@@ -259,10 +222,10 @@ public UserInfoDTO getUserInfo(String loginId) {
 
 	public void logout(String loginId) {
 		DBConnector db = new DBConnector();
-		Connection con = db.getConnection();
+		con = db.getConnection();
 		String sql = "update user_info set logined=0 where user_id=?";
 		try {
-			PreparedStatement ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(sql);
 			ps.setString(1, loginId);
 			ps.execute();
 		} catch (SQLException e) {

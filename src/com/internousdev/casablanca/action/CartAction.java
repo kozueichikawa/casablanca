@@ -15,9 +15,6 @@ import com.internousdev.casablanca.dto.MCategoryDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CartAction extends ActionSupport implements SessionAware{
-	private String categoryId;
-	private String keywords;
-	private List<MCategoryDTO> mCategoryDtoList = new ArrayList<MCategoryDTO>();
 	private Map<String,Object> session;
 	public String execute(){
 		String result = ERROR;
@@ -42,29 +39,12 @@ public class CartAction extends ActionSupport implements SessionAware{
 		result = SUCCESS;
 		if(!session.containsKey("mCategoryList")){
 			MCategoryDAO mCategoryDao = new MCategoryDAO();
-			mCategoryDtoList = mCategoryDao.getMCategoryList();
+			List<MCategoryDTO> mCategoryDtoList = mCategoryDao.getMCategoryList();
 			session.put("mCategoryDtoList", mCategoryDtoList);
 		}
 		return result;
 	}
 
-
-
-	public String getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-	public String getKeywords() {
-		return keywords;
-	}
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
-	}
-	public Map<String, Object> getSession() {
-		return session;
-	}
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
