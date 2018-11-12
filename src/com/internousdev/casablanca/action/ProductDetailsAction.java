@@ -15,10 +15,8 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware{
 
 	private Map<String,Object>session;
 	private List<ProductInfoDTO>productInfoDTOList=new ArrayList<ProductInfoDTO>();
-	private List<MCategoryDTO>mCategoryDtoList=new ArrayList<MCategoryDTO>();
 	private ProductInfoDTO productInfoDTO=new ProductInfoDTO();
 	private int productId;
-	private int cotegoryId;
 
 	public String execute()throws SQLException{
 		ProductInfoDAO productInfoDAO=new ProductInfoDAO();
@@ -31,7 +29,7 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware{
 
 		if(!session.containsKey("mCategoryList")){
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();
-			mCategoryDtoList=mCategoryDAO.getMCategoryList();
+			List<MCategoryDTO> mCategoryDtoList=mCategoryDAO.getMCategoryList();
 			session.put("mCategoryDtoList", mCategoryDtoList);
 		}
 
@@ -44,43 +42,15 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware{
 	public ProductInfoDTO getProductInfoDTO() {
 		return productInfoDTO;
 	}
-	public void setProductInfoDTO(ProductInfoDTO productInfoDTO){
-		this.productInfoDTO=productInfoDTO;
-	}
 
-	public int getProductId() {
-		return productId;
-	}
 	public void setProductId(int productId) {
 		this.productId = productId;
-	}
-
-	public int getCotegoryId() {
-		return cotegoryId;
-	}
-	public void setCotegoryId(int cotegoryId) {
-		this.cotegoryId = cotegoryId;
 	}
 
 	public List<ProductInfoDTO> getProductInfoDTOList() {
 		return productInfoDTOList;
 	}
-	public void setProductInfoDTOList(List<ProductInfoDTO> productInfoDTOList) {
-	this.productInfoDTOList = productInfoDTOList;
-	}
 
-
-	public List<MCategoryDTO> getmCategoryDtoList() {
-		return mCategoryDtoList;
-	}
-	public void setmCategoryDtoList(List<MCategoryDTO> mCategoryDtoList) {
-		this.mCategoryDtoList = mCategoryDtoList;
-	}
-
-
-	public Map<String,Object> getSession(){
-		return this.session;
-	}
 	@Override
 	public void setSession(Map<String, Object>session) {
 		this.session=session;

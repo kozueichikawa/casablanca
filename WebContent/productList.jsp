@@ -10,7 +10,7 @@
 <meta http-equiv="imagetoolbar" content="no"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/product.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <title>商品一覧</title>
 </head>
@@ -23,7 +23,7 @@
 <s:if test="productInfoDtoList==null">
     <div id="NoResult">
         <h3>検索結果はありません</h3>
-
+    </div>
 
     <s:if test="keywordsErrorMessageList!=null">
         <div id="ErrorMessage">
@@ -32,32 +32,25 @@
         </s:iterator>
         </div>
     </s:if>
-    </div>
+
 </s:if>
 
 <s:if test="productInfoDtoList!=null">
+<div id="productList">
     <s:iterator value="productInfoDtoList">
-        <div id="productList">
-        <table>
-            <tr>
-                <td>
-                    <a href='<s:url action="ProductDetailsAction">
-                        <s:param name="productId" value="%{productId}"/></s:url>'>
-                        <img src='<s:property value="imageFilePath"/>/<s:property value="imageFileName"/>' width="200px" height="200px"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td><s:property value="productName"/></td>
-            </tr>
-            <tr>
-                <td><s:property value="productNameKana"/></td>
-            </tr>
-            <tr>
-                <td><s:property value="price"/><span>円</span></td>
-            </tr>
-        </table>
-        </div>
+    <div id="productBox">
+        <a href='<s:url action="ProductDetailsAction">
+                 <s:param name="productId" value="%{productId}"/></s:url>'>
+                 <img src='<s:property value="imageFilePath"/>/<s:property value="imageFileName"/>' width="200px" height="200px"/></a>
+        <br>
+        <s:property value="productName"/>
+        <br>
+        <s:property value="productNameKana"/>
+        <br>
+        <s:property value="price"/><span>円</span>
+    </div>
     </s:iterator>
+</div>
 </s:if>
 </div>
 <s:include value="footer.jsp"/>

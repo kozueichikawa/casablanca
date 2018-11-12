@@ -14,7 +14,6 @@ import com.opensymphony.xwork2.ActionSupport;
 public class ProductListAction extends ActionSupport implements SessionAware{
 
 	private ArrayList<ProductInfoDTO>productInfoDtoList=new ArrayList<ProductInfoDTO>();
-	private List<MCategoryDTO>mCategoryDtoList=new ArrayList<MCategoryDTO>();
 	private Map<String,Object>session;
 
 
@@ -28,7 +27,7 @@ public class ProductListAction extends ActionSupport implements SessionAware{
 
 		if(!session.containsKey("mCategoryList")){
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();
-			mCategoryDtoList=mCategoryDAO.getMCategoryList();
+			List<MCategoryDTO> mCategoryDtoList=mCategoryDAO.getMCategoryList();
 			session.put("mCategoryDtoList", mCategoryDtoList);
 		}
 		result=SUCCESS;
@@ -37,22 +36,6 @@ public class ProductListAction extends ActionSupport implements SessionAware{
 
 	public ArrayList<ProductInfoDTO>getProductInfoDtoList(){
 		return productInfoDtoList;
-	}
-
-	public void setProductInfoDtoList(ArrayList<ProductInfoDTO>productDtoList){
-		this.productInfoDtoList=productDtoList;
-	}
-
-	public List<MCategoryDTO> getmCategoryDtoList() {
-		return mCategoryDtoList;
-	}
-
-	public void setmCategoryDtoList(List<MCategoryDTO> mCategoryDtoList) {
-		this.mCategoryDtoList = mCategoryDtoList;
-	}
-
-	public Map<String, Object> getSession() {
-		return session;
 	}
 
 	public void setSession(Map<String, Object> session) {
