@@ -21,8 +21,6 @@ public class ResetPasswordCompleteAction extends ActionSupport implements Sessio
 		int count=userInfoDAO.resetPassword(String.valueOf(session.get("loginId")),String.valueOf(session.get("newPassword")));
 		if(count>0){
 			result=SUCCESS;
-		}else{
-			result=ERROR;
 		}
 		if(!session.containsKey("mCategoryList")) {
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();

@@ -20,6 +20,7 @@ public class PurchaseHistoryAction extends ActionSupport implements SessionAware
 	private Map<String,Object> session;
 
 	public String execute() {
+		String result = ERROR;
 		if(Objects.equals(session.get("logined"),"1")) {
 
 
@@ -30,16 +31,16 @@ public class PurchaseHistoryAction extends ActionSupport implements SessionAware
 		if(!(iterator.hasNext())) {
 			purchaseHistoryInfoDtoList=null;
 		}
+		result = SUCCESS;
+		} else {
+			System.out.println("セッションタイムアウト");
 		}
 		if(!session.containsKey("mCategoryList")){
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();
 			List<MCategoryDTO> mCategoryDTOList= mCategoryDAO.getMCategoryList();
 			session.put("mCategoryDTOList", mCategoryDTOList);
 		}
-
-
-		return SUCCESS;
-
+		return result;
 	}
 
 

@@ -30,7 +30,9 @@ public class DeletePurchaseHistoryAction extends ActionSupport implements Sessio
 				purchaseHistoryInfoDtoList=null;
 			}
 			result=SUCCESS;
-		}
+			}
+		} else {
+			System.out.println("セッションタイムアウト");
 		}
 		if(!session.containsKey("mCategoryList")) {
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();

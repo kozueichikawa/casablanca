@@ -27,15 +27,11 @@ public class AddCartAction extends ActionSupport implements SessionAware{
 	private String releaseCompany;
 	private Date releaseDate;
 	private String productDescription;
-
-	private String categoryId;
-
 	private Map<String,Object> session;
 	public String execute(){
 		String result = ERROR;
 		String userId = null;
 		String tempUserId = null;
-
 
 		if(!(session.containsKey("loginId")) && ! (session.containsKey("tempUserId"))){
 			CommonUtility commonUtility = new CommonUtility();
@@ -54,16 +50,17 @@ public class AddCartAction extends ActionSupport implements SessionAware{
 		int count = cartInfoDao.regist(userId, tempUserId, productId, productCount, price);
 		if(count > 0){
 			result=SUCCESS;
+			List<CartInfoDTO> cartInfoDtoList = new ArrayList<CartInfoDTO>();
+			cartInfoDtoList = cartInfoDao.getCartInfoDtoList(userId);
+			Iterator<CartInfoDTO> iterator = cartInfoDtoList.iterator();
+			if(!(iterator.hasNext())){
+				cartInfoDtoList = null;
+			}
+			session.put("cartInfoDtoList", cartInfoDtoList);
+			int totalPrice = Integer.parseInt(String.valueOf(cartInfoDao.getTotalPrice(userId)));
+			session.put("totalPrice", totalPrice);
+			System.out.println("カートに追加:成功");
 		}
-		List<CartInfoDTO> cartInfoDtoList = new ArrayList<CartInfoDTO>();
-		cartInfoDtoList = cartInfoDao.getCartInfoDtoList(userId);
-		Iterator<CartInfoDTO> iterator = cartInfoDtoList.iterator();
-		if(!(iterator.hasNext())){
-			cartInfoDtoList = null;
-		}
-		session.put("cartInfoDtoList", cartInfoDtoList);
-		int totalPrice = Integer.parseInt(String.valueOf(cartInfoDao.getTotalPrice(userId)));
-		session.put("totalPrice", totalPrice);
 		if (!session.containsKey("mCategoryList")) {
 			MCategoryDAO mCategoryDao = new MCategoryDAO();
 			List<MCategoryDTO> mCategoryDtoList = mCategoryDao.getMCategoryList();
@@ -145,18 +142,6 @@ public class AddCartAction extends ActionSupport implements SessionAware{
 
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
-	}
-
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public Map<String, Object> getSession() {
-		return session;
 	}
 
 	public void setSession(Map<String, Object> session) {

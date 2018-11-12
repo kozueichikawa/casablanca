@@ -18,6 +18,7 @@ public class CreateDestinationCompleteAction extends ActionSupport implements Se
 	private String familyNameKana;
 	private String firstNameKana;
 	private String email;
+	@SuppressWarnings("unused")
 	private String sex;
 	private String telNumber;
 	private String userAddress;
@@ -32,6 +33,8 @@ public class CreateDestinationCompleteAction extends ActionSupport implements Se
 			if(count > 0){
 				result=SUCCESS;
 			}
+		} else {
+			System.out.println("セッションタイムアウト");
 		}
 		if(!session.containsKey("mCategoryDtoList")) {
 			MCategoryDAO mCategoryDAO = new MCategoryDAO();

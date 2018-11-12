@@ -53,8 +53,10 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 		    && userAddressErrorMessageList.size()==0){
 				result=SUCCESS;
 			}
+		} else {
+			System.out.println("セッションタイムアウト");
+			result = "timeout";
 		}
-
 		if(!session.containsKey("mCategoryDtoList")) {
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();
 			List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
@@ -131,56 +133,28 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 		return familyNameErrorMessageList;
 	}
 
-	public void setFamilyNameErrorMessageList(List<String> familyNameErrorMessageList){
-		this.familyNameErrorMessageList=familyNameErrorMessageList;
-	}
-
 	public List<String> getFirstNameErrorMessageList(){
 		return firstNameErrorMessageList;
-	}
-
-	public void setFirstNameErrorMessageList(List<String> firstNameErrorMessageList){
-		this.firstNameErrorMessageList=firstNameErrorMessageList;
 	}
 
 	public List<String> getFamilyNameKanaErrorMessageList(){
 		return familyNameKanaErrorMessageList;
 	}
 
-	public void setFamilyNameKanaErrorMessageList(List<String> familyNameKanaErrorMessageList){
-		this.familyNameKanaErrorMessageList=familyNameKanaErrorMessageList;
-	}
-
 	public List<String> getFirstNameKanaErrorMessageList(){
 		return firstNameKanaErrorMessageList;
-	}
-
-	public void setFirstNameKanaErrorMessageList(List<String> firstNameKanaErrorMessageList){
-		this.firstNameKanaErrorMessageList=firstNameKanaErrorMessageList;
 	}
 
 	public List<String> getEmailErrorMessageList(){
 		return emailErrorMessageList;
 	}
 
-	public void setEmailErrorMessageList(List<String> emailErrorMessageList){
-		this.emailErrorMessageList=emailErrorMessageList;
-	}
-
 	public List<String> getTelNumberErrorMessageList(){
 		return telNumberErrorMessageList;
 	}
 
-	public void setTelNumberErrorMessageList(List<String> telNumberErrorMessageList){
-		this.telNumberErrorMessageList=telNumberErrorMessageList;
-	}
-
 	public List<String> getUserAddressErrorMessageList(){
 		return userAddressErrorMessageList;
-	}
-
-	public void setUserAddressErrorMessageList(List<String> userAddressErrorMessageList){
-		this.userAddressErrorMessageList=userAddressErrorMessageList;
 	}
 
 	public void setSession(Map<String,Object> session){

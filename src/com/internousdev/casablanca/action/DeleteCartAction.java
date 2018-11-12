@@ -39,7 +39,7 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 		}
 
 		for(String id:checkList){
-			System.out.println(id);
+			System.out.println("カートから削除:id " + id);
 			count += cartInfoDAO.delete(id);
 		}
 		if(count <= 0){
