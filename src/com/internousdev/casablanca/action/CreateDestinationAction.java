@@ -19,6 +19,8 @@ public class CreateDestinationAction extends ActionSupport implements SessionAwa
 
 		if(Objects.equals(session.get("logined"),"1")){
 			result=SUCCESS;
+		} else {
+			System.out.println("セッションタイムアウト");
 		}
 
 		if(!session.containsKey("mCategoryDtoList")) {

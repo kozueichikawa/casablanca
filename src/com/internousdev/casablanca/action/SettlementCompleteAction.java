@@ -59,6 +59,8 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 					System.out.println("購入処理 : 成功");
 				}
 			}
+		} else {
+			System.out.println("セッションタイムアウト");
 		}
 		return result;
 	}
