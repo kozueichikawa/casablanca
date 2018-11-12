@@ -11,7 +11,6 @@
 	<action name="AddCartAction" class="com.internousdev.casablanca.action.AddCartAction" method="execute">
 		<result name="success">cart.jsp</result>
 		<result name="error">index.jsp</result>
-		<result name="input">cart.jsp</result>
 	</action>
 
 	<action name="CartAction" class="com.internousdev.casablanca.action.CartAction" method="execute">
