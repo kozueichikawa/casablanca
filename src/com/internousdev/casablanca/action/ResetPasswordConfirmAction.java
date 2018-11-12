@@ -93,8 +93,6 @@ public class ResetPasswordConfirmAction extends ActionSupport implements Session
 		this.newPassword = newPassword;
 	}
 
-
-
 	public String getReConfirmationPassword() {
 		return reConfirmationPassword;
 	}
@@ -150,7 +148,6 @@ public class ResetPasswordConfirmAction extends ActionSupport implements Session
 	public void setNewPasswordIncorrectErrorMessageList(List<String> newPasswordIncorrectErrorMessageList) {
 		this.newPasswordIncorrectErrorMessageList = newPasswordIncorrectErrorMessageList;
 	}
-
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
