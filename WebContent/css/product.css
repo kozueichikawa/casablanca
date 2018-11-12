@@ -1,0 +1,51 @@
+<@charset "UTF-8";>
+
+table{
+
+}
+#contents{
+ width:100%;
+ text-align:center;
+}
+#productList{
+ width:70%;
+ margin:0 auto;
+ display:flex;
+ flex-wrap:wrap;
+ justify-content: space-around;
+}
+#productBox{
+ border:1px solid dimgray;
+ border-radius:5px;
+ width: 300px;
+ margin:10px;
+ padding:0px 0px 20px 15px;
+ text-align:left;
+ box-sizing:border-box;
+ display: inline-block;
+}
+#productBox:hover{
+	box-shadow:0 0 15px gray;
+	transition: 0.5s ;
+}
+
+#productBox img{
+ margin:20px 10px 10px 60px;
+
+}
+
+div.detailBox{
+	display:flex;
+	margin:0 auto;
+}
+
+div.imag{
+
+}
+div.detailInfo{
+
+}
+
+div.recommend{
+	display:flex;
+}

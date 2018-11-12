@@ -10,7 +10,7 @@
 <meta http-equiv="imagetoolbar" content="no"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/product.css">
 <title>商品詳細</title>
 </head>
 <body>
@@ -19,11 +19,11 @@
     <h1>商品詳細画面</h1>
 <div id="productDetails">
     <s:form action="AddCartAction">
-    <div class="box">
+    <div class="detailBox">
     <div class="image">
         <img src='<s:property value="productInfoDTO.imageFilePath"/>/<s:property value="productInfoDTO.imageFileName"/>'width="320px" height="320px"/>
     </div>
-    <div class="product">
+    <div class="detailInfo">
         <table border="1">
             <tr>
                 <th>商品名</th>
@@ -78,7 +78,7 @@
     </div>
     </s:form>
 </div>
-<div id="sameCategory">
+<div class="recommend">
     <s:iterator value="productInfoDTOList">
         <div id="recommend-item">
             <a href='<s:url action="ProductDetailsAction">
