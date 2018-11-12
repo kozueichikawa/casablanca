@@ -1,7 +1,6 @@
 package com.internousdev.casablanca.action;
 
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,12 +15,12 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class CartAction extends ActionSupport implements SessionAware{
 	private Map<String,Object> session;
+	private List<CartInfoDTO> cartInfoDtoList;
+	private int totalPrice;
 	public String execute(){
 		String result = ERROR;
 		String userId = null;
 		CartInfoDAO cartInfoDao = new CartInfoDAO();
-		List<CartInfoDTO> cartInfoDtoList = new ArrayList<CartInfoDTO>();
-
 		if(session.containsKey("loginId")){
 			userId = String.valueOf(session.get("loginId"));
 		}else if(session.containsKey("tempUserId")){
@@ -32,10 +31,7 @@ public class CartAction extends ActionSupport implements SessionAware{
 		if(!(iterator.hasNext())){
 			cartInfoDtoList = null;
 		}
-		session.put("cartInfoDtoList", cartInfoDtoList);
-
-		int totalPrice = Integer.parseInt(String.valueOf(cartInfoDao.getTotalPrice(userId)));
-		session.put("totalPrice", totalPrice);
+		totalPrice = Integer.parseInt(String.valueOf(cartInfoDao.getTotalPrice(userId)));
 		result = SUCCESS;
 		if(!session.containsKey("mCategoryList")){
 			MCategoryDAO mCategoryDao = new MCategoryDAO();
@@ -49,5 +45,12 @@ public class CartAction extends ActionSupport implements SessionAware{
 		this.session = session;
 	}
 
+	public List<CartInfoDTO> getCartInfoDtoList() {
+		return cartInfoDtoList;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
 
 }

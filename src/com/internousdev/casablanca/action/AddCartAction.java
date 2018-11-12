@@ -1,6 +1,5 @@
 package com.internousdev.casablanca.action;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -27,6 +26,8 @@ public class AddCartAction extends ActionSupport implements SessionAware{
 	private String releaseCompany;
 	private Date releaseDate;
 	private String productDescription;
+	private List<CartInfoDTO> cartInfoDtoList;
+	private int totalPrice;
 	private Map<String,Object> session;
 	public String execute(){
 		String result = ERROR;
@@ -50,15 +51,12 @@ public class AddCartAction extends ActionSupport implements SessionAware{
 		int count = cartInfoDao.regist(userId, tempUserId, productId, productCount, price);
 		if(count > 0){
 			result=SUCCESS;
-			List<CartInfoDTO> cartInfoDtoList = new ArrayList<CartInfoDTO>();
 			cartInfoDtoList = cartInfoDao.getCartInfoDtoList(userId);
 			Iterator<CartInfoDTO> iterator = cartInfoDtoList.iterator();
 			if(!(iterator.hasNext())){
 				cartInfoDtoList = null;
 			}
-			session.put("cartInfoDtoList", cartInfoDtoList);
-			int totalPrice = Integer.parseInt(String.valueOf(cartInfoDao.getTotalPrice(userId)));
-			session.put("totalPrice", totalPrice);
+			totalPrice = Integer.parseInt(String.valueOf(cartInfoDao.getTotalPrice(userId)));
 			System.out.println("カートに追加:成功");
 		}
 		if (!session.containsKey("mCategoryList")) {
@@ -142,6 +140,14 @@ public class AddCartAction extends ActionSupport implements SessionAware{
 
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
+	}
+
+	public List<CartInfoDTO> getCartInfoDtoList() {
+		return cartInfoDtoList;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
 	}
 
 	public void setSession(Map<String, Object> session) {

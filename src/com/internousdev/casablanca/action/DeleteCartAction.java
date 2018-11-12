@@ -28,7 +28,8 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 	private String releaseDate;
 	private String productCount;
 	private String subtotal;
-
+	private List<CartInfoDTO> cartInfoDtoList;
+	private int totalPrice;
 	private Map<String,Object> session;
 	public String execute(){
 		String result=ERROR;
@@ -37,40 +38,34 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 		if ( checkList == null ) {
 			checkList = new ArrayList<>();
 		}
-
+		/* チョックリストに入れた品物だけ削除 */
 		for(String id:checkList){
 			System.out.println("カートから削除:id " + id);
 			count += cartInfoDAO.delete(id);
 		}
+		/* チェックボックスにチェックしなかった場合のみ表示 */
 		if(count <= 0){
 			checkListErrorMessageList.add("チェックされていません。");
-			return ERROR;
-		}else{
-			String userId = null;
-			List<CartInfoDTO> cartInfoDtoList = new ArrayList<CartInfoDTO>();
-			if(session.containsKey("loginId")){
-				userId = String.valueOf(session.get("loginId"));
-			}else if(session.containsKey("tempUserId")){
-				userId = String.valueOf(session.get("tempUserId"));
-			}
-			cartInfoDtoList = cartInfoDAO.getCartInfoDtoList(userId);
-			Iterator<CartInfoDTO> iterator = cartInfoDtoList.iterator();
-			if(!(iterator.hasNext())){
-				cartInfoDtoList = null;
-			}
-			session.put("cartInfoDtoList", cartInfoDtoList);
-
-			int totalPrice = Integer.parseInt(String.valueOf(cartInfoDAO.getTotalPrice(userId)));
-			session.put("totalPrice", totalPrice);
-
-			if(!session.containsKey("mCategoryDtoList")) {
-				MCategoryDAO mCategoryDAO=new MCategoryDAO();
-				List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
-				session.put("mCategoryDtoList", mCategoryDtoList);
-			}
-
-			result=SUCCESS;
 		}
+		/* 削除に成功しようがしまいがDBからカート情報を取得する */
+		String userId = null;
+		if(session.containsKey("loginId")){
+			userId = String.valueOf(session.get("loginId"));
+		}else if(session.containsKey("tempUserId")){
+			userId = String.valueOf(session.get("tempUserId"));
+		}
+		cartInfoDtoList = cartInfoDAO.getCartInfoDtoList(userId);
+		Iterator<CartInfoDTO> iterator = cartInfoDtoList.iterator();
+		if(!(iterator.hasNext())){
+			cartInfoDtoList = null;
+		}
+		totalPrice = Integer.parseInt(String.valueOf(cartInfoDAO.getTotalPrice(userId)));
+		if(!session.containsKey("mCategoryDtoList")) {
+			MCategoryDAO mCategoryDAO=new MCategoryDAO();
+			List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
+			session.put("mCategoryDtoList", mCategoryDtoList);
+		}
+		result=SUCCESS;
 		return result;
 	}
 
@@ -144,6 +139,15 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 	public void setSubtotal(String subtotal) {
 		this.subtotal = subtotal;
 	}
+
+	public List<CartInfoDTO> getCartInfoDtoList() {
+		return cartInfoDtoList;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
