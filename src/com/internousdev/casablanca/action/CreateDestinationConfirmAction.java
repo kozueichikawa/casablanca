@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.casablanca.dao.MCategoryDAO;
+import com.internousdev.casablanca.dto.MCategoryDTO;
 import com.internousdev.casablanca.util.InputChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -19,12 +21,6 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 	private String email;
 	private String telNumber;
 	private String userAddress;
-	private List<String> sexList=new ArrayList<String>();
-	private static final String MALE="男性";
-	private static final String FEMALE="女性";
-	private String defaultSexValue=MALE;
-
-
 	private List<String> familyNameErrorMessageList=new ArrayList<String>();
 	private List<String> firstNameErrorMessageList=new ArrayList<String>();
 	private List<String> familyNameKanaErrorMessageList=new ArrayList<String>();
@@ -32,12 +28,9 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 	private List<String> emailErrorMessageList=new ArrayList<String>();
 	private List<String> telNumberErrorMessageList=new ArrayList<String>();
 	private List<String> userAddressErrorMessageList=new ArrayList<String>();
-
-
-	private String categoryId;
 	private Map<String,Object> session;
+
 	public String execute(){
-		System.out.println(familyName);
 		String result=ERROR;
 		InputChecker inputChecker=new InputChecker();
 //フォームの内容をinputCheckerを使ってチェックする。
@@ -59,11 +52,13 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 			result=SUCCESS;
 		}
 
-		sexList.add(MALE);
-		sexList.add(FEMALE);
+		if(!session.containsKey("mCategoryDtoList")) {
+			MCategoryDAO mCategoryDAO=new MCategoryDAO();
+			List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
+			session.put("mCategoryDtoList", mCategoryDtoList);
+		}
 		return result;
 	}
-
 
 	public String getFamilyName(){
 		return familyName;
@@ -72,7 +67,6 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 	public void setFamilyName(String familyName){
 		this.familyName=familyName;
 	}
-
 
 	public String getFirstName(){
 		return firstName;
@@ -130,29 +124,6 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 		this.sex=sex;
 	}
 
-	public List<String> getSexList(){
-		return sexList;
-	}
-
-	public void setSexList(List<String> sexList){
-		this.sexList=sexList;
-	}
-	public String getDefaultSexValue(){
-		return defaultSexValue;
-	}
-
-	public void setDefaultSexSexValue(String defaultSexValue){
-		this.defaultSexValue=defaultSexValue;
-	}
-
-	public String getCategoryId(){
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId){
-		this.categoryId=categoryId;
-	}
-
 	public List<String> getFamilyNameErrorMessageList(){
 		return familyNameErrorMessageList;
 	}
@@ -207,10 +178,6 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 
 	public void setUserAddressErrorMessageList(List<String> userAddressErrorMessageList){
 		this.userAddressErrorMessageList=userAddressErrorMessageList;
-	}
-
-	public Map<String,Object> getSession(){
-		return session;
 	}
 
 	public void setSession(Map<String,Object> session){

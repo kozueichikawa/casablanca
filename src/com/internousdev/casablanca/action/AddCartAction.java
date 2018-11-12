@@ -9,7 +9,9 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.casablanca.dao.CartInfoDAO;
+import com.internousdev.casablanca.dao.MCategoryDAO;
 import com.internousdev.casablanca.dto.CartInfoDTO;
+import com.internousdev.casablanca.dto.MCategoryDTO;
 import com.internousdev.casablanca.util.CommonUtility;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -62,6 +64,11 @@ public class AddCartAction extends ActionSupport implements SessionAware{
 		session.put("cartInfoDtoList", cartInfoDtoList);
 		int totalPrice = Integer.parseInt(String.valueOf(cartInfoDao.getTotalPrice(userId)));
 		session.put("totalPrice", totalPrice);
+		if (!session.containsKey("mCategoryList")) {
+			MCategoryDAO mCategoryDao = new MCategoryDAO();
+			List<MCategoryDTO> mCategoryDtoList = mCategoryDao.getMCategoryList();
+			session.put("mCategoryDtoList", mCategoryDtoList);
+		}
 		return result;
 	}
 

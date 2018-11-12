@@ -21,21 +21,27 @@
 			<s:property/>
 		</s:iterator>
 	</s:if>
+
 	<s:form action="LoginAction">
 	<s:if test="#session.saveLoginStatus">
+		<label>ユーザー名</label>
 		<s:textfield name="loginId" value="%{#session.loginId}"/>
 	</s:if>
 	<s:else>
-		<s:textfield name="loginId"/>
+		<label>ユーザー名</label>
+		<s:textfield name="loginId" label="ユーザー名"/>
 	</s:else>
-		<s:password name="password"/>
+		<label>パスワード</label>
+		<s:password name="password" label="パスワード"/>
 	<s:if test="#session.saveLoginStatus">
+		<label>ログインID保存</label>
 		<s:checkbox name="saveLoginStatus" checked="checked"/>
 	</s:if>
 	<s:else>
-	<s:checkbox name="saveLoginStatus"/>
+		<label>ログインID保存</label>
+		<s:checkbox name="saveLoginStatus"/>
 	</s:else>
-	<s:submit value="ログイン"/>
+		<s:submit value="ログイン"/>
 	</s:form>
 	<s:form action="CreateUserAction">
 		<s:submit value="新規登録"/>

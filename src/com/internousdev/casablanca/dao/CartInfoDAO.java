@@ -164,7 +164,7 @@ public class CartInfoDAO {
 		DBConnector db = new DBConnector();
 		con = db.getConnection();
 		int count = 0;
-		String sql = "delete from cart_info where id=?";
+		String sql = "delete from cart_info where id = ?";
 		try{
 			ps = con.prepareStatement(sql);
 			ps.setString(1, id);
@@ -187,6 +187,32 @@ public class CartInfoDAO {
 		return count;
 	}
 
+	public int deleteAll(String userId){
+		DBConnector db = new DBConnector();
+		con = db.getConnection();
+		int count = 0;
+		String sql = "delete from cart_info where user_id = ?";
+		try{
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+
+			count = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
 
 	public boolean isExistsCartInfo(){
 		return false;

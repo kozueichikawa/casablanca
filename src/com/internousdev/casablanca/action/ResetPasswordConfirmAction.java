@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.casablanca.dao.MCategoryDAO;
 import com.internousdev.casablanca.dao.UserInfoDAO;
+import com.internousdev.casablanca.dto.MCategoryDTO;
 import com.internousdev.casablanca.util.InputChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -15,7 +17,6 @@ public class ResetPasswordConfirmAction extends ActionSupport implements Session
 	private String password;
 	private String newPassword;
 	private String reConfirmationPassword;
-	private String categoryId;
 
 	private List<String> loginIdErrorMessageList = new ArrayList<String>();
 	private List<String> passwordErrorMessageList = new ArrayList<String>();
@@ -28,8 +29,6 @@ public class ResetPasswordConfirmAction extends ActionSupport implements Session
 
 	public String execute() {
 		String result = ERROR;
-
-
 		InputChecker inputChecker = new InputChecker();
 
 		loginIdErrorMessageList = inputChecker.doCheck("ログインID", loginId, 1, 8, true, false, false, true, false, false, false, false, false);
@@ -56,18 +55,13 @@ public class ResetPasswordConfirmAction extends ActionSupport implements Session
 				passwordIncorrectErrorMessageList.add("入力されたパスワードが異なります。");
 			}
 		}
+		if(!session.containsKey("mCategoryList")) {
+			MCategoryDAO mCategoryDAO=new MCategoryDAO();
+			List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
+			session.put("mCategoryDtoList", mCategoryDtoList);
+		}
 		return result;
 	}
-
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-
 
 	public String getLoginId() {
 		return loginId;

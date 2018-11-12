@@ -13,9 +13,11 @@ pageEncoding="UTF-8"%>
 <div id="content">
 <h1>パスワード再設定画面</h1>
 <s:form action="ResetPasswordCompleteAction">
-<s:property value="#session.loginId"/><br>
-<s:property value="#session.concealedPassword"/><br>
-<s:submit value="再設定" class="submit_btn"/>
+	<label>ログインID:</label>
+	<s:property value="#session.loginId"/><br>
+	<label>新パスワード:</label>
+	<s:property value="#session.concealedPassword"/><br>
+	<s:submit value="再設定" class="submit_btn"/>
 </s:form>
 </div>
 <s:include value="footer.jsp"/>

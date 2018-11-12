@@ -18,7 +18,7 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware{
 	private List<MCategoryDTO>mCategoryDtoList=new ArrayList<MCategoryDTO>();
 	private ProductInfoDTO productInfoDTO=new ProductInfoDTO();
 	private int productId;
-	private int cotegoryId;
+//	private int cotegoryId;
 
 	public String execute()throws SQLException{
 		ProductInfoDAO productInfoDAO=new ProductInfoDAO();
@@ -44,9 +44,9 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware{
 	public ProductInfoDTO getProductInfoDTO() {
 		return productInfoDTO;
 	}
-	public void setProductInfoDTO(ProductInfoDTO productInfoDTO){
-		this.productInfoDTO=productInfoDTO;
-	}
+//	public void setProductInfoDTO(ProductInfoDTO productInfoDTO){
+//		this.productInfoDTO=productInfoDTO;
+//	}
 
 	public int getProductId() {
 		return productId;
@@ -55,27 +55,27 @@ public class ProductDetailsAction extends ActionSupport implements SessionAware{
 		this.productId = productId;
 	}
 
-	public int getCotegoryId() {
-		return cotegoryId;
-	}
-	public void setCotegoryId(int cotegoryId) {
-		this.cotegoryId = cotegoryId;
-	}
+//	public int getCotegoryId() {
+//		return cotegoryId;
+//	}
+//	public void setCotegoryId(int cotegoryId) {
+//		this.cotegoryId = cotegoryId;
+//	}
 
 	public List<ProductInfoDTO> getProductInfoDTOList() {
 		return productInfoDTOList;
 	}
-	public void setProductInfoDTOList(List<ProductInfoDTO> productInfoDTOList) {
-		this.productInfoDTOList = productInfoDTOList;
-	}
+//	public void setProductInfoDTOList(List<ProductInfoDTO> productInfoDTOList) {
+//		this.productInfoDTOList = productInfoDTOList;
+//	}
 
 
-	public List<MCategoryDTO> getmCategoryDtoList() {
-		return mCategoryDtoList;
-	}
-	public void setmCategoryDtoList(List<MCategoryDTO> mCategoryDtoList) {
-		this.mCategoryDtoList = mCategoryDtoList;
-	}
+//	public List<MCategoryDTO> getmCategoryDtoList() {
+//		return mCategoryDtoList;
+//	}
+//	public void setmCategoryDtoList(List<MCategoryDTO> mCategoryDtoList) {
+//		this.mCategoryDtoList = mCategoryDtoList;
+//	}
 
 
 	public Map<String,Object> getSession(){

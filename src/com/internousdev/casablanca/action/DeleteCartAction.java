@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.casablanca.dao.CartInfoDAO;
+import com.internousdev.casablanca.dao.MCategoryDAO;
 import com.internousdev.casablanca.dto.CartInfoDTO;
 import com.internousdev.casablanca.dto.MCategoryDTO;
 import com.opensymphony.xwork2.ActionSupport;
@@ -16,14 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class DeleteCartAction extends ActionSupport implements SessionAware{
 	private Collection<String> checkList;
-	private String categoryId;
 	private String productId;
-
-	private String sex;
-	private List<String> sexList = new ArrayList<String>();
-	private static final String MALE = "男性";
-	private static final String FEMALE = "女性";
-	private String defaultSexValue = MALE;
 	private  List<String> checkListErrorMessageList = new ArrayList<String>();
 	private String productName;
 	private String productNameKana;
@@ -34,7 +28,6 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 	private String releaseDate;
 	private String productCount;
 	private String subtotal;
-	private List<MCategoryDTO> mCategoryDtoList = new ArrayList<MCategoryDTO>();
 
 	private Map<String,Object> session;
 	public String execute(){
@@ -72,8 +65,12 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 			int totalPrice = Integer.parseInt(String.valueOf(cartInfoDAO.getTotalPrice(userId)));
 			session.put("totalPrice", totalPrice);
 
-			sexList.add(MALE);
-			sexList.add(FEMALE);
+			if(!session.containsKey("mCategoryDtoList")) {
+				MCategoryDAO mCategoryDAO=new MCategoryDAO();
+				List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
+				session.put("mCategoryDtoList", mCategoryDtoList);
+			}
+
 			result=SUCCESS;
 		}
 		return result;
@@ -89,35 +86,11 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 	public void setCheckList(Collection<String> checkList) {
 		this.checkList = checkList;
 	}
-	public String getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
 	public String getProductId() {
 		return productId;
 	}
 	public void setProductId(String productId) {
 		this.productId = productId;
-	}
-	public String getSex() {
-		return sex;
-	}
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-	public List<String> getSexList() {
-		return sexList;
-	}
-	public void setSexList(List<String> sexList) {
-		this.sexList = sexList;
-	}
-	public String getDefaultSexValue() {
-		return defaultSexValue;
-	}
-	public void setDefaultSexValue(String defaultSexValue) {
-		this.defaultSexValue = defaultSexValue;
 	}
 	public String getProductName() {
 		return productName;
@@ -173,18 +146,7 @@ public class DeleteCartAction extends ActionSupport implements SessionAware{
 	public void setSubtotal(String subtotal) {
 		this.subtotal = subtotal;
 	}
-	public List<MCategoryDTO> getmCategoryDtoList() {
-		return mCategoryDtoList;
-	}
-	public void setmCategoryDtoList(List<MCategoryDTO> mCategoryDtoList) {
-		this.mCategoryDtoList = mCategoryDtoList;
-	}
-	public Map<String, Object> getSession() {
-		return session;
-	}
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
-
-
 }

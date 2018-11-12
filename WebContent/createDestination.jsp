@@ -86,9 +86,15 @@
 
 <tr>
 	<td>
+		<s:if test="%{sex==1}">
+			<label>男性<input type="radio" value="0" name="sex"/></label>
+			<label>女性<input type="radio" value="1" checked="checked" name="sex"/></label>
+		</s:if>
+		<s:else>
 			<label>男性<input type="radio" value="0" checked="checked" name="sex"/></label>
 			<label>女性<input type="radio" value="1" name="sex"/></label>
-		</td>
+		</s:else>
+	</td>
 </tr>
 
 <tr>

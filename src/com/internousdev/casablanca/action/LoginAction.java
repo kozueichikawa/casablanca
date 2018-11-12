@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.casablanca.dao.CartInfoDAO;
 import com.internousdev.casablanca.dao.DestinationInfoDAO;
 import com.internousdev.casablanca.dao.MCategoryDAO;
 import com.internousdev.casablanca.dao.UserInfoDAO;
@@ -55,6 +56,10 @@ public class LoginAction extends ActionSupport implements SessionAware {
 				if (Objects.equals(session.get("fromCart"), true)) {
 					System.out.println("カート決済経由でログイン->宛先選択画面へ");
 
+					/* DB cart_infoテーブルの一時IDをログインユーザIDとリンクさせる */
+					CartInfoDAO cartInfoDAO = new CartInfoDAO();
+					int count = cartInfoDAO.linkToLoginId(session.get("tempUserId").toString(), loginId);
+					session.remove("tempUserId");
 					/* 再ログイン後に決済画面へ遷移しないようにセッションからフラグを削除 */
 					session.remove("fromCart");
 

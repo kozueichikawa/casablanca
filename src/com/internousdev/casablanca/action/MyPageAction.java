@@ -21,26 +21,16 @@ public class MyPageAction extends ActionSupport implements SessionAware{
 	public String execute() {
 		String result=ERROR;
 		if(Objects.equals(session.get("logined"),"1")) {
-
-
 		UserInfoDAO userInfoDAO= new UserInfoDAO();
 		userInfoDTO=userInfoDAO.getUserInfo(String.valueOf(session.get("loginId")));
-
-
 		result =SUCCESS;
 		}
-
-
-
-
-
-
-	if(!session.containsKey("mCategoryList")) {
-		MCategoryDAO mCategoryDAO=new MCategoryDAO();
-		List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
-		session.put("mCategoryDtoList", mCategoryDtoList);
-	}
-	return result;
+		if(!session.containsKey("mCategoryList")) {
+			MCategoryDAO mCategoryDAO=new MCategoryDAO();
+			List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
+			session.put("mCategoryDtoList", mCategoryDtoList);
+		}
+		return result;
 
 
 	}
