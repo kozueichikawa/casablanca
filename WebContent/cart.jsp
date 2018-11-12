@@ -27,8 +27,11 @@ function goDeleteCartAction(){
 <body>
 
 <s:include value="header.jsp" />
-<div id="contents">
-<h1>カート画面</h1>
+<br>
+<div id="title">
+<h2>カート画面</h2>
+</div>
+
 <s:if test="checkListErrorMessageList!=null">
 	<div class="error">
 		<div class="error-message">

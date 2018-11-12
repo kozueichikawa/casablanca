@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="./css/casablanca.css">
 <title>footer</title>
 </head>
 <body>
-フッターやで
+<div id="footer">
+© 2018 casablanca study
+</div>
 </body>
 </html>
