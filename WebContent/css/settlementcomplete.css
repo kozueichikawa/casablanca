@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+/* =======COMPLETE LAYOUT========== */
+
+#main{
+	margin:0;
+	padding:0;
+	line-height:1.6;
+}
+
+
+
+#h1{
+
+   text-align:center;
+}

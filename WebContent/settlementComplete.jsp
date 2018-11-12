@@ -5,8 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/settlementcomplete.css">
 <meta http-equiv = "refresh" content = "3;URL = 'HomeAction'"/>
+
 <title>決済完了</title>
 </head>
 <body>
@@ -17,6 +18,7 @@
 決済が完了しました。
 </div>
 </div>
+
 <s:include value="footer.jsp"/>
 </body>
 </html>
