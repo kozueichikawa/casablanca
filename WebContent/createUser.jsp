@@ -10,6 +10,44 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <title>createUser.jsp</title>
+
+<style type="text/css">
+
+
+	.user-jouhou{
+		width:70%;
+		background-color:lightgray;
+		border-radius:50px;
+		}
+	.midasi{
+		text-align:center;
+		}
+	.submit_btn{
+		width:60%;
+		border-radius:50px;
+		background: darkblue;
+		color:white;
+		height:50px;
+		border:none;
+		}
+	.submit_btn_box{
+		text-align:center;
+		}
+	.txt{
+		border-radius:50px;
+		width:80%;
+		height:30px;;
+		}
+	.hissu{
+		color:white;
+		background:red;
+		border-radius:50px;
+		}
+
+
+
+
+		</style>
 </head>
 <body>
 <%-- エラーメッセージ表示部分 --%>
@@ -80,54 +118,52 @@
 <%-- エラーメッセージここまで --%>
 
 <s:form action="CreateUserConfirmAction">
-<table class = "user-jouhou">
-	<tr>
-		<td>姓</td>
-		<td><s:textfield name="familyName" value="%{familyName}" label="姓" placeholder="姓" class="txt" /></td>
-	</tr>
+<div class = "user-jouhou">
+		<div class = "midasi">姓<span class = "hissu">必須</span><br>
+		<s:textfield name="familyName" value="%{familyName}" label="姓" placeholder=" 姓" class="txt" />
+		</div>
 
-	<tr>
-		<td>名</td>
-		<td><s:textfield name="firstName" value="%{firstName}" label="名" placeholder="名" class="txt" /></td>
-	</tr>
 
-	<tr>
-		<td>姓かな</td>
-		<td><s:textfield name="familyNameKana" value="%{familyNameKana}" label="姓ふりがな" placeholder="姓ふりがな" class="txt" /></td>
-	<tr>
 
-	<tr>
-		<td>名かな</td>
-		<td><s:textfield name="firstNameKana" value="%{firstNameKana}" label="名ふりがな" placeholder="名ふりがな" class="txt" /></td>
-	</tr>
+		<div class = "midasi">名<span class = "hissu">必須</span><br>
+		<s:textfield name="firstName" value="%{firstName}" label="名" placeholder=" 名" class="txt" />
+		</div>
 
-	<tr>
-		<td>
+
+		<div class = "midasi">姓かな<span class = "hissu">必須</span><br>
+		<s:textfield name="familyNameKana" value="%{familyNameKana}" label="姓ふりがな" placeholder=" 姓ふりがな" class="txt" />
+		</div>
+
+
+		<div class = "midasi">名かな<span class = "hissu">必須</span><br>
+		<s:textfield name="firstNameKana" value="%{firstNameKana}" label="名ふりがな" placeholder=" 名ふりがな" class="txt" />
+		</div>
+
+		<div class = "midasi">性別<span class = "hissu">必須</span><br>
 			<label>男性<input type="radio" value="0" checked="checked" name="sex"/></label>
 			<label>女性<input type="radio" value="1" name="sex"/></label>
-		</td>
-	</tr>
+		</div>
 
-	<tr>
-		<td>メールアドレス</td>
-		<td><s:textfield name="email" value="%{email}" label="メールアドレス" placeholder="メールアドレス" class="txt" /></td>
-	</tr>
+		<div class = "midasi">メールアドレス<span class = "hissu">必須</span><br>
+		<s:textfield name="email" value="%{email}" label="メールアドレス" placeholder=" メールアドレス" class="txt" />
+		</div>
 
-	<tr>
-		<td>ログインID</td>
-		<td><s:textfield name="loginId" value="%{loginId}" label="ログインID" placeholder="ログインID" class="txt" /></td>
-	</tr>
 
-	<tr>
-		<td>パスワード</td>
-		<td><s:password name="password" value="" label="パスワード" class="txt" placeholder="パスワード" /></td>
-	</tr>
-</table>
-<div class="submit_btn_box">
-<div id=".contents-btn-set">
-<s:submit value="登録" class="submit_btn" />
+		<div class = "midasi">ログインID<span class = "hissu">必須</span><br>
+		<s:textfield name="loginId" value="%{loginId}" label="ログインID" placeholder=" ログインID" class="txt" />
+		</div>
+
+		<div class = "midasi">パスワード<span class = "hissu">必須</span><br>
+		<s:password name="password" value="" label="パスワード" class="txt" placeholder=" パスワード" />
+		</div>
+
+		<div class="submit_btn_box">
+		<div id=".contents-btn-set">
+		<s:submit value="登録" class="submit_btn" />
+		</div>
+		</div>
 </div>
-</div>
+
 </s:form>
 
 

@@ -7,19 +7,32 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./css/style.css">
 <title>宛先情報確認</title>
+
+<style type="text/css">
+
+table.vertical-list-table{
+background-color:#EEEEEE;
+	border-radius:20px;
+	width:100%;
+	height:500px;
+}
+
+
+</style>
+
 </head>
 <body>
 
 <s:include value="header.jsp"/>
-
 <div id="contents">
 
 <h1>宛先情報確認画面</h1>
+	<p>以下の内容で登録します</p>
+
 
 <s:form action="CreateDestinationCompleteAction">
 
 <table class="vertical-list-table">
-
 <tr>
 	<th scope="row">
 		<s:label value="姓"/>
@@ -105,7 +118,6 @@
 </tr>
 
 </table>
-
 <div class="submit_btn_box">
 <div id=".contents-btn-set">
 <s:submit value="宛先情報登録" class="submit_btn"/>
