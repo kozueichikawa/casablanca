@@ -7,6 +7,10 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./css/style.css">
 <title>宛先情報入力</title>
+
+
+
+
 </head>
 <body>
 <s:include value="header.jsp" />
