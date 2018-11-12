@@ -16,7 +16,6 @@ public class CreateDestinationCompleteAction extends ActionSupport implements Se
 	private String firstName;
 	private String familyNameKana;
 	private String firstNameKana;
-	private String sex;
 	private String email;
 	private String telNumber;
 	private String userAddress;
@@ -66,9 +65,6 @@ public class CreateDestinationCompleteAction extends ActionSupport implements Se
 		this.userAddress = userAddress;
 	}
 
-	public void setSex(String sex){
-		this.sex=sex;
-	}
 
 	public void setSession(Map<String,Object> session){
 		this.session=session;
