@@ -3,6 +3,7 @@ package com.internousdev.casablanca.action;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -32,24 +33,26 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 
 	public String execute(){
 		String result=ERROR;
+		if(Objects.equals(session.get("logined"),"1")){
 		InputChecker inputChecker=new InputChecker();
 //フォームの内容をinputCheckerを使ってチェックする。
-		familyNameErrorMessageList=inputChecker.doCheck("姓", familyName, 1, 16, true, true, true, false,false,false,true,false,false);
-		firstNameErrorMessageList=inputChecker.doCheck("名", firstName, 1, 16, true, true, true, false,false,false,true,false,false);
-		familyNameKanaErrorMessageList=inputChecker.doCheck("姓ふりがな", familyNameKana, 1, 16,false,false,true,false,false,false,false,false,false);
-		firstNameKanaErrorMessageList=inputChecker.doCheck("名ふりがな", firstNameKana, 1, 16, false, false, true, false, false, false, false,false,false);
-		userAddressErrorMessageList=inputChecker.doCheck("住所", userAddress, 15, 50, false, true, true, true,true,true,false,false,false);
-		telNumberErrorMessageList=inputChecker.doCheck("電話番号", telNumber,10, 13, false, false, false, true, false, false, false,false,false);
-		emailErrorMessageList=inputChecker.doCheck("メールアドレス", email, 14, 32, true, false, false, true, true,false,false,false,false);
+			familyNameErrorMessageList=inputChecker.doCheck("姓", familyName, 1, 16, true, true, true, false,false,false,true,false,false);
+			firstNameErrorMessageList=inputChecker.doCheck("名", firstName, 1, 16, true, true, true, false,false,false,true,false,false);
+			familyNameKanaErrorMessageList=inputChecker.doCheck("姓ふりがな", familyNameKana, 1, 16,false,false,true,false,false,false,false,false,false);
+			firstNameKanaErrorMessageList=inputChecker.doCheck("名ふりがな", firstNameKana, 1, 16, false, false, true, false, false, false, false,false,false);
+			userAddressErrorMessageList=inputChecker.doCheck("住所", userAddress, 15, 50, false, true, true, true,true,true,false,false,false);
+			telNumberErrorMessageList=inputChecker.doCheck("電話番号", telNumber,10, 13, false, false, false, true, false, false, false,false,false);
+			emailErrorMessageList=inputChecker.doCheck("メールアドレス", email, 14, 32, true, false, false, true, true,false,false,false,false);
 
-		if(familyNameErrorMessageList.size()==0
-	    && firstNameErrorMessageList.size()==0
-	    && familyNameKanaErrorMessageList.size()==0
-	    && firstNameKanaErrorMessageList.size()==0
-	    && emailErrorMessageList.size()==0
-	    && telNumberErrorMessageList.size()==0
-	    && userAddressErrorMessageList.size()==0){
-			result=SUCCESS;
+			if(familyNameErrorMessageList.size()==0
+		    && firstNameErrorMessageList.size()==0
+		    && familyNameKanaErrorMessageList.size()==0
+		    && firstNameKanaErrorMessageList.size()==0
+		    && emailErrorMessageList.size()==0
+		    && telNumberErrorMessageList.size()==0
+		    && userAddressErrorMessageList.size()==0){
+				result=SUCCESS;
+			}
 		}
 
 		if(!session.containsKey("mCategoryDtoList")) {
@@ -183,4 +186,5 @@ public class CreateDestinationConfirmAction extends ActionSupport implements Ses
 	public void setSession(Map<String,Object> session){
 		this.session=session;
 	}
+
 }
