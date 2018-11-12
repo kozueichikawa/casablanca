@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.casablanca.dao.CartInfoDAO;
 import com.internousdev.casablanca.dao.MCategoryDAO;
 import com.internousdev.casablanca.dao.UserInfoDAO;
 import com.internousdev.casablanca.dto.DestinationInfoDTO;
@@ -34,13 +35,19 @@ public class CreateUserCompleteAction extends ActionSupport implements SessionAw
 			UserInfoDao.login(loginId, password);
 			session.put("loginId", loginId);
 			session.put("logined", "1");
-			System.out.println("登録・ログイン成功");
+			System.out.println("登録・ログイン成功/loginedに1をセット");
+
 			result = SUCCESS;
 
 
 			/* 以下、カート決済ボタン経由での新規登録かを判定 */
 			if (Objects.equals(session.get("fromCart"), true)) {
 				System.out.println("カート決済経由でログイン->宛先選択画面へ");
+
+				/* DB cart_infoテーブルの一時IDをログインユーザIDとリンクさせる */
+				CartInfoDAO cartInfoDAO = new CartInfoDAO();
+				count = cartInfoDAO.linkToLoginId(session.get("tempUserId").toString(), loginId);
+				session.remove("tempUserId");
 
 				/* 再登録後に決済画面へ遷移しないようにセッションからフラグを削除 */
 				session.remove("fromCart");

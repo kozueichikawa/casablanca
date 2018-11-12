@@ -21,7 +21,6 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 	private String email;
 	private String loginId;
 	private String password;
-
 	private List<String> familyNameErrorMessageList = new ArrayList<String>();
 	private List<String> firstNameErrorMessageList = new ArrayList<String>();
 	private List<String> familyNameKanaErrorMessageList = new ArrayList<String>();
@@ -29,9 +28,6 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 	private List<String> emailErrorMessageList = new ArrayList<String>();
 	private List<String> loginIdErrorMessageList = new ArrayList<String>();
 	private List<String> passwordErrorMessageList = new ArrayList<String>();
-
-	private String categoryId;
-	private List<String> sexList = new ArrayList<String>();
 	private Map<String, Object> session;
 
 	public String execute() {
@@ -64,18 +60,6 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 	public List<String> getLoginIdErrorMessageList() {
 		return loginIdErrorMessageList;
 	}
-	public List<String> getSexList() {
-		return sexList;
-	}
-	public void setSexList(List<String> sexList) {
-		this.sexList = sexList;
-	}
-	public String getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
 	public String getFamilyName() {
 		return familyName;
 	}
@@ -106,13 +90,6 @@ public class CreateUserConfirmAction extends ActionSupport implements SessionAwa
 	public void setSex(String sex){
 		this.sex = sex;
 	}
-	//		public List<String> getSexList() {
-	//		return sexList;
-	//		}
-	//		public void setSexList(List<String> sexList) {
-	//		this.sexList = sexList;
-	//		}
-
 	public String getEmail() {
 		return email;
 	}

@@ -1,9 +1,12 @@
 package com.internousdev.casablanca.action;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.casablanca.dao.MCategoryDAO;
 import com.internousdev.casablanca.dao.UserInfoDAO;
+import com.internousdev.casablanca.dto.MCategoryDTO;
 import com.opensymphony.xwork2.ActionSupport;
 public class ResetPasswordCompleteAction extends ActionSupport implements SessionAware {
 
@@ -20,6 +23,11 @@ public class ResetPasswordCompleteAction extends ActionSupport implements Sessio
 			result=SUCCESS;
 		}else{
 			result=ERROR;
+		}
+		if(!session.containsKey("mCategoryList")) {
+			MCategoryDAO mCategoryDAO=new MCategoryDAO();
+			List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
+			session.put("mCategoryDtoList", mCategoryDtoList);
 		}
 		return result;
 	}

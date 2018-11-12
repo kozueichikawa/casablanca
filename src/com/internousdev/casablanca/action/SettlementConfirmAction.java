@@ -3,24 +3,23 @@ package com.internousdev.casablanca.action;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.casablanca.dao.DestinationInfoDAO;
+import com.internousdev.casablanca.dao.MCategoryDAO;
 import com.internousdev.casablanca.dto.DestinationInfoDTO;
+import com.internousdev.casablanca.dto.MCategoryDTO;
 import com.internousdev.casablanca.dto.PurchaseHistoryInfoDTO;
 import com.internousdev.casablanca.util.CommonUtility;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SettlementConfirmAction extends ActionSupport implements SessionAware{
 
-	List<DestinationInfoDTO> destinationInfoDtoList;
-	private String categoryId;
-	private Collection<String> checkList;
+	private List<DestinationInfoDTO> destinationInfoDtoList;
 	private String productId;
 	private String productName;
 	private String productNameKana;
@@ -35,18 +34,24 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 	public String execute() {
 		String result = ERROR;
 
-		if(session.containsKey("loginId")) {
+		/* ログイン状態か否かを判定 */
+		if(Objects.equals(session.get("logined"), "1")) {
+			/* ログイン状態であれば、まず宛先情報をListにしてValueStackへ積む */
 			DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
 			destinationInfoDtoList = new ArrayList<>();
-			destinationInfoDtoList = destinationInfoDAO.getDestinationInfo(String.valueOf(session.get("loginId")));
-			Iterator<DestinationInfoDTO> iterator = destinationInfoDtoList.iterator();
-			if(!(iterator.hasNext())) {
+			destinationInfoDtoList = destinationInfoDAO.getDestinationInfo((session.get("loginId").toString()));
+			if (destinationInfoDtoList.size() == 0) {
 				destinationInfoDtoList = null;
 			}
+			result = SUCCESS;
+		} else {
+			session.put("fromCart", true);
+			System.out.println("未ログイン状態");
 		}
-
+		/* cart.jspに入っていた注文リストをSettlementCompleteActionへ送るためのListを生成する */
 		List<PurchaseHistoryInfoDTO> purchaseHistoryInfoDtoList = new ArrayList<PurchaseHistoryInfoDTO>();
 
+		/* cart.jspから[xx, xx, xx]というStringで渡ってくる各値をCommonUtilityで,(カンマ)区切りで配列に変換する */
 		CommonUtility commonUtility = new CommonUtility();
 		String[] productIdList = commonUtility.parseArrayList(productId);
 		String[] productNameList = commonUtility.parseArrayList(productName);
@@ -58,6 +63,11 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 		String[] releaseDateList = commonUtility.parseArrayList(releaseDate);
 		String[] productCountList = commonUtility.parseArrayList(productCount);
 		String[] subtotalList = commonUtility.parseArrayList(subtotal);
+
+		/* 購入する品物数分のDTOを生成しそのDTOをListに格納していく。
+		 * ▼ cart.jspに4つの品物を入れた状態で決済ボタンを押した時の、for文を終えた時のListイメージ
+		 * |_dto_|_dto_|_dto_|_dto_|　←DTO１つ対し１つに商品情報がそれぞれ詰まっている
+		 *    0     1     2     3                                  */
 		for(int i=0;i<productIdList.length;i++) {
 			PurchaseHistoryInfoDTO purchaseHistoryInfoDTO = new PurchaseHistoryInfoDTO();
 			purchaseHistoryInfoDTO.setUserId(String.valueOf(session.get("loginId")));
@@ -78,117 +88,65 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 			purchaseHistoryInfoDTO.setSubtotal(Integer.parseInt(String.valueOf(subtotalList[i])));
 			purchaseHistoryInfoDtoList.add(purchaseHistoryInfoDTO);
 		}
-		session.put("purchaseHistoryInfoDtoList", purchaseHistoryInfoDtoList);
 
-		if(!session.containsKey("loginId")) {
-			result = ERROR;
-		}else {
-			result = SUCCESS;
+		/* 出来上がったListをセッションへ格納し、SettlementCompleteActionでgetできるようにする */
+		session.put("purchaseHistoryInfoDtoList", purchaseHistoryInfoDtoList);
+		/* 以下else句は、未ログイン状態の場合 */
+		/* カテゴリリストのセッションが切れてしまい次ページでカテゴリが表示されない事象を防ぐため */
+		if(!session.containsKey("mCategoryList")) {
+			MCategoryDAO mCategoryDAO=new MCategoryDAO();
+			List<MCategoryDTO> mCategoryDtoList= mCategoryDAO.getMCategoryList();
+			session.put("mCategoryDtoList", mCategoryDtoList);
 		}
+
+		/* ログイン状態で本Actionが実行されればSUCCESS(settlementConfirm.jsp)、未ログイン状態ならERROR(login.jsp) */
 		return result;
 	}
 
-	public Collection<String> getCheckList() {
-		return checkList;
+	public List<DestinationInfoDTO> getDestinationInfoDtoList() {
+		return destinationInfoDtoList;
 	}
-
-	public void setCheckList(Collection<String> checkList) {
-		this.checkList = checkList;
-	}
-
-	public String getProductId() {
-		return productId;
-	}
-
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public Map<String, Object> getSession() {
-		return session;
-	}
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
-	}
-
-	public String getProductName() {
-		return productName;
 	}
 
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
 
-	public String getProductNameKana() {
-		return productNameKana;
-	}
-
 	public void setProductNameKana(String productNameKana) {
 		this.productNameKana = productNameKana;
-	}
-
-	public String getImageFilePath() {
-		return imageFilePath;
 	}
 
 	public void setImageFilePath(String imageFilePath) {
 		this.imageFilePath = imageFilePath;
 	}
 
-	public String getImageFileName() {
-		return imageFileName;
-	}
-
 	public void setImageFileName(String imageFileName) {
 		this.imageFileName = imageFileName;
-	}
-
-	public String getPrice() {
-		return price;
 	}
 
 	public void setPrice(String price) {
 		this.price = price;
 	}
 
-	public String getReleaseCompany() {
-		return releaseCompany;
-	}
-
 	public void setReleaseCompany(String releaseCompany) {
 		this.releaseCompany = releaseCompany;
-	}
-
-	public String getReleaseDate() {
-		return releaseDate;
 	}
 
 	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
-	public String getProductCount() {
-		return productCount;
-	}
-
 	public void setProductCount(String productCount) {
 		this.productCount = productCount;
-	}
-
-	public String getSubtotal() {
-		return subtotal;
 	}
 
 	public void setSubtotal(String subtotal) {
 		this.subtotal = subtotal;
 	}
-
 }

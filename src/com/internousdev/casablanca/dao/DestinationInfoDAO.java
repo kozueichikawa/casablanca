@@ -22,7 +22,7 @@ public class DestinationInfoDAO {
 		con = db.getConnection();
 		int count = 0;
 		String sql = "insert into destination_info(user_id,family_name,first_name,family_name_kana,first_name_kana,email,tel_number,user_address,regist_date,update_date)"
-				+ "values(?,?,?,?,?,?,?,?,now(),'0000-01-01')";
+				+ "values(?,?,?,?,?,?,?,?,now(),now())";
 		try{
 			ps=con.prepareStatement(sql);
 			ps.setString(1,userId);
