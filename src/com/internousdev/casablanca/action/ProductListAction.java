@@ -39,17 +39,17 @@ public class ProductListAction extends ActionSupport implements SessionAware{
 		return productInfoDtoList;
 	}
 
-//	public void setProductInfoDtoList(ArrayList<ProductInfoDTO>productDtoList){
-//		this.productInfoDtoList=productDtoList;
-//	}
+	public void setProductInfoDtoList(ArrayList<ProductInfoDTO>productDtoList){
+		this.productInfoDtoList=productDtoList;
+	}
 
-//	public List<MCategoryDTO> getmCategoryDtoList() {
-//		return mCategoryDtoList;
-//	}
-//
-//	public void setmCategoryDtoList(List<MCategoryDTO> mCategoryDtoList) {
-//		this.mCategoryDtoList = mCategoryDtoList;
-//	}
+	public List<MCategoryDTO> getmCategoryDtoList() {
+		return mCategoryDtoList;
+	}
+
+	public void setmCategoryDtoList(List<MCategoryDTO> mCategoryDtoList) {
+		this.mCategoryDtoList = mCategoryDtoList;
+	}
 
 	public Map<String, Object> getSession() {
 		return session;
