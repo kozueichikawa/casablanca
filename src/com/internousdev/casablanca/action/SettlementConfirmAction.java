@@ -45,6 +45,7 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 			}
 			result = SUCCESS;
 		} else {
+			/* ログイン状態でなければ、loginAction分岐用にカートフラグを立てる */
 			session.put("fromCart", true);
 			System.out.println("未ログイン状態");
 		}
@@ -91,7 +92,7 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 
 		/* 出来上がったListをセッションへ格納し、SettlementCompleteActionでgetできるようにする */
 		session.put("purchaseHistoryInfoDtoList", purchaseHistoryInfoDtoList);
-		/* 以下else句は、未ログイン状態の場合 */
+
 		/* カテゴリリストのセッションが切れてしまい次ページでカテゴリが表示されない事象を防ぐため */
 		if(!session.containsKey("mCategoryList")) {
 			MCategoryDAO mCategoryDAO=new MCategoryDAO();
