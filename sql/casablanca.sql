@@ -18,7 +18,7 @@ sex tinyint not null default 0,
 email varchar(32) not null,
 status tinyint not null default 0,
 logined tinyint not null default 0,
-regist_date datetime,
+regist_date datetime not null,
 update_date datetime
 )
 default charset=utf8
