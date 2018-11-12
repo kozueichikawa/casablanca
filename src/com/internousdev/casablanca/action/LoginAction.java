@@ -17,8 +17,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport implements SessionAware {
 	private String loginId;
+	private String loginIdTemp;
 	private String password;
 	private boolean saveLoginStatus;
+	private String passwordIncorrectErrorMessage;
 	private List<DestinationInfoDTO> destinationInfoDtoList;
 	private List<String> loginIdErrorMessageList;
 	private List<String> passwordErrorMessageList;
@@ -29,6 +31,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		/* フォーム記憶チェック */
 		if (saveLoginStatus) {
 			session.put("saveLoginStatus", saveLoginStatus);
+			session.put("loginIdTemp", loginId);
 		} else {
 			session.remove("saveLoginStatus");
 		}
@@ -59,15 +62,20 @@ public class LoginAction extends ActionSupport implements SessionAware {
 					/* DB cart_infoテーブルの一時IDをログインユーザIDとリンクさせる */
 					CartInfoDAO cartInfoDAO = new CartInfoDAO();
 					int count = cartInfoDAO.linkToLoginId(session.get("tempUserId").toString(), loginId);
-					session.remove("tempUserId");
-					/* 再ログイン後に決済画面へ遷移しないようにセッションからフラグを削除 */
-					session.remove("fromCart");
+					if (count > 0) {
+						session.remove("tempUserId");
+						/* 再ログイン後に決済画面へ遷移しないようにセッションからフラグを削除 */
+						session.remove("fromCart");
 
-					/* 宛先情報をsettlementConfirm.jspで表示用に生成 */
-					DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
-					destinationInfoDtoList = destinationInfoDAO.getDestinationInfo(loginId);
-					result = "gotosettlementconfirm";
+						/* 宛先情報をsettlementConfirm.jspで表示用に生成 */
+						DestinationInfoDAO destinationInfoDAO = new DestinationInfoDAO();
+						destinationInfoDtoList = destinationInfoDAO.getDestinationInfo(loginId);
+						result = "gotosettlementconfirm";
+					}
 				}
+			} else {
+				passwordIncorrectErrorMessage = "入力されたパスワードが異なります。";
+				System.out.println("ログイン失敗");
 			}
 		} else {
 			System.out.println("ログイン失敗");
@@ -89,12 +97,20 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		this.loginId = loginId;
 	}
 
+	public String getLoginIdTemp() {
+		return loginIdTemp;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	public void setSaveLoginStatus(boolean saveLoginStatus) {
 		this.saveLoginStatus = saveLoginStatus;
+	}
+
+	public String getPasswordIncorrectErrorMessage() {
+		return passwordIncorrectErrorMessage;
 	}
 
 	public List<String> getLoginIdErrorMessageList() {
@@ -112,4 +128,5 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
+
 }

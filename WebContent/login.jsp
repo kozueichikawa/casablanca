@@ -21,11 +21,14 @@
 			<s:property/>
 		</s:iterator>
 	</s:if>
+	<s:if test="!passwordIncorrectErrorMessage.isEmpty()">
+			<s:property value="passwordIncorrectErrorMessage"/>
+	</s:if>
 
 	<s:form action="LoginAction">
 	<s:if test="#session.saveLoginStatus">
 		<label>ユーザー名</label>
-		<s:textfield name="loginId" value="%{#session.loginId}"/>
+		<s:textfield name="loginId" value="%{#session.loginIdTemp}"/>
 	</s:if>
 	<s:else>
 		<label>ユーザー名</label>

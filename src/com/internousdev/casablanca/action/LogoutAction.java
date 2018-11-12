@@ -25,6 +25,7 @@ public class LogoutAction extends ActionSupport implements SessionAware {
 			/* loginedカラムを"0"にupdate */
 			userInfoDAO.logout(session.get("loginId").toString());
 			session.put("logined", "0");
+			session.put("loginIdTemp", session.get("loginId"));
 			session.remove("loginId");
 			System.out.println("ログアウトしました。");
 		}
