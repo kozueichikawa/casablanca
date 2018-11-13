@@ -10,7 +10,6 @@
 <meta http-equiv="imagetoolbar" content="no"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
-<link rel="stylesheet" href="./css/product.css">
 <title>商品詳細</title>
 </head>
 <body>
