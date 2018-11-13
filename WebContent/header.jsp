@@ -8,37 +8,33 @@
 <title>header</title>
 </head>
 <body>
-
-<div id="top">
-
-<div id="logo">
-<p>casablanca</p>
-</div>
 <ul>
-
-
-	<li><a href="CartAction">カート</a></li>
-	<li><a href="ProductListAction">商品一覧</a></li>
+	<s:form action="SearchItemAction">
+	<li><s:select name="categoryId" list="#session.mCategoryDtoList" listKey="categoryId" listValue="categoryName"/></li>
+	<li><s:textfield name="keywords" value="%{keywords}" placeholder="検索ワード"/></li>
+	<li><s:submit value="商品検索"/></li>
+	</s:form>
 	<s:if test="#session.logined==1">
-		<li><a href="MyPageAction">マイページ</a></li>
-	</s:if>
-		<s:if test="#session.logined==1">
-		<li><a href="LogoutAction">ログアウト</a></li>
+		<li><s:form action="LogoutAction">
+			<s:submit value="ログアウト"/>
+		</s:form></li>
 	</s:if>
 	<s:else>
-	<li><a href="GoLoginAction">ログイン</a></li>
+	<li><s:form action="GoLoginAction">
+		<s:submit value="ログイン"/>
+	</s:form></li>
 	</s:else>
+	<li><s:form action="CartAction">
+		<s:submit value="カート"/>
+	</s:form></li>
+	<li><s:form action="ProductListAction">
+		<s:submit value="商品一覧"/>
+	</s:form></li>
+	<s:if test="#session.logined==1">
+		<li><s:form action="MyPageAction">
+			<s:submit value="マイページ"/>
+		</s:form></li>
+	</s:if>
 </ul>
-</div>
-<div id="bottom">
-	<div id="search">
-	<s:form action="SearchItemAction">
-	<s:select name="categoryId" class="slct" list="#session.mCategoryDtoList" listKey="categoryId" listValue="categoryName"/>
-	<s:textfield name="keywords" class="slct_key" value="%{keywords}" placeholder="検索ワード" size="80%" />
-	<s:submit value="商品検索" class="submit_key" />
-	</s:form>
-	</div>
-</div>
-
 </body>
 </html>

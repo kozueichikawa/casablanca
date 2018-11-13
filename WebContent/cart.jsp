@@ -13,7 +13,6 @@
 	<meta name="keywords" content="" />
 
 
-	<link rel="stylesheet" href="./css/style.css" >
 
 <title>Cart</title>
 
@@ -110,7 +109,6 @@ function goDeleteCartAction(){
 カート情報はありません。
 </div>
 </s:else>
-</div>
 <div id="footer">
 <s:include value="footer.jsp" />
 </div>
